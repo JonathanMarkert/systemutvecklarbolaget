@@ -1,15 +1,8 @@
-import React, { FC } from "react";
-import { Footer } from "../components/common/Footer";
-import { Header } from "../components/common/Header";
 
-interface Props {}
-
-export const Admin: FC<Props> = (props: Props) => {
+export default function Admin() {
   return (
     <>
-      <Header />
-
-      <Footer />
+    <h1>ADMIN</h1>
     </>
   );
 };

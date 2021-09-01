@@ -1,15 +1,9 @@
-import React, { FC } from "react";
-import { Footer } from "../components/common/Footer";
-import { Header } from "../components/common/Header";
 
-interface Props {}
 
-export const ShoppingCart: FC<Props> = (props: Props) => {
+export default function ShoppingCart(){
   return (
     <>
-      <Header />
-
-      <Footer />
+    <h1>ShoppingCart</h1>
     </>
   );
 };
