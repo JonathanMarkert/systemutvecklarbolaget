@@ -9,10 +9,12 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     footer: {
       backgroundColor: "#7c3f04",
+      color: "#d4ccce",
       padding: theme.spacing(6),
     },
-    textColor: {
-      color: "#d4ccce",
+    icon: {
+      margin: "0 1rem",
+      fontSize: "2rem"
     }
 }));
 
@@ -20,12 +22,12 @@ export const Footer = () => {
   const classes = useStyles();
   return (
     <div className={classes.footer}>
-      <Typography className={classes.textColor} variant="subtitle1" align="center" color="textSecondary" component="p">
-          <FacebookIcon />
-          <InstagramIcon />
-          <TwitterIcon />
+      <Typography  variant="subtitle1" align="center" component="p">
+          <FacebookIcon className={classes.icon}/>
+          <InstagramIcon className={classes.icon}/>
+          <TwitterIcon className={classes.icon}/>
       </Typography>
-      <Box textAlign="center" className={classes.textColor}>
+      <Box textAlign="center">
           Systemutveklar Bolaget 	&copy; {new Date().getFullYear()}
       </Box>
     </div>
