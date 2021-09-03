@@ -8,8 +8,8 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 const useStyles = makeStyles((theme: Theme) => 
   createStyles({
     footer: {
-      backgroundColor: "#7c3f04",
-      color: "#d4ccce",
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.primary.contrastText,
       padding: theme.spacing(6),
     },
     icon: {
