@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider } from "@material-ui/core/styles";
+import { createStyles, createTheme, makeStyles, Theme, ThemeProvider } from "@material-ui/core/styles";
 import { Footer } from "./Footer";
 import  Header  from "./Header";
 import ViewContainer from "./ViewContainer";
@@ -46,13 +46,27 @@ const theme = createTheme({
   },
 });
 
+const useStyles = makeStyles((theme: Theme) => 
+  createStyles({
+    base: {
+      display: 'flex',
+      minHeight: '100vh',
+      flexDirection: 'column',
+    },
+}));
+
+
 export default function Layout() {
+  const classes = useStyles();
+  
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Header />
-        <ViewContainer />
-        <Footer />
+        <div className={classes.base}>
+          <Header />
+          <ViewContainer />
+          <Footer />
+        </ div>
       </ThemeProvider>
     </>
   );
