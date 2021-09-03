@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.primary.main,
       color: theme.palette.primary.contrastText,
       padding: theme.spacing(6),
+      marginTop: 'auto',
     },
     icon: {
       margin: "0 1rem",
