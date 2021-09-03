@@ -1,7 +1,7 @@
 import { Badge, Hidden } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import AccountCircle from "@material-ui/icons/AccountCircle";
@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 const image: string =
   "https://cdn.systembolaget.se/4a51ce/globalassets/logo.svg";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: "flex",
@@ -25,18 +25,19 @@ const useStyles = makeStyles(() =>
     appBarStyle: {
       position: "fixed",
       // backgroundImage: `url(${headerImage})`,
-      backgroundColor: "#342404",
+      backgroundColor: theme.palette.primary.main,
     },
     titleStyle: {
       flexGrow: 1,
       fontFamily: "cursive",
-      color: "#7c3f04",
+      color: theme.palette.primary.contrastText,
     },
     iconStyle: {
       fontSize: 40,
-      color: "#7c3f04",
+      color: theme.palette.primary.contrastText,
       "&:hover": {
-        color: "#f46f04",
+        // color white
+        color: '#fff',
       },
     },
     mainImage: {},
@@ -65,7 +66,7 @@ export default function MenuAppBar() {
           <div>
             <Link to="/cart">
             <IconButton aria-label="cart">
-              <Badge badgeContent={0} color={"primary"}>
+              <Badge badgeContent={3} color={"secondary"}>
                 <ShoppingCartOutlinedIcon className={classes.iconStyle} />
               </Badge>
             </IconButton>
