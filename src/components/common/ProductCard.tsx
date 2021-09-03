@@ -13,7 +13,6 @@ const ProductCard: FC<Props> =({ image }) => {
                 src ={image.url}
                 key={image.id}
                 alt=""
-              
               />
               <div>
                   <p>

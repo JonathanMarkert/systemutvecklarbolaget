@@ -24,13 +24,8 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
   },
-  // heroContent: {
-  //   backgroundColor: theme.palette.background.paper,
-  //   padding: theme.spacing(8, 0, 6),
-  // },
-  // heroButtons: {
-  //   marginTop: theme.spacing(4),
-// },
+
+//detta ska lyftas in i tema eller css
   background: {
     backgroundColor: 'black',
   },
@@ -46,12 +41,23 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'grey',
   },
   cardMedia: {
-    maxHeight: '100%',
-    maxWidth:'100%',
+    width: '100%',
+    height: 200,
     paddingTop: '56.25%', // 16:9
   },
   cardContent: {
     flexGrow: 1,
+    height: '10rem',
+ //   marginBottom: '2rem',
+    textOverflow: '',
+    overflow: 'hidden',
+    textJustify: 'inter-word'
+  },
+  detailsButton: {
+    color: "#7c3f04",
+    "&:hover": {
+      color: "#f46f04",
+    },
   },
 
 }));
@@ -79,15 +85,15 @@ export default function Home() {
                     title={card.name}
                   />
                   <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography gutterBottom variant="h5" component="h2" align="center">
                       {card.name}
                     </Typography>
-                    <Typography>
-                      {card.description}
-                    </Typography>
+                    <div>
+                    {card.description}
+                    </div>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary">
+                    <Button className={classes.detailsButton}>
                       View
                     </Button>
                   </CardActions>
