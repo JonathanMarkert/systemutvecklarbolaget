@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme: Theme) =>
       minHeight: '100vh',
       flexDirection: 'column',
     },
+    toolbar: theme.mixins.toolbar,
 }));
 
 
@@ -64,6 +65,7 @@ export default function Layout() {
       <ThemeProvider theme={theme}>
         <div className={classes.base}>
           <Header />
+          <div className={classes.toolbar}></div>
           <ViewContainer />
           <Footer />
         </ div>
