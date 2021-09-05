@@ -1,6 +1,6 @@
 
 import { CSSProperties } from "@material-ui/styles";
-import ProductCard from "../components/common/ProductCard";
+import  ProductCard from "../components/common/ProductCard";
 import { products } from "../Mockdata";
 
 import React from 'react';
@@ -27,38 +27,13 @@ const useStyles = makeStyles((theme) => ({
 
 //detta ska lyftas in i tema eller css
   background: {
-    backgroundColor: 'black',
+    backgroundColor: 'white',
   },
   cardGrid: {
-    backgroundColor: 'black',
+    backgroundColor: 'white',
     paddingTop: theme.spacing(12),
     paddingBottom: theme.spacing(8),
-  },
-  card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: 'grey',
-  },
-  cardMedia: {
-    width: '100%',
-    height: 200,
-    paddingTop: '56.25%', // 16:9
-  },
-  cardContent: {
-    flexGrow: 1,
-    height: '10rem',
- //   marginBottom: '2rem',
-    textOverflow: '',
-    overflow: 'hidden',
-    textJustify: 'inter-word'
-  },
-  detailsButton: {
-    color: "#7c3f04",
-    "&:hover": {
-      color: "#f46f04",
-    },
-  },
+  }, 
 
 }));
 
@@ -76,28 +51,9 @@ export default function Home() {
        
           <Grid container spacing={4}>
       
-            {products.map((card) => (
-              <Grid item key={card.id} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}               
-                    image={card.url}
-                    title={card.name}
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2" align="center">
-                      {card.name}
-                    </Typography>
-                    <div>
-                    {card.description}
-                    </div>
-                  </CardContent>
-                  <CardActions>
-                    <Button className={classes.detailsButton}>
-                      View
-                    </Button>
-                  </CardActions>
-                </Card>
+            {products.map(product => (
+              <Grid item key={product.id} xs={12} sm={6} md={4}>
+                <ProductCard product={product} />
               </Grid>
             ))}
           </Grid>
@@ -108,56 +64,6 @@ export default function Home() {
     </React.Fragment>
   );
 }
-
-// export default function Home() {
-
-//   return (
-//     <>
-//       <section>
-//         <div>
-//           <div style={gridStyle}>
-//             {products.map(image => <ProductCard key = {image.id} image = {image}/>)}
-//           <div style={cardStyle}>
-//             <div>
-//               image
-//             </div>
-//             <div>
-//                 Text på kortet
-//             </div>
-//                 också text
-//           </div>
-//         </div>
-//      </div>
-//       </section>
-//     </>
-//   );
-// };
-
-// const gridStyle: CSSProperties = {
-//     display: 'flex',
-//     flexWrap: 'wrap',
-//     boxSizing :'border-box' 
-// }
-
-// const cardStyle: CSSProperties = {
-//   padding: '16px', 
-//   borderSpacing: '2rem', 
-  
-// If background img
-/* <img
-src="https://assets.hypefactors.com/stories/scaled/large/HYeRy9xZVCkDJRKXopAZxxpNZL2juKP1Cxi1xxm8.png"
-alt="" 
-/>*/
-
-
-// const useStyles = makeStyles(() =>
-//   createStyles({
-//     root: {
-//       display: "flex",
-      
-//     },
-//   })
-// );
 
 //add this for admins under cardAction
 //<Button size="small" color="primary">
