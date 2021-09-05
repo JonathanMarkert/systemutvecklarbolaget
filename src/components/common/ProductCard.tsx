@@ -13,10 +13,9 @@ const ProductCard: FC<Props> =({ image }) => {
                 src ={image.url}
                 key={image.id}
                 alt=""
-              
               />
               <div>
-                <p>
+                  <p>
                 {image.name}
                 </p> 
                 <p>
@@ -28,7 +27,7 @@ const ProductCard: FC<Props> =({ image }) => {
 }
 
 const rootStyle: CSSProperties= {
-    width: '100%',
+    
     backgroundColor: '#342404',
     color: 'd4ccce',
     alignContent: 'space-between'

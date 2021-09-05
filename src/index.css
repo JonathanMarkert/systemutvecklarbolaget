@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.backgroundimg{
+  background-image: url("https://assets.hypefactors.com/stories/scaled/large/HYeRy9xZVCkDJRKXopAZxxpNZL2juKP1Cxi1xxm8.png");
+  background-size: cover;
+  background-repeat: none;
+}
