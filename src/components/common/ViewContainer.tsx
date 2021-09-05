@@ -11,7 +11,7 @@ export default function ViewContainer () {
   return (
     <Switch>
         <Route exact path ="/" component={Home}/>
-        <Route path ="/details/:product" component={ProductDetails}/>
+        <Route path ="/details" component={ProductDetails}/>
         <Route path ="/cart" component = {ShoppingCart}/>
         <Route path ="/admin" component = {Admin}/>
     </Switch>
