@@ -6,9 +6,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-
-
+import { ProductContext } from "../context/ProductContext";
 
 const image: string =
   "https://cdn.systembolaget.se/4a51ce/globalassets/logo.svg";
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.primary.contrastText,
       "&:hover": {
         // color white
-        color: '#fff',
+        color: "#fff",
       },
     },
     mainImage: {},
@@ -46,17 +46,23 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MenuAppBar() {
   const classes = useStyles();
+  const { cart } = useContext(ProductContext);
+
+  // Needs "amount" property in mockData
+  const getTotalItems = () =>
+    cart.reduce((total: number, cart) => total + cart.amount, 0);
 
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBarStyle}>
         <Toolbar>
           <Link to="/">
-          <IconButton>
-            <img src={image} alt="" />
-          </IconButton>
+            <IconButton>
+              <img src={image} alt="" />
+            </IconButton>
           </Link>
           <div className={classes.grow}>
+
             <Hidden only="xs">
               <Typography variant="h6" className={classes.titleStyle}>
                 SystemUtvecklarBolaget
@@ -65,16 +71,16 @@ export default function MenuAppBar() {
           </div>
           <div>
             <Link to="/cart">
-            <IconButton aria-label="cart">
-              <Badge badgeContent={3} color={"secondary"}>
-                <ShoppingCartOutlinedIcon className={classes.iconStyle} />
-              </Badge>
-            </IconButton>
+              <IconButton aria-label="cart">
+                <Badge badgeContent={getTotalItems()} color={"secondary"}>
+                  <ShoppingCartOutlinedIcon className={classes.iconStyle} />
+                </Badge>
+              </IconButton>
             </Link>
             <Link to="/admin">
-            <IconButton>
-              <AccountCircle className={classes.iconStyle} />
-            </IconButton>
+              <IconButton>
+                <AccountCircle className={classes.iconStyle} />
+              </IconButton>
             </Link>
           </div>
         </Toolbar>
