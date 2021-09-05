@@ -1,6 +1,6 @@
 
 import { CSSProperties } from "@material-ui/styles";
-import  ProductCard from "../components/common/ProductCard";
+import  ProductCard from "../components/ProductCard";
 import { products } from "../Mockdata";
 
 import React from 'react';
@@ -36,8 +36,6 @@ const useStyles = makeStyles((theme) => ({
   }, 
 
 }));
-
-const cards = products;
 
 export default function Home() {
   const classes = useStyles();

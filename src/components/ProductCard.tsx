@@ -1,4 +1,4 @@
-import { Product, products } from '../../Mockdata'
+import { Product, products } from '../Mockdata'
 import { CSSProperties, FC } from 'react'
 import { Button, Card, CardActions, CardContent, CardMedia, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
