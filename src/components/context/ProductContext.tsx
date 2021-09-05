@@ -16,8 +16,8 @@ const CartProvider: FC = (props) => {
     const handleAddToCart = (beerProduct: Product) => {
         setCart((previousState) => {
             const isProductInCart = previousState.find(
-                (item) => item.id === beerProduct.id
-                );
+                (item) => item.id === beerProduct.id);
+
                 if (isProductInCart) {
                     return previousState.map((item) =>
                     item.id === beerProduct.id
@@ -26,11 +26,15 @@ const CartProvider: FC = (props) => {
                     );
                 }
                 return [...previousState, {...beerProduct, amount: 1}]
-                // alternativt i varukorgen foreacha arrayn och ha en ny property som plussar på beroende på hur många id av samma det är. 
-            });
-        };
+              });
+            };
+            // alternativt i varukorgen foreacha arrayn och ha en ny property som plussar på beroende på hur många id av samma det är.
+
         const handleRemoveFromCart = (beerProduct: Product) => {
             // remove from cart
+           const test = cart.filter(item => item.id !== beerProduct.id);
+           setCart(test);
+          
         };
         const incrementNumber = (num: number) => {
             // alternativt flytta till cart component och ändra inparameter
@@ -42,18 +46,18 @@ const CartProvider: FC = (props) => {
         };
         
         return (
-            <ProductContext.Provider
+          <ProductContext.Provider
             value={{
-                cart,
-                handleAddToCart,
-                handleRemoveFromCart,
-                incrementNumber,
-                decrementNumber,
+              cart: cart,
+              handleAddToCart,
+              handleRemoveFromCart,
+              incrementNumber,
+              decrementNumber,
             }}
-            >
-      {props.children}
-    </ProductContext.Provider>
-  );
+          >
+            {props.children}
+          </ProductContext.Provider>
+        );
 };
 export default CartProvider;
 
@@ -68,10 +72,14 @@ export const ProductContext = createContext<CartContext>({
 
 
 // consume:a en context i en component:
-//const {cart, handleAddToCart} = useContext(ContextValue);
+//const {cart, handleAddToCart} = useContext(ProductContext);
 
 // sen använda i t.ex onclick på en button
-// onClick={() => handleAddtoCart(product:Product)}
+// onClick={() => handleAddToCart(product:Product)}
 
-// const getTotalProducts = (cart: Product[]) =>
-//   cart.reduce((sum: number, item) => sum + item.amount, 0);
+  // till header använd sen funktionen i badge
+  // const getTotalItems = () =>
+  // cart.reduce((total: number, cart) => total + cart.amount, 0);
+
+
+
