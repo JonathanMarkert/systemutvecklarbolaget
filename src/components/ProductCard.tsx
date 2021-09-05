@@ -1,7 +1,8 @@
 import { Product, products } from '../Mockdata'
-import { CSSProperties, FC } from 'react'
+import { CSSProperties, FC, useContext } from 'react'
 import { Button, Card, CardActions, CardContent, CardMedia, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
+import { ProductContext } from './context/ProductContext';
 
 interface Props {
     product: Product
@@ -33,11 +34,17 @@ const useStyles = makeStyles((theme) => ({
             color: "#f46f04",
         },
     },
+    addToCartButton: {
+        color: "#7c3f04",
+        "&:hover": {
+            color: "#f46f04",
+        },
+    }
 }))
 
 const ProductCard: React.FC<Props> = ({ product }) => {
     const classes = useStyles();
-    // const product = products.find((p) => p.id);
+    const {handleAddToCart} = useContext(ProductContext);
     return (
         <React.Fragment>
             {/* {products.map((product) => ( */}
@@ -58,6 +65,13 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                 <CardActions>
                     <Button className={classes.detailsButton}>
                         View
+                    </Button>
+                    <Button className={classes.addToCartButton}
+                        size="small"
+                        color="primary"
+                        onClick={() => handleAddToCart(product)}
+                    >
+                        Add
                     </Button>
                 </CardActions>
             </Card>
