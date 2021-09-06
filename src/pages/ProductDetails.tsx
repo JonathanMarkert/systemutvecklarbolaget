@@ -12,13 +12,16 @@ import {
 
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { FC, useContext } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { ProductContext } from "../components/context/ProductContext";
 
-import { Product, products } from "../Mockdata";
+import { Product } from "../Mockdata";
 
 interface Props {
   product: Product
 }
+
+// interface Props extends RouteComponentProps <{id: string}> {}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -9,7 +9,7 @@ export default function ViewContainer () {
   return (
     <Switch>
         <Route exact path ="/" component={Home}/>
-        <Route path ="/details/:id" component={ProductDetails}/>
+        <Route path ="/details/:productid" component={ProductDetails}/>
         <Route path ="/cart" component = {ShoppingCart}/>
         <Route path ="/admin" component = {Admin}/>
     </Switch>

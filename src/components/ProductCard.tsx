@@ -1,6 +1,6 @@
 import { Product } from '../Mockdata'
 import { CSSProperties, FC, useContext } from 'react'
-import {Link,useParams } from 'react-router-dom'
+import {Link, useParams } from 'react-router-dom'
 import { 
     Button, 
     Card, 
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const ProductCard: React.FC<Props> = ({ product }) => {
+const ProductCard: React.FC<Props> = ({ product }) => {   //add clickable image
     const classes = useStyles();
     const {handleAddToCart} = useContext(ProductContext);
     return (
@@ -74,7 +74,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                     </div>
                 </CardContent>
                 <CardActions>
-                   <Link to="/details/:id" >
+                   <Link to={`/details/${product.id}`} > 
                     <Button className={classes.detailsButton} aria-label="details">
                         View
                     </Button>
