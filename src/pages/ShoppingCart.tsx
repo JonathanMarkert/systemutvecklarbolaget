@@ -10,18 +10,21 @@ const useStyles = makeStyles((theme) => ({
   welcomeToShoppingCart: {
     backgroundColor: 'blue',
     textAlign: 'center',
-    color: 'white'
+    color: 'white',
+    width: '32rem',
+    margin: 'auto',
+    padding: '0.5rem'
   },
-  cardGrid: {
-    backgroundColor: '#009135',
-    paddingTop: theme.spacing(12),
-    paddingBottom: theme.spacing(8),
+  wrapper: {
+    backgroundColor: 'purple',
+    width: '32rem',
+    margin: 'auto',
+    padding: '0 0 30px 0'
   },
   cartSlip: {
     height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: 'grey'
+    backgroundColor: 'grey',
+    marginBottom: '1rem'
   },
   cardSlipMedia: {
     width: '100%',
@@ -40,18 +43,33 @@ export default function ShoppingCart(){
   <>
     <Container>
         <div className={classes.welcomeToShoppingCart}>
-          // Statisk
           <h1>ShoppingCart</h1>
           // Vill ta in ett värde från vagnen //
             <h2>Your cart is empthy</h2>
         </div>
-        <div className={classes.cartSlip}>
-          This is a cardslip
-          // Grid? // Name
-          <div className={classes.cardSlipMedia}>
-            content
+        <Container className={classes.wrapper}>
+          <div className={classes.cartSlip}>
+            This is a cardslip
+            // Grid? // Name
+            <div className={classes.cardSlipMedia}>
+              content
+            </div>
           </div>
-        </div>
+          <div className={classes.cartSlip}>
+            This is a cardslip
+            // Grid? // Name
+            <div className={classes.cardSlipMedia}>
+              content
+            </div>
+          </div>
+          <div className={classes.cartSlip}>
+            This is a cardslip
+            // Grid? // Name
+            <div className={classes.cardSlipMedia}>
+              content
+            </div>
+          </div>
+        </Container>
     </Container>
   </>
   );
