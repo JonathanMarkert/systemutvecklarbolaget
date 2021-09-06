@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const testData = products.find((p) => p.id === "4");
+// const testData = products.find((p) => p.id === "4");
 
 const ProductDetails:FC<Props> = ({product}) => {
   const { handleAddToCart } = useContext(ProductContext);
@@ -70,15 +70,15 @@ const ProductDetails:FC<Props> = ({product}) => {
           <div className={classes.card}>
            <CardMedia className={classes.image} 
            component='img'
-           image={testData?.urlDetails} 
+           image={product?.urlDetails} 
            />
           </div>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Paper className={classes.paper}>
-            <Typography variant="h2">{testData?.name}</Typography>
-            <Typography variant="h5">{testData?.brewery}</Typography>
-            <Typography>{testData?.description}</Typography>
+            <Typography variant="h2">{product?.name}</Typography>
+            <Typography variant="h5">{product?.brewery}</Typography>
+            <Typography>{product?.description}</Typography>
             <Button size="large" color="secondary" onClick={() => handleAddToCart(product)}>
             <AddShoppingCartIcon style={{ fontSize: 50 }} color="secondary" />
               Buy now

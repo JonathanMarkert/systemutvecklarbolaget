@@ -5,13 +5,11 @@ import Home from '../../pages/Home';
 import ProductDetails from '../../pages/ProductDetails';
 import ShoppingCart from '../../pages/ShoppingCart';
 
-
-
 export default function ViewContainer () {
   return (
     <Switch>
         <Route exact path ="/" component={Home}/>
-        <Route path ="/details" component={ProductDetails}/>
+        <Route path ="/details/:id" component={ProductDetails}/>
         <Route path ="/cart" component = {ShoppingCart}/>
         <Route path ="/admin" component = {Admin}/>
     </Switch>

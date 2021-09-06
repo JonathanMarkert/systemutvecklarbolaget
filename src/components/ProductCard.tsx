@@ -1,11 +1,22 @@
-import { Product, products } from '../Mockdata'
+import { Product } from '../Mockdata'
 import { CSSProperties, FC, useContext } from 'react'
-import { Button, Card, CardActions, CardContent, CardMedia, makeStyles, Typography } from '@material-ui/core';
+import {Link,useParams } from 'react-router-dom'
+import { 
+    Button, 
+    Card, 
+    CardActions, 
+    CardContent, 
+    CardMedia, 
+    makeStyles, 
+    Typography } 
+        from '@material-ui/core';
 import React from 'react';
 import { ProductContext } from './context/ProductContext';
 
 interface Props {
     product: Product
+    
+    
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -63,13 +74,16 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                     </div>
                 </CardContent>
                 <CardActions>
-                    <Button className={classes.detailsButton}>
+                   <Link to="/details/:id" >
+                    <Button className={classes.detailsButton} aria-label="details">
                         View
                     </Button>
+                    </Link>
                     <Button className={classes.addToCartButton}
                         size="small"
                         color="primary"
                         onClick={() => handleAddToCart(product)}
+                        aria-label="add to cart"
                     >
                         Add
                     </Button>
