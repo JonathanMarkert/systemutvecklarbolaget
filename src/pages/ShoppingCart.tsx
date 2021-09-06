@@ -1,7 +1,7 @@
 import React from "react";
 import  ProductCard from "../components/ProductCard";
 import { Product, products } from "../Mockdata";
-import { Container, CardMedia } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
