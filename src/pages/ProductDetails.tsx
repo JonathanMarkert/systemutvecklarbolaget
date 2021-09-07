@@ -48,14 +48,14 @@ createStyles({
 })
 );
 
-interface DetailsProps extends RouteComponentProps <{productid: string}> {}
+interface DetailsProps extends RouteComponentProps <{productId: string}> {}
 
 const ProductDetails: FC<DetailsProps> = ({ match}:DetailsProps) => {
   
   const { handleAddToCart } = useContext(ProductContext);
   const classes = useStyles();
-  const productId = match.params.productid;
-  const product = products.find((p) => p.id === productId) as Product;
+  const id = match.params.productId;
+  const product = products.find((p) => p.id === id) as Product;
    
   return (
    
