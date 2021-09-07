@@ -43,14 +43,16 @@ const useStyles = makeStyles((theme) => ({
   },
   cartSlip: {
     height: '100%',
-    backgroundColor: 'grey',
+    backgroundColor: 'pink',
     marginBottom: '1rem',
     marginLeft: '1rem',
-    padding: '1rem'
+    padding: '1rem',
+    color: 'brown'
   },
   cartSlipMedia: {
     width: '100%',
-    height: 100
+    height: 100,
+    color: 'green'
   }
 
 }));
@@ -72,7 +74,7 @@ export default function ShoppingCart(){
         </Container>
           <Container className={classes.wrapper} maxWidth="md">
             <h2>Wrapper</h2>
-              <Grid container spacing={2}>
+              <Container>
                 <div className={classes.cartSlip}>
                   <h3>cart slip</h3>
                     <div className={classes.cartSlipMedia}>
@@ -98,7 +100,7 @@ export default function ShoppingCart(){
                     </div>
                 </div>
 
-              </Grid>
+              </Container>
           </Container>
       </main>
     </React.Fragment>
