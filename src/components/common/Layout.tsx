@@ -1,4 +1,4 @@
-import { createStyles, createTheme, makeStyles, Theme, ThemeProvider } from "@material-ui/core/styles";
+import { createStyles, createTheme, makeStyles, responsiveFontSizes, Theme, ThemeProvider } from "@material-ui/core/styles";
 import { Footer } from "./Footer";
 import  Header  from "./Header";
 import ViewContainer from "./ViewContainer";
@@ -17,8 +17,7 @@ declare module "@material-ui/core/styles/createPalette" {
   }
 }
 
-
-const theme = createTheme({
+let theme = createTheme({
   palette: {
     primary: {
       main: amber[800],
@@ -46,6 +45,9 @@ const theme = createTheme({
   },
 });
 
+
+let responsiveAndColorTheme = responsiveFontSizes(theme);
+
 const useStyles = makeStyles((theme: Theme) => 
   createStyles({
     base: {
@@ -59,17 +61,18 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Layout() {
   const classes = useStyles();
-  
+
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <div className={classes.base}>
-          <Header />
-          <div className={classes.toolbar}></div>
-          <ViewContainer />
-          <Footer />
-        </ div>
-      </ThemeProvider>
+      <ThemeProvider theme={responsiveAndColorTheme}>
+
+          <div className={classes.base}>
+            <Header />
+            <div className={classes.toolbar}></div>
+            <ViewContainer />
+            <Footer />
+          </div>
+        </ThemeProvider>
     </>
   );
 }

@@ -1,16 +1,15 @@
-import { Product } from '../Mockdata'
-import { CSSProperties, FC, useContext } from 'react'
-import {Link, useParams } from 'react-router-dom'
-import { 
-    Button, 
-    Card, 
-    CardActions, 
-    CardContent, 
-    CardMedia, 
-    makeStyles, 
-    Typography } 
-        from '@material-ui/core';
-import React from 'react';
+import {
+    Button,
+    Card,
+    CardActions,
+    CardContent,
+    CardMedia,
+    makeStyles,
+    Typography
+} from '@material-ui/core';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { Product } from '../Mockdata';
 import { ProductContext } from './context/ProductContext';
 
 interface Props {

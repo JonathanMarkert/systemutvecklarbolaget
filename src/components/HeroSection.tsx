@@ -1,6 +1,7 @@
-import { Box, Theme, Typography } from "@material-ui/core";
+import { Box, Hidden, Theme, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import KeyboardArrowDownOutlinedIcon from "@material-ui/icons/KeyboardArrowDownOutlined";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const useStyles = makeStyles((theme: Theme) => ({
   heroBackground: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   videoContainer: {
     display: "flex",
-    flexDirection: "column", 
+    flexDirection: "column",
     minWidth: "100%",
     opacity: 1, // testa utan filmen
   },
@@ -45,6 +46,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: "auto",
   },
   breadText: {
+    paddingTop:"3rem",
     textAlign: "center",
     maxWidth: "600px",
     letterSpacing: "2px",
@@ -88,19 +90,27 @@ const HeroSection = () => {
       </Box>
       <Box className={classes.heroContainer}>
         <Typography className={classes.headLine} variant="h1">
-          Beer for Developers
-          <Typography className={classes.breadText} variant="body1">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore
-            provident accusamus rem neque ipsa esse aliquid numquam eligendi
-            libero corrupti.
-          </Typography>
+          <Hidden only={["xs", "sm"]}>Beer for Developers</Hidden>
+          <Hidden only={["md", "lg", "xl"]}>
+            Beer <FavoriteIcon style={{ fontSize: 40 }} />{" "}
+          </Hidden>
+          <Hidden only="xs">
+            <Typography className={classes.breadText} variant="h5">
+              What is cooler than coding-themed beer? Null,
+              I say! We have already messed with your meddlesome government so
+              you don't have to worry about taxes or such. Just treat this site
+              as middleware and import the whole module!
+            </Typography>
+          </Hidden>
         </Typography>
-        <Box className={classes.visualIndicator}>
-          <Typography variant="h6">SCROLL DOWN</Typography>
-          <KeyboardArrowDownOutlinedIcon
-            className={`${classes.iconStyle} ${classes.animatedItem} `}
-          />
-        </Box>
+        <Hidden only={"xs"}>
+          <Box className={classes.visualIndicator}>
+            <Typography variant="h6">SCROLL DOWN</Typography>
+            <KeyboardArrowDownOutlinedIcon
+              className={`${classes.iconStyle} ${classes.animatedItem} `}
+            />
+          </Box>
+        </Hidden>
       </Box>
     </Box>
   );
