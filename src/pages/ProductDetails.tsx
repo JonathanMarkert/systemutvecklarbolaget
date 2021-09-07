@@ -48,8 +48,6 @@ createStyles({
 })
 );
 
-interface DetailsProps {}
-
 interface DetailsProps extends RouteComponentProps <{productid: string}> {}
 
 const ProductDetails: FC<DetailsProps> = ({ match}:DetailsProps) => {
@@ -68,14 +66,14 @@ const ProductDetails: FC<DetailsProps> = ({ match}:DetailsProps) => {
           <div className={classes.card}>
            <CardMedia className={classes.image}   
            component='img'         
-           image={product?.urlDetails} 
+           image={product.urlDetails} 
            />
           </div>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Paper className={classes.paper}>
-            <Typography variant="h2">{product?.name}</Typography>
-            <Typography variant="h5">{product?.brewery}</Typography>
+            <Typography variant="h2">{product.name}</Typography>
+            <Typography variant="h5">{product.brewery}</Typography>
             <Typography>{product?.description}</Typography>
             <Button size="large" color="secondary" onClick={() => handleAddToCart(product)}>
             <AddShoppingCartIcon style={{ fontSize: 50 }} color="secondary"/>
