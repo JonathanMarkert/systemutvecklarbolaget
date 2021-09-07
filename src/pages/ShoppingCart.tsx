@@ -21,6 +21,8 @@ import { grey } from "@material-ui/core/colors";
 import ListItem from "@material-ui/core/ListItem";
 import Avatar from "@material-ui/core/Avatar";
 import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -30,14 +32,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'white',
   },
   welcomeToShoppingCart: {
-    backgroundColor: 'blue',
+    backgroundColor: theme.palette.secondary.light,
     textAlign: 'center',
     color: 'white',
     marginBottom: 0,
     padding: '0.5rem'
   },
   wrapper: {
-    backgroundColor: '#345621',
     textAlign: 'center',
     color: 'white',
     marginBottom: 0,
@@ -48,10 +49,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     width: '100%',
     height: '100%',
-    border: 'pink',
     marginBottom: '1rem',
     padding: '1rem',
-    color: 'brown'
+    color: '#000',
   },
   cartSlipContent: {
     display: 'flex',
@@ -60,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     // height: 100,
     paddingLeft: '1rem',
-    color: 'green'
   },
   thumbNail: {
     width: theme.spacing(20),
@@ -79,9 +78,42 @@ const useStyles = makeStyles((theme) => ({
   },
   row: {
     display: 'flex',
+    alignItems: 'center',
   },
   amountText: {
     margin: '0 2rem',
+  },
+  amountButton: {
+    borderRadius: '50%',
+    color: '#fff',
+    backgroundColor: theme.palette.secondary.light,
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.dark,
+    }
+  },
+  amountDiv: {
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    borderRadius: '20px',
+    border: '1px solid #444444',
+    padding: '0.2rem',
+  },
+  amountPadding: {
+    padding: '0 0.5rem',
+  },
+  deleteIcon: {
+    color: 'red',
+    opacity: '0.5',
+    fontSize: '3rem',
+    "&:hover": {
+      fontSize: '3.5rem',
+      color: 'red',
+      opacity: 1,
+    }
+  },
+  checkOutButton: {
+    
   }
 
 }));
@@ -105,7 +137,6 @@ export default function ShoppingCart(){
           <h2>Antal varor i varukorg</h2>
         </Container>
           <Container className={classes.wrapper} maxWidth="md">
-            <h2>Wrapper</h2>
               <Container maxWidth="md">
                 <Card className={classes.cartSlipMedia}>
                   <Avatar 
@@ -116,43 +147,29 @@ export default function ShoppingCart(){
                   </ Avatar>
                   <div className={classes.cartSlipContent}>
                     <div>
-                      <h2 className={classes.titleText}>name</h2>
-                      <h3>price/st</h3>
+                      <h2 className={classes.titleText}>Xmas</h2>
+                      <h3>39:-/st</h3>
                     </div>
                     <div className={classes.row}>
                       <h2 className={classes.amountText}>Antal:</h2>
-                      <button>- 0 +</button>
+                      <div className={classes.amountDiv}>
+                        <button className={classes.amountButton}>
+                          <AddIcon />
+                        </button>
+                          <span className={classes.amountPadding}>0</span>
+                        <button className={classes.amountButton}>
+                          <RemoveIcon />
+                        </button>
+                      </div>
                     </div>
                     <div className={classes.spaceBetween}>
-                      <DeleteForeverTwoToneIcon />
-                      <h3>summa pris</h3>
-                    </div>
-                  </div>
-                </Card>
-
-                <Card className={classes.cartSlipMedia}>
-                  <Avatar 
-                    variant="rounded" 
-                    src='https://images.ctfassets.net/ngqihdllh70f/3P0eSoXiTYlcZcGAHrtoZn/7f8214f4aaee2bbced7dcf72022a1457/xmas_override_keg.png' 
-                    alt=""
-                    className={classes.thumbNail}>
-                  </ Avatar>
-                  <div className={classes.cartSlipContent}>
-                    <div>
-                      <h2 className={classes.titleText}>name</h2>
-                      <h3>price/st</h3>
-                    </div>
-                    <div className={classes.row}>
-                      <h2 className={classes.amountText}>Antal:</h2>
-                      <button>- 0 +</button>
-                    </div>
-                    <div className={classes.spaceBetween}>
-                      <DeleteForeverTwoToneIcon />
-                      <h3>summa pris</h3>
+                      <DeleteForeverTwoToneIcon className={classes.deleteIcon}/>
+                      <h3>summa pris: 39:-</h3>
                     </div>
                   </div>
                 </Card>
               </Container>
+                <Button className={classes.checkOutButton} variant="contained" color="secondary">CheckOut</Button>
           </Container>
       </main>
     </React.Fragment>
