@@ -104,34 +104,3 @@ export default function ShoppingCart(){
     </React.Fragment>
   );
 };
-
-//<Container maxWidth="md">
-/*<div className={classes.welcomeToShoppingCart}>
-<h1>ShoppingCart</h1>
-// Vill ta in ett värde från vagnen //
-  <h2>Your cart is empthy</h2>
-</div>
-<Container className={classes.wrapper}>
-<div className={classes.cartSlip}>
-  This is a cardslip
-  // Grid? // Name
-  <div className={classes.cardSlipMedia}>
-    content
-  </div>
-</div>
-<div className={classes.cartSlip}>
-  This is a cardslip
-  // Grid? // Name
-  <div className={classes.cardSlipMedia}>
-    content
-  </div>
-</div>
-<div className={classes.cartSlip}>
-  This is a cardslip
-  // Grid? // Name
-  <div className={classes.cardSlipMedia}>
-    content
-  </div>
-</div>
-</Container>
-</Container>*/
