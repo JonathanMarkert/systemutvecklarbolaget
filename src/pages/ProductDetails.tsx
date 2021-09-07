@@ -13,21 +13,10 @@ import { Product, products } from "../Mockdata";
 
 const useStyles = makeStyles((theme: Theme) =>
 createStyles({
-  page: {
+  root: {
+    padding: theme.spacing(5),
+    flexGrow: 1,
     display: "flex",
-    flexWrap: "wrap",
-    padding: theme.spacing(4),
-  },
-  containerStyle: {
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "flex-end",
-    padding: theme.spacing(1),
-  },
-  image: {
-    height: 500,
-    width: 'auto',
-    objectFit: 'contain',
   },
   card: {
     display:'flex',
@@ -35,10 +24,10 @@ createStyles({
     justifyContent: 'center',
     minWidth: 200,
   },
-  root: {
-    padding: theme.spacing(5),
-    flexGrow: 1,
-    display: "flex",
+  image: {
+    height: 500,
+    width: 'auto',
+    objectFit: 'contain',
   },
   paper: {
     padding: theme.spacing(1),
