@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: "auto",
   },
   breadText: {
+    paddingTop:"3rem",
     textAlign: "center",
     maxWidth: "600px",
     letterSpacing: "2px",
@@ -89,15 +90,16 @@ const HeroSection = () => {
       </Box>
       <Box className={classes.heroContainer}>
         <Typography className={classes.headLine} variant="h1">
-          <Hidden only={['xs','sm']}>Beer for Developers</Hidden>
+          <Hidden only={["xs", "sm"]}>Beer for Developers</Hidden>
           <Hidden only={["md", "lg", "xl"]}>
             Beer <FavoriteIcon style={{ fontSize: 40 }} />{" "}
           </Hidden>
           <Hidden only="xs">
             <Typography className={classes.breadText} variant="h5">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore
-              provident accusamus rem neque ipsa esse aliquid numquam eligendi
-              libero corrupti.
+              What is cooler than coding-themed beer? Null,
+              I say! We have already messed with your meddlesome government so
+              you don't have to worry about taxes or such. Just treat this site
+              as middleware and import the whole module!
             </Typography>
           </Hidden>
         </Typography>
