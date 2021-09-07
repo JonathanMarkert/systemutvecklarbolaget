@@ -1,7 +1,6 @@
 import { CSSProperties } from "@material-ui/styles";
 import  ProductCard from "../components/ProductCard";
 import { products } from "../Mockdata";
-
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -112,10 +111,6 @@ const useStyles = makeStyles((theme) => ({
       opacity: 1,
     }
   },
-  checkOutButton: {
-    
-  }
-
 }));
 
 interface Props {
@@ -169,7 +164,7 @@ export default function ShoppingCart(){
                   </div>
                 </Card>
               </Container>
-                <Button className={classes.checkOutButton} variant="contained" color="secondary">CheckOut</Button>
+                <Button variant="contained" color="secondary">CheckOut</Button>
           </Container>
       </main>
     </React.Fragment>
