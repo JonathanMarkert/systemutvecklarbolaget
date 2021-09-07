@@ -19,6 +19,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import { grey } from "@material-ui/core/colors";
+import HeroSection from "../components/HeroSection";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -45,8 +46,8 @@ export default function Home() {
       <CssBaseline />
       
       <main className={classes.background}>
+          <HeroSection/>
         <Container className={classes.cardGrid} maxWidth="md">
-       
           <Grid container spacing={4}>
       
             {products.map(product => (
