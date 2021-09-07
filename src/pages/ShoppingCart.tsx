@@ -1,4 +1,3 @@
-
 import { CSSProperties } from "@material-ui/styles";
 import  ProductCard from "../components/ProductCard";
 import { products } from "../Mockdata";
@@ -19,6 +18,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import { grey } from "@material-ui/core/colors";
+import ListItem from "@material-ui/core/ListItem";
+import Avatar from "@material-ui/core/Avatar";
+import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -35,24 +37,51 @@ const useStyles = makeStyles((theme) => ({
     padding: '0.5rem'
   },
   wrapper: {
-    backgroundColor: 'purple',
+    backgroundColor: '#345621',
     textAlign: 'center',
     color: 'white',
     marginBottom: 0,
-    padding: '0.5rem'
+    padding: '0.5rem',
   },
-  cartSlip: {
+  cartSlipMedia: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
     height: '100%',
-    backgroundColor: 'pink',
+    border: 'pink',
     marginBottom: '1rem',
-    marginLeft: '1rem',
     padding: '1rem',
     color: 'brown'
   },
-  cartSlipMedia: {
+  cartSlipContent: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
     width: '100%',
-    height: 100,
+    // height: 100,
+    paddingLeft: '1rem',
     color: 'green'
+  },
+  thumbNail: {
+    width: theme.spacing(20),
+    height: theme.spacing(20)
+  },
+  titleText: {
+    margin: '0 0 2rem 0',
+  },
+  spaceBetween: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    // textAlign: 'right'
+  },
+  row: {
+    display: 'flex',
+  },
+  amountText: {
+    margin: '0 2rem',
   }
 
 }));
@@ -60,6 +89,8 @@ const useStyles = makeStyles((theme) => ({
 interface Props {
   
 }
+
+
 
 export default function ShoppingCart(){
   const classes = useStyles();
@@ -71,35 +102,56 @@ export default function ShoppingCart(){
       <main className={classes.background}>
         <Container className={classes.welcomeToShoppingCart} maxWidth="md">
           <h1>Shopping cart</h1>
+          <h2>Antal varor i varukorg</h2>
         </Container>
           <Container className={classes.wrapper} maxWidth="md">
             <h2>Wrapper</h2>
-              <Container>
-                <div className={classes.cartSlip}>
-                  <h3>cart slip</h3>
-                    <div className={classes.cartSlipMedia}>
-                      <h4>cart slip media</h4>
+              <Container maxWidth="md">
+                <Card className={classes.cartSlipMedia}>
+                  <Avatar 
+                    variant="rounded" 
+                    src='https://images.ctfassets.net/ngqihdllh70f/3P0eSoXiTYlcZcGAHrtoZn/7f8214f4aaee2bbced7dcf72022a1457/xmas_override_keg.png' 
+                    alt=""
+                    className={classes.thumbNail}>
+                  </ Avatar>
+                  <div className={classes.cartSlipContent}>
+                    <div>
+                      <h2 className={classes.titleText}>name</h2>
+                      <h3>price/st</h3>
                     </div>
-                </div>
-                <div className={classes.cartSlip}>
-                  <h3>cart slip</h3>
-                    <div className={classes.cartSlipMedia}>
-                      <h4>cart slip media</h4>
+                    <div className={classes.row}>
+                      <h2 className={classes.amountText}>Antal:</h2>
+                      <button>- 0 +</button>
                     </div>
-                </div>
-                <div className={classes.cartSlip}>
-                  <h3>cart slip</h3>
-                    <div className={classes.cartSlipMedia}>
-                      <h4>cart slip media</h4>
+                    <div className={classes.spaceBetween}>
+                      <DeleteForeverTwoToneIcon />
+                      <h3>summa pris</h3>
                     </div>
-                </div>
-                <div className={classes.cartSlip}>
-                  <h3>cart slip</h3>
-                    <div className={classes.cartSlipMedia}>
-                      <h4>cart slip media</h4>
-                    </div>
-                </div>
+                  </div>
+                </Card>
 
+                <Card className={classes.cartSlipMedia}>
+                  <Avatar 
+                    variant="rounded" 
+                    src='https://images.ctfassets.net/ngqihdllh70f/3P0eSoXiTYlcZcGAHrtoZn/7f8214f4aaee2bbced7dcf72022a1457/xmas_override_keg.png' 
+                    alt=""
+                    className={classes.thumbNail}>
+                  </ Avatar>
+                  <div className={classes.cartSlipContent}>
+                    <div>
+                      <h2 className={classes.titleText}>name</h2>
+                      <h3>price/st</h3>
+                    </div>
+                    <div className={classes.row}>
+                      <h2 className={classes.amountText}>Antal:</h2>
+                      <button>- 0 +</button>
+                    </div>
+                    <div className={classes.spaceBetween}>
+                      <DeleteForeverTwoToneIcon />
+                      <h3>summa pris</h3>
+                    </div>
+                  </div>
+                </Card>
               </Container>
           </Container>
       </main>
