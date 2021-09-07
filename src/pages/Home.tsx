@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import ProductCard from "../components/ProductCard";
 import { products } from "../Mockdata";
+import HeroSection from "../components/HeroSection";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,8 +34,8 @@ export default function Home() {
       <CssBaseline />
       
       <main className={classes.background}>
+          <HeroSection/>
         <Container className={classes.cardGrid} maxWidth="md">
-       
           <Grid container spacing={4}>
       
             {products.map(product => (
