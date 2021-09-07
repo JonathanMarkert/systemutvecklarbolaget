@@ -9,7 +9,6 @@ interface CartContext {
   decrementNumber: (num: number) => void;
 }
 
-
 const CartProvider: FC = (props) => {
     const [cart, setCart] = useState<Product[]>([]);
     
@@ -57,6 +56,7 @@ const CartProvider: FC = (props) => {
           >
             {props.children}
           </ProductContext.Provider>
+
         );
 };
 export default CartProvider;
