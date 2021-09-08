@@ -38,18 +38,16 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'hidden',
         textJustify: 'inter-word'
     },
-    detailsButton: {
+    linkStyling: {
+        textDecoration: 'none',
+    },
+    actionButton: {
+        textDecoration: 'none',
         color: "#7c3f04",
         "&:hover": {
             color: "#f46f04",
         },
     },
-    addToCartButton: {
-        color: "#7c3f04",
-        "&:hover": {
-            color: "#f46f04",
-        },
-    }
 }))
 
 const ProductCard: React.FC<Props> = ({ product }) => {   //add clickable image
@@ -73,12 +71,16 @@ const ProductCard: React.FC<Props> = ({ product }) => {   //add clickable image
                     </div>
                 </CardContent>
                 <CardActions>
-                   <Link to={`/details/${product.id}`} > 
-                    <Button className={classes.detailsButton} aria-label="details">
+                   <Link className={classes.linkStyling} to={`/details/${product.id}`}> 
+                    <Button className={classes.actionButton} 
+                        size="small"
+                        color="primary"
+                        aria-label="details"
+                    >
                         View
                     </Button>
                     </Link>
-                    <Button className={classes.addToCartButton}
+                    <Button className={classes.actionButton}
                         size="small"
                         color="primary"
                         onClick={() => handleAddToCart(product)}
