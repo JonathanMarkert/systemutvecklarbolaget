@@ -13,9 +13,7 @@ import { Product } from '../Mockdata';
 import { ProductContext } from './context/ProductContext';
 
 interface Props {
-    product: Product
-    
-    
+    product: Product  
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: 'grey',
+        textDecoration: 'none'
     },
     cardMedia: {
         width: '100%',
@@ -38,18 +36,16 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'hidden',
         textJustify: 'inter-word'
     },
-    detailsButton: {
-        color: "#7c3f04",
+    linkStyling: {
+        textDecoration: 'none',
+    },
+    actionButton: {
+        textDecoration: 'none',
+        color: theme.palette.primary.light,
         "&:hover": {
-            color: "#f46f04",
+            color: theme.palette.primary.dark,
         },
     },
-    addToCartButton: {
-        color: "#7c3f04",
-        "&:hover": {
-            color: "#f46f04",
-        },
-    }
 }))
 
 const ProductCard: React.FC<Props> = ({ product }) => {   //add clickable image
@@ -73,14 +69,16 @@ const ProductCard: React.FC<Props> = ({ product }) => {   //add clickable image
                     </div>
                 </CardContent>
                 <CardActions>
-                   <Link to={`/details/${product.id}`} > 
-                    <Button className={classes.detailsButton} aria-label="details">
+                   <Link className={classes.linkStyling} to={`/details/${product.id}`}> 
+                    <Button className={classes.actionButton} 
+                        size="small"
+                        aria-label="details"
+                    >
                         View
                     </Button>
                     </Link>
-                    <Button className={classes.addToCartButton}
+                    <Button className={classes.actionButton}
                         size="small"
-                        color="primary"
                         onClick={() => handleAddToCart(product)}
                         aria-label="add to cart"
                     >
