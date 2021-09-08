@@ -43,9 +43,11 @@ const useStyles = makeStyles((theme) => ({
     },
     actionButton: {
         textDecoration: 'none',
-        color: "#7c3f04",
+        color: theme.palette.primary.light,
+        //color: "#7c3f04",
         "&:hover": {
-            color: "#f46f04",
+            //color: "#f46f04",
+            color: theme.palette.primary.dark,
         },
     },
 }))
