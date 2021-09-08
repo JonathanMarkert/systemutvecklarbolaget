@@ -6,25 +6,23 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-import { useContext } from "react";
+import classNames from "classnames";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { usePrevious } from "../../CustomHook";
+import MainLogo from "../../images/logga.png";
 import { ProductContext } from "../context/ProductContext";
-
-const image: string =
-  "https://cdn.systembolaget.se/4a51ce/globalassets/logo.svg";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: "flex",
-      // opacity: "50%",
     },
     grow: {
       flexGrow: 1,
     },
     appBarStyle: {
       position: "fixed",
-      // backgroundImage: `url(${headerImage})`,
       backgroundColor: theme.palette.primary.main,
     },
     titleStyle: {
@@ -36,21 +34,35 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: 40,
       color: theme.palette.primary.contrastText,
       "&:hover": {
-        // color white
         color: "#fff",
       },
     },
-    mainImage: {},
+    animateStyle: {
+      color: theme.palette.secondary.main,
+      fontSize: 50,
+    },
   })
 );
 
 export default function MenuAppBar() {
   const classes = useStyles();
   const { cart } = useContext(ProductContext);
+  const [animate, setAnimate] = useState<boolean>(false);
 
-  // Needs "amount" property in mockData
-  const getTotalItems = () =>
-    cart.reduce((total: number, cart) => total + cart.amount, 0);
+  const totalItems = cart.reduce(
+    (total: number, cart) => total + cart.amount,
+    0
+  );
+
+  const previousTotal = usePrevious(totalItems);
+  useEffect(() => {
+    if (previousTotal !== totalItems) {
+      setAnimate(true);
+      setTimeout(() => {
+        setAnimate(false);
+      }, 1000);
+    }
+  }, [previousTotal, totalItems]);
 
   return (
     <div className={classes.root}>
@@ -58,11 +70,10 @@ export default function MenuAppBar() {
         <Toolbar>
           <Link to="/">
             <IconButton>
-              <img src={image} alt="" />
+              <img style={{width:"100%"}} src={MainLogo} alt="" />
             </IconButton>
           </Link>
           <div className={classes.grow}>
-
             <Hidden only="xs">
               <Typography variant="h6" className={classes.titleStyle}>
                 SystemUtvecklarBolaget
@@ -72,8 +83,12 @@ export default function MenuAppBar() {
           <div>
             <Link to="/cart">
               <IconButton aria-label="cart">
-                <Badge badgeContent={getTotalItems()} color={"secondary"}>
-                  <ShoppingCartOutlinedIcon className={classes.iconStyle} />
+                <Badge badgeContent={totalItems} color={"secondary"}>
+                  <ShoppingCartOutlinedIcon
+                    className={classNames(classes.iconStyle, {
+                      [classes.animateStyle]: animate,
+                    })}
+                  />
                 </Badge>
               </IconButton>
             </Link>
