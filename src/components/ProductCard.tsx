@@ -13,9 +13,7 @@ import { Product } from '../Mockdata';
 import { ProductContext } from './context/ProductContext';
 
 interface Props {
-    product: Product
-    
-    
+    product: Product  
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -44,9 +42,7 @@ const useStyles = makeStyles((theme) => ({
     actionButton: {
         textDecoration: 'none',
         color: theme.palette.primary.light,
-        //color: "#7c3f04",
         "&:hover": {
-            //color: "#f46f04",
             color: theme.palette.primary.dark,
         },
     },
@@ -76,7 +72,6 @@ const ProductCard: React.FC<Props> = ({ product }) => {   //add clickable image
                    <Link className={classes.linkStyling} to={`/details/${product.id}`}> 
                     <Button className={classes.actionButton} 
                         size="small"
-                        color="primary"
                         aria-label="details"
                     >
                         View
@@ -84,7 +79,6 @@ const ProductCard: React.FC<Props> = ({ product }) => {   //add clickable image
                     </Link>
                     <Button className={classes.actionButton}
                         size="small"
-                        color="primary"
                         onClick={() => handleAddToCart(product)}
                         aria-label="add to cart"
                     >
