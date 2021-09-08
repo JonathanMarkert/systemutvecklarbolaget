@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
+import { useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,6 +32,59 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function CheckoutForm() {
   const classes = useStyles();
+  // const [text, setText] = useState<string>();
+  // const [zipcode, setZipcode] = useState<string>();
+  // const [address, setAddress] = useState<string>();
+  // const [phone, setPhone] = useState<string>();
+  // const [mail, setMail] = useState<string>();
+  const [errors, setErrors] = useState<{ phone?: string, text?: string, zipcode?: string, address?:string, mail?: string }>();
+
+  
+  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: {value} } = event;
+    setErrors({ text: '' })
+    // setText(value);
+    let textReg = new RegExp(/^[a-zåäöA-ZÅÄÖ]+$/).test(value);
+    if (!textReg) {
+      setErrors({ text: 'Only letters are permitted'})
+    }    
+  };
+  const handleAdderssChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: {value} } = event;
+    setErrors({ address: '' })
+    // setAddress(value);
+    let addressReg = new RegExp(/[A-Za-zåäö]+/).test(value);
+    if (!addressReg) {
+      setErrors({ address: 'Only letters and numbers are permitted'})
+    }    
+  };
+  const handleZipcodChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: {value} } = event;
+    setErrors({ zipcode: '' })
+    // setZipcode(value);
+    let zipReg = new RegExp(/^[+ 0-9]{5}$/).test(value);
+    if (!zipReg) {
+      setErrors({ zipcode: 'Has to be 5 numbers'})
+    }    
+  };
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: {value} } = event;
+    setErrors({ phone: '' })
+    // setPhone(value);
+    let phoneReg = new RegExp(/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm).test(value);
+    if (!phoneReg ) {
+      setErrors({ phone: 'Only numbers are permitted'})
+    }    
+  };
+  const handleMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: {value} } = event;
+    setErrors({ mail: '' })
+    // setMail(value);
+    let mailReg = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/).test(value);
+    if (!mailReg ) {
+      setErrors({ mail: 'Needs to be an valid email'})
+    }    
+  };
   
   return (
     <form className={classes.root} noValidate autoComplete="on">
@@ -47,6 +101,9 @@ export default function CheckoutForm() {
             fullWidth
             autoComplete="given-name"
             variant="outlined"
+            error={Boolean(errors?.text)}
+            helperText={(errors?.text)}
+            onChange={handleTextChange}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -65,6 +122,9 @@ export default function CheckoutForm() {
             fullWidth
             autoComplete="family-name"
             variant="outlined"
+            error={Boolean(errors?.text)}
+            helperText={(errors?.text)}
+            onChange={handleTextChange}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -83,6 +143,9 @@ export default function CheckoutForm() {
             fullWidth
             autoComplete="shipping address"
             variant="outlined"
+            error={Boolean(errors?.address)}
+            helperText={(errors?.address)}
+            onChange={handleAdderssChange}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -101,6 +164,9 @@ export default function CheckoutForm() {
             fullWidth
             autoComplete="shipping postal-code"
             variant="outlined"
+            error={Boolean(errors?.zipcode)}
+            helperText={(errors?.zipcode)}
+            onChange={handleZipcodChange}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -119,6 +185,9 @@ export default function CheckoutForm() {
             fullWidth
             autoComplete="shipping address-level2"
             variant="outlined"
+            error={Boolean(errors?.text)}
+            helperText={(errors?.text)}
+            onChange={handleTextChange}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -137,6 +206,9 @@ export default function CheckoutForm() {
             fullWidth
             autoComplete="shipping country"
             variant="outlined"
+            error={Boolean(errors?.text)}
+            helperText={(errors?.text)}
+            onChange={handleTextChange}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -155,6 +227,9 @@ export default function CheckoutForm() {
             fullWidth
             autoComplete="tel-national username"
             variant="outlined"
+            error={Boolean(errors?.phone)}
+            helperText={(errors?.phone)}
+            onChange={handlePhoneChange}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -173,6 +248,9 @@ export default function CheckoutForm() {
             label="Email Address"
             name="email"
             autoComplete="email"
+            error={Boolean(errors?.mail)}
+            helperText={(errors?.mail)}
+            onChange={handleMailChange}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -187,3 +265,5 @@ export default function CheckoutForm() {
     </form>
   );
 }
+
+
