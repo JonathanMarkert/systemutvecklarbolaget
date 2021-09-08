@@ -3,17 +3,29 @@ import { Product, products } from "../../Mockdata";
 
 interface IProductContext {
   beerProductArray: Product[];
-  AddToLocalStorage: (beerProduct: Product) => void;
+  addBeerProduct: (beerProduct: Product) => void;
+  editBeerProduct: (beerProduct: Product) => void;
+  deleteBeerProduct: (beerProduct: Product) => void;
 }
 
 const ProductProvider: FC = (props) => {
   const [productsState, setProductsState] = useState<Product[]>(products);
 
-  const AddToLocalStorage = (beerProduct: Product) => {
+  const addBeerProduct = (beerProduct: Product) => {
     setProductsState((pre) => {
       return [...pre, beerProduct];
     });
   };
+
+  const editBeerProduct = (beerProduct: Product) => {
+    const index = productsState.findIndex((item) => item.id === beerProduct.id);
+    const newBeerProducts = [...productsState];
+    newBeerProducts[index] = beerProduct;
+    setProductsState(newBeerProducts);
+  };
+
+  const deleteBeerProduct = (beerProduct: Product) => {};
+
   useEffect(() => {
     localStorage.setItem("Products", JSON.stringify(productsState));
   }, [productsState]);
@@ -29,7 +41,9 @@ const ProductProvider: FC = (props) => {
     <ProductContext.Provider
       value={{
         beerProductArray: productsState,
-        AddToLocalStorage,
+        addBeerProduct,
+        editBeerProduct,
+        deleteBeerProduct,
       }}
     >
       {props.children}
@@ -41,5 +55,7 @@ export default ProductProvider;
 
 export const ProductContext = createContext<IProductContext>({
   beerProductArray: [],
-  AddToLocalStorage: () => {},
+  addBeerProduct: () => {},
+  editBeerProduct: () => {},
+  deleteBeerProduct: () => {},
 });

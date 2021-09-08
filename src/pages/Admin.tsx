@@ -14,29 +14,29 @@ const alfons:Product = {
 }
 
 const alfons2: Product = {
-  id: "544",
-  url: "t",
-  urlDetails: "h",
-  name: "o",
-  brewery: "m",
-  description: "a",
+  id: "1",
+  url: "",
+  urlDetails: "",
+  name: "Testar om det blev uppdaterat",
+  brewery: "",
+  description: "",
   price: 666,
   amount: 0,
 };
 
 const Admin = () => {
-  const { beerProductArray: beerProducyArray, AddToLocalStorage } = useContext(ProductContext);
-   console.log(beerProducyArray);
+  const { beerProductArray, addBeerProduct, editBeerProduct } = useContext(ProductContext);
+   console.log(beerProductArray);
   // console.log(alfons);
   return (
     <>
       <h1>ADMIN</h1>
-      <p>{beerProducyArray.map((item) => item.price)}</p>
-      <button onClick={() => AddToLocalStorage(alfons)}>
+      <p>{beerProductArray.map((item) => item.price)}</p>
+      <button onClick={() => addBeerProduct(alfons)}>
         ADD to localStorage
       </button>
-      <button onClick={() => AddToLocalStorage(alfons2)}>
-        ADD to localStorage
+      <button onClick={() => editBeerProduct(alfons2)}>
+        Edit existing beer
       </button>
     </>
   );
