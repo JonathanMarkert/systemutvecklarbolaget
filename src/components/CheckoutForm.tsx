@@ -1,13 +1,14 @@
-import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-
-import HomeIcon from '@material-ui/icons/Home';
-import CallIcon from '@material-ui/icons/Call';
+import MailTwoToneIcon from '@material-ui/icons/MailTwoTone';
+import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone';
+import CallTwoToneIcon from '@material-ui/icons/CallTwoTone';
+import PersonOutlineTwoToneIcon from '@material-ui/icons/PersonOutlineTwoTone';
+import PublicTwoToneIcon from '@material-ui/icons/PublicTwoTone';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { AccountCircle } from '@material-ui/icons';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,14 +23,15 @@ const useStyles = makeStyles((theme: Theme) =>
     displayIcon: {
         color: 'black',
     },
-    gridUI: {
-        display: 'flex',
-    }
+    orderButton: {
+      marginTop: '2rem',
+    },
   }),
 );
 
 export default function CheckoutForm() {
   const classes = useStyles();
+  
   return (
     <form className={classes.root} noValidate autoComplete="on">
       <Typography variant="h6" gutterBottom>
@@ -45,6 +47,13 @@ export default function CheckoutForm() {
             fullWidth
             autoComplete="given-name"
             variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PersonOutlineTwoToneIcon />
+                </InputAdornment>
+              ),
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -56,10 +65,16 @@ export default function CheckoutForm() {
             fullWidth
             autoComplete="family-name"
             variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PersonOutlineTwoToneIcon />
+                </InputAdornment>
+              ),
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-       
           <TextField
             required
             id="address"
@@ -71,7 +86,7 @@ export default function CheckoutForm() {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <AccountCircle />
+                  <HomeTwoToneIcon />
                 </InputAdornment>
               ),
             }}
@@ -86,6 +101,13 @@ export default function CheckoutForm() {
             fullWidth
             autoComplete="shipping postal-code"
             variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <HomeTwoToneIcon />
+                </InputAdornment>
+              ),
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -97,6 +119,13 @@ export default function CheckoutForm() {
             fullWidth
             autoComplete="shipping address-level2"
             variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <HomeTwoToneIcon />
+                </InputAdornment>
+              ),
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -108,18 +137,31 @@ export default function CheckoutForm() {
             fullWidth
             autoComplete="shipping country"
             variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PublicTwoToneIcon />
+                </InputAdornment>
+              ),
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-        {/* <CallIcon/> */}
           <TextField
             required
             id="mobileNumber"
             name="mobileNumber"
             label="Mobile Number"
             fullWidth
-            autoComplete="mobileNumber"
+            autoComplete="tel-national username"
             variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <CallTwoToneIcon />
+                </InputAdornment>
+              ),
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -131,9 +173,17 @@ export default function CheckoutForm() {
             label="Email Address"
             name="email"
             autoComplete="email"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <MailTwoToneIcon />
+                </InputAdornment>
+              ),
+            }}
           />
         </Grid>
       </Grid>
+      <Button variant="contained" color="secondary" className={classes.orderButton}>Place Order</Button>
     </form>
   );
 }
