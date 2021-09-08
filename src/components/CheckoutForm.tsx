@@ -44,7 +44,7 @@ export default function CheckoutForm() {
     const { target: {value} } = event;
     setErrors({ text: '' })
     // setText(value);
-    let textReg = new RegExp(/^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s-]+$/).test(value);
+    let textReg = new RegExp(/^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/).test(value);
     if (!textReg) {
       setErrors({ text: 'Only letters are permitted'})
     }    
