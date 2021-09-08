@@ -44,7 +44,7 @@ export default function CheckoutForm() {
     const { target: {value} } = event;
     setErrors({ text: '' })
     // setText(value);
-    let textReg = new RegExp(/^[a-zåäöA-ZÅÄÖ]+$/).test(value);
+    let textReg = new RegExp(/^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s-]+$/).test(value);
     if (!textReg) {
       setErrors({ text: 'Only letters are permitted'})
     }    
@@ -62,7 +62,7 @@ export default function CheckoutForm() {
     const { target: {value} } = event;
     setErrors({ zipcode: '' })
     // setZipcode(value);
-    let zipReg = new RegExp(/^[+ 0-9]{5}$/).test(value);
+    let zipReg = new RegExp(/^[+ 0-9]{5}$/).test(value.replace(/\s/g, ""));
     if (!zipReg) {
       setErrors({ zipcode: 'Has to be 5 numbers'})
     }    
