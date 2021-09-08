@@ -1,85 +1,48 @@
-import { FC, createContext, useState } from "react";
-import { Product } from "../../Mockdata";
+import { createContext, FC, useEffect, useState } from "react";
+import { products } from "../../Mockdata";
 
-interface CartContext {
-  cart: Product[];
-  handleAddToCart: (beerProduct: Product) => void;
-  handleRemoveFromCart: (beerProduct: Product) => void;
-  incrementNumber: (num: number) => void;
-  decrementNumber: (num: number) => void;
+interface IProductContext {
+  AddToLocalStorage: () => void;
+  GetFromLocalStorage: () => void;
 }
 
-const CartProvider: FC = (props) => {
-    const [cart, setCart] = useState<Product[]>([]);
-    
-    const handleAddToCart = (beerProduct: Product) => {
-        setCart((previousState) => {
-            const isProductInCart = previousState.find(
-                (item) => item.id === beerProduct.id);
+const ProductProvider: FC = (props) => {
+  const [product, setProduct] = useState(products);
 
-                if (isProductInCart) {
-                    return previousState.map((item) =>
-                    item.id === beerProduct.id
-                    ? { ...item, amount: item.amount + 1 }
-                    : item
-                    );
-                }
-                return [...previousState, {...beerProduct, amount: 1}]
-              });
-            };
-            // alternativt i varukorgen foreacha arrayn och ha en ny property som plussar på beroende på hur många id av samma det är.
+  useEffect(() => {
+    const data = localStorage.getItem("Products");
+    if (data) {
+      setProduct(JSON.parse(data));
+    }
+  }, []);
 
-        const handleRemoveFromCart = (beerProduct: Product) => {
-            // remove from cart
-           const test = cart.filter(item => item.id !== beerProduct.id);
-           setCart(test);
-          
-        };
-        const incrementNumber = (num: number) => {
-            // alternativt flytta till cart component och ändra inparameter
-            // ta in en product[] och gå igenom.
-            // add number
-        };
-        const decrementNumber = (num: number) => {
-            // subtract number
-        };
-        
-        return (
-          <ProductContext.Provider
-            value={{
-              cart: cart,
-              handleAddToCart,
-              handleRemoveFromCart,
-              incrementNumber,
-              decrementNumber,
-            }}
-          >
-            {props.children}
-          </ProductContext.Provider>
+  useEffect(() => {
+    localStorage.setItem("Products", JSON.stringify(product));
+  }, [product]);
 
-        );
+  const AddToLocalStorage = () => {
+
+  }
+
+  const GetFromLocalStorage = () => {
+      
+  }
+
+  return (
+    <ProductContext.Provider
+      value={{
+        GetFromLocalStorage,
+        AddToLocalStorage,
+      }}
+    >
+      {props.children}
+    </ProductContext.Provider>
+  );
 };
-export default CartProvider;
 
+export default ProductProvider;
 
-export const ProductContext = createContext<CartContext>({
-  cart: [],
-  handleAddToCart: () => {},
-  handleRemoveFromCart: () => {},
-  incrementNumber: () => {},
-  decrementNumber: () => {},
+export const ProductContext = createContext<IProductContext>({
+  GetFromLocalStorage: () => {},
+  AddToLocalStorage: () => {},
 });
-
-
-// consume:a en context i en component:
-//const {cart, handleAddToCart} = useContext(ProductContext);
-
-// sen använda i t.ex onclick på en button
-// onClick={() => handleAddToCart(product:Product)}
-
-  // till header använd sen funktionen i badge
-  // const getTotalItems = () =>
-  // cart.reduce((total: number, cart) => total + cart.amount, 0);
-
-
-

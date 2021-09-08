@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router} from 'react-router-dom'
-import CartProvider from '../context/ProductContext';
+import CartProvider from '../context/CartContext';
 import Layout from './Layout';
 
 function App() {

@@ -10,7 +10,7 @@ import {
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from '../Mockdata';
-import { ProductContext } from './context/ProductContext';
+import { CartContext } from './context/CartContext';
 
 interface Props {
     product: Product
@@ -54,10 +54,10 @@ const useStyles = makeStyles((theme) => ({
 
 const ProductCard: React.FC<Props> = ({ product }) => {   //add clickable image
     const classes = useStyles();
-    const {handleAddToCart} = useContext(ProductContext);
+    const {handleAddToCart} = useContext(CartContext);
     return (
         <React.Fragment>
-            {/* {products.map((product) => ( */}
+            {/* {products.map((product) => <ProductCard>( */}
             <Card className={classes.card}>
                 <CardMedia
                     className={classes.cardMedia}
