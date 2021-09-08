@@ -24,7 +24,10 @@ const ProductProvider: FC = (props) => {
     setProductsState(newBeerProducts);
   };
 
-  const deleteBeerProduct = (beerProduct: Product) => {};
+  const deleteBeerProduct = (beerProduct: Product) => {
+    const filteredState = productsState.filter((item) => item.id !== beerProduct.id);
+    setProductsState(filteredState);
+  };
 
   useEffect(() => {
     localStorage.setItem("Products", JSON.stringify(productsState));

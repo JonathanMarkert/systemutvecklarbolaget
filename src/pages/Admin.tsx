@@ -25,7 +25,7 @@ const alfons2: Product = {
 };
 
 const Admin = () => {
-  const { beerProductArray, addBeerProduct, editBeerProduct } = useContext(ProductContext);
+  const { beerProductArray, addBeerProduct, editBeerProduct,deleteBeerProduct } = useContext(ProductContext);
    console.log(beerProductArray);
   // console.log(alfons);
   return (
@@ -37,6 +37,9 @@ const Admin = () => {
       </button>
       <button onClick={() => editBeerProduct(alfons2)}>
         Edit existing beer
+      </button>
+      <button onClick={() => deleteBeerProduct(alfons)}>
+        Delete existing beer
       </button>
     </>
   );
