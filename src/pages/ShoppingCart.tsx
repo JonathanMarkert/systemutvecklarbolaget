@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
+import CheckoutForm from '../components/CheckoutForm';
 import SplipCard from "../components/SlipCard";
 
 const useStyles = makeStyles((theme) => ({
@@ -45,6 +46,7 @@ export default function ShoppingCart(){
                 <SplipCard />
               </Container>
                 <Button variant="contained" color="secondary">CheckOut</Button>
+            <CheckoutForm />
           </Container>
       </main>
     </React.Fragment>
