@@ -9,16 +9,16 @@ interface IProductContext {
   deleteBeerProduct: (beerProduct: Product) => void;
 }
 
-const preLoadToLocalStorage = () => {
-  const isEmpty = localStorage.length;
-  if (isEmpty === 0) {
+const preLoadToLocalStorage = ():Product[] => {
+  const data = localStorage.getItem("Products");
+
+  if (!data) {
     localStorage.setItem("Products", JSON.stringify(products));
   }
-  const data = localStorage.getItem("Products");
-  const parsedData:Product[] = JSON.parse(data as string);
-  return parsedData;
-  // kan vi göra den här funktionen snyggare ?
-}
+  
+  return JSON.parse(data as string);
+};
+
 
 const ProductProvider: FC = (props) => {
   const [productsState, setProductsState] = useState<Product[]>(preLoadToLocalStorage);
@@ -32,6 +32,7 @@ const ProductProvider: FC = (props) => {
 
   const editBeerProduct = (beerProduct: Product) => {
     const index = productsState.findIndex((item) => item.id === beerProduct.id);
+    if (index === -1) return
     const newBeerProducts = [...productsState];
     newBeerProducts[index] = beerProduct;
     setProductsState(newBeerProducts);

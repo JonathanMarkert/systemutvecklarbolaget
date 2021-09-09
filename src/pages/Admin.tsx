@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { CartContext } from "../components/context/CartContext";
 import { ProductContext } from "../components/context/ProductContext";
 import { Product } from "../Interfaces/IProduct";
 
@@ -27,7 +28,8 @@ const alfons2: Product = {
 const Admin = () => {
   const { beerProductArray, addBeerProduct, editBeerProduct,deleteBeerProduct } = useContext(ProductContext);
    console.log(beerProductArray);
-  // console.log(alfons);
+   const {cart} = useContext(CartContext);
+    console.log(cart);
   return (
     <>
       <h1>ADMIN</h1>
@@ -41,6 +43,9 @@ const Admin = () => {
       <button onClick={() => deleteBeerProduct(alfons)}>
         Delete existing beer
       </button>
+      <h2>CHECK CART ITEMS</h2>
+      <p>{cart.map((item) => item.id)}</p>
+
     </>
   );
 };

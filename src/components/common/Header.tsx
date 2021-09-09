@@ -60,7 +60,7 @@ export default function MenuAppBar() {
       setAnimate(true);
       setTimeout(() => {
         setAnimate(false);
-      }, 1000);
+      }, 300);
     }
   }, [previousTotal, totalItems]);
 
