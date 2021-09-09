@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,6 +28,9 @@ const useStyles = makeStyles((theme: Theme) =>
     orderButton: {
       marginTop: '2rem',
     },
+    link: {
+      textDecoration: 'none',
+    }
   }),
 );
 
@@ -261,7 +265,15 @@ export default function CheckoutForm() {
           />
         </Grid>
       </Grid>
-      <Button variant="contained" color="secondary" className={classes.orderButton}>Place Order</Button>
+      <Link to="/checkout" className={classes.link}>
+        <Button 
+          className={classes.orderButton}
+          variant="contained" 
+          color="secondary" 
+        >
+          Place Order
+        </Button>
+      </Link>
     </form>
   );
 }
