@@ -9,13 +9,12 @@ import {
 } from '@material-ui/core';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Product } from '../Mockdata';
+import { Product } from '../Interfaces/IProduct';
 import { CartContext } from './context/CartContext';
 
 interface Props {
     product: Product
-    
-    
+        
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -57,7 +56,6 @@ const ProductCard: React.FC<Props> = ({ product }) => {   //add clickable image
     const {handleAddToCart} = useContext(CartContext);
     return (
         <React.Fragment>
-            {/* {products.map((product) => <ProductCard>( */}
             <Card className={classes.card}>
                 <CardMedia
                     className={classes.cardMedia}

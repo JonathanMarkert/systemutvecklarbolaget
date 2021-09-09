@@ -1,5 +1,6 @@
 import { createContext, FC, useEffect, useState } from "react";
-import { Product, products } from "../../Mockdata";
+import { products } from "../../Mockdata";
+import { Product } from "../../Interfaces/IProduct";
 
 interface IProductContext {
   beerProductArray: Product[];

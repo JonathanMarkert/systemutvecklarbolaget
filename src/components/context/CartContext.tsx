@@ -1,5 +1,5 @@
 import { FC, createContext, useState } from "react";
-import { Product } from "../../Mockdata";
+import { Product } from '../../Interfaces/IProduct';
 
 interface ICartContext {
   cart: Product[];

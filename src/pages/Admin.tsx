@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { ProductContext } from "../components/context/ProductContext";
-import { Product } from "../Mockdata";
+import { Product } from "../Interfaces/IProduct";
 
 const alfons:Product = {
   id:"1000",
-  url:"t",
-  urlDetails:"h",
+  url:"https://i.pinimg.com/736x/26/b2/50/26b250a738ea4abc7a5af4d42ad93af0.jpg",
+  urlDetails:"https://i.pinimg.com/736x/26/b2/50/26b250a738ea4abc7a5af4d42ad93af0.jpg",
   name:"o",
   brewery:"m",
   description:"a",
