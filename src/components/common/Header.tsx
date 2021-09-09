@@ -11,7 +11,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { usePrevious } from "../../CustomHook";
 import MainLogo from "../../images/logga.png";
-import { ProductContext } from "../context/ProductContext";
+import { CartContext } from "../context/CartContext";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MenuAppBar() {
   const classes = useStyles();
-  const { cart } = useContext(ProductContext);
+  const { cart } = useContext(CartContext);
   const [animate, setAnimate] = useState<boolean>(false);
 
   const totalItems = cart.reduce(
