@@ -1,13 +1,4 @@
-export interface Product {
-	id: string;
-	url: string;
-  urlDetails: string;
-  name: string;
-  brewery: string;
-	description: string; 
-  price: number;
-  amount: number;
-}
+import {Product} from "./Interfaces/IProduct";
 
 export const products: Product[] = [{
 	id: '1',

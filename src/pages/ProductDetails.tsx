@@ -7,8 +7,9 @@ import {
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { FC, useContext } from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { CartContext } from "../components/context/CartContext";
 import { ProductContext } from "../components/context/ProductContext";
-import { Product, products } from "../Mockdata";
+import {Product} from "../Interfaces/IProduct";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -41,10 +42,11 @@ interface DetailsProps extends RouteComponentProps <{productId: string}> {}
 
 const ProductDetails: FC<DetailsProps> = ({ match}:DetailsProps) => {
   
-  const { handleAddToCart } = useContext(ProductContext);
+  const { handleAddToCart } = useContext(CartContext);
+  const {beerProductArray} = useContext(ProductContext);
   const classes = useStyles();
   const id = match.params.productId;
-  const product = products.find((p) => p.id === id) as Product;
+  const product = beerProductArray.find((p) => p.id === id) as Product;
    
   return (
    

@@ -46,50 +46,53 @@ export default function CheckoutForm() {
   
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target: {value} } = event;
-    setErrors({ text: '' })
+    setErrors({ ...errors, text: '' })
     // setText(value);
     let textReg = new RegExp(/^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/).test(value);
     if (!textReg) {
-      setErrors({ text: 'Only letters are permitted'})
+      setErrors({ ...errors, text: 'Only letters are permitted'})
     }    
-  };
+  }; // Behöver bryta upp denna i firstName, lastName etc
   const handleAdderssChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target: {value} } = event;
-    setErrors({ address: '' })
+    setErrors({ ...errors, address: '' })
     // setAddress(value);
     let addressReg = new RegExp(/[A-Za-zåäö]+/).test(value);
     if (!addressReg) {
-      setErrors({ address: 'Only letters and numbers are permitted'})
+      setErrors({ ...errors, address: 'Only letters and numbers are permitted'})
     }    
   };
   const handleZipcodChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target: {value} } = event;
-    setErrors({ zipcode: '' })
+    setErrors({ ...errors, zipcode: '' })
     // setZipcode(value);
     let zipReg = new RegExp(/^[+ 0-9]{5}$/).test(value.replace(/\s/g, ""));
     if (!zipReg) {
-      setErrors({ zipcode: 'Has to be 5 numbers'})
+      setErrors({ ...errors, zipcode: 'Has to be 5 numbers'})
     }    
   };
   const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target: {value} } = event;
-    setErrors({ phone: '' })
+    setErrors({ ...errors, phone: '' })
     // setPhone(value);
     let phoneReg = new RegExp(/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm).test(value);
     if (!phoneReg ) {
-      setErrors({ phone: 'Only numbers are permitted'})
+      setErrors({ ...errors, phone: 'Only numbers are permitted'})
     }    
   };
   const handleMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target: {value} } = event;
-    setErrors({ mail: '' })
+    setErrors({ ...errors, mail: '' })
     // setMail(value);
     let mailReg = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/).test(value);
     if (!mailReg ) {
-      setErrors({ mail: 'Needs to be an valid email'})
+      setErrors({ ...errors, mail: 'Needs to be an valid email'})
     }    
   };
   
+  // Flytta till egen fil ex checkoutFormFields
+  // bara fälten
+  // ta in props och changes
   return (
     <form className={classes.root} noValidate autoComplete="on">
       <Typography variant="h6" gutterBottom>
