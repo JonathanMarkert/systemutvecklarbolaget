@@ -36,27 +36,48 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function CheckoutForm() {
   const classes = useStyles();
-  // const [text, setText] = useState<string>();
-  // const [zipcode, setZipcode] = useState<string>();
-  // const [address, setAddress] = useState<string>();
-  // const [phone, setPhone] = useState<string>();
-  // const [mail, setMail] = useState<string>();
-  const [errors, setErrors] = useState<{ phone?: string, text?: string, zipcode?: string, address?:string, mail?: string }>();
-
+  const [firstName, setFirstName] = useState<string>();
+  const [lastName, setLastName] = useState<string>();
+  const [city, setCity] = useState<string>();
+  const [country, setCountry] = useState<string>();
+  const [zipcode, setZipcode] = useState<string>();
+  const [address, setAddress] = useState<string>();
+  const [phone, setPhone] = useState<string>();
+  const [mail, setMail] = useState<string>();
+  const [errors, setErrors] = useState<{ 
+    firstName?: string, 
+    lastName?: string, 
+    address?:string, 
+    zipcode?: string, 
+    city?: string,
+    country?: string, 
+    phone?: string, 
+    mail?: string 
+  }
+  >();
   
-  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target: {value} } = event;
-    setErrors({ ...errors, text: '' })
-    // setText(value);
-    let textReg = new RegExp(/^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/).test(value);
-    if (!textReg) {
-      setErrors({ ...errors, text: 'Only letters are permitted'})
+    setErrors({ ...errors, firstName: '' })
+    setFirstName(value);
+    let firstNameReg = new RegExp(/^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/).test(value);
+    if (!firstNameReg) {
+      setErrors({ ...errors, firstName: 'Only letters are permitted'})
     }    
-  }; // Behöver bryta upp denna i firstName, lastName etc
+  };
+  const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: {value} } = event;
+    setErrors({ ...errors, lastName: '' })
+    setLastName(value);
+    let lastNameReg = new RegExp(/^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/).test(value);
+    if (!lastNameReg) {
+      setErrors({ ...errors, lastName: 'Only letters are permitted'})
+    }    
+  };
   const handleAdderssChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target: {value} } = event;
     setErrors({ ...errors, address: '' })
-    // setAddress(value);
+    setAddress(value);
     let addressReg = new RegExp(/[A-Za-zåäö]+/).test(value);
     if (!addressReg) {
       setErrors({ ...errors, address: 'Only letters and numbers are permitted'})
@@ -65,16 +86,34 @@ export default function CheckoutForm() {
   const handleZipcodChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target: {value} } = event;
     setErrors({ ...errors, zipcode: '' })
-    // setZipcode(value);
+    setZipcode(value);
     let zipReg = new RegExp(/^[+ 0-9]{5}$/).test(value.replace(/\s/g, ""));
     if (!zipReg) {
       setErrors({ ...errors, zipcode: 'Has to be 5 numbers'})
     }    
   };
+  const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: {value} } = event;
+    setErrors({ ...errors, city: '' })
+    setCity(value);
+    let cityReg = new RegExp(/^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/).test(value);
+    if (!cityReg) {
+      setErrors({ ...errors, city: 'Only letters are permitted'})
+    }    
+  };
+  const handleCountryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: {value} } = event;
+    setErrors({ ...errors, country: '' })
+    setCountry(value);
+    let countryReg = new RegExp(/^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/).test(value);
+    if (!countryReg) {
+      setErrors({ ...errors, country: 'Only letters are permitted'})
+    }    
+  }; 
   const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target: {value} } = event;
     setErrors({ ...errors, phone: '' })
-    // setPhone(value);
+    setPhone(value);
     let phoneReg = new RegExp(/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm).test(value);
     if (!phoneReg ) {
       setErrors({ ...errors, phone: 'Only numbers are permitted'})
@@ -83,7 +122,7 @@ export default function CheckoutForm() {
   const handleMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target: {value} } = event;
     setErrors({ ...errors, mail: '' })
-    // setMail(value);
+    setMail(value);
     let mailReg = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/).test(value);
     if (!mailReg ) {
       setErrors({ ...errors, mail: 'Needs to be an valid email'})
@@ -108,9 +147,9 @@ export default function CheckoutForm() {
             fullWidth
             autoComplete="given-name"
             variant="outlined"
-            error={Boolean(errors?.text)}
-            helperText={(errors?.text)}
-            onChange={handleTextChange}
+            error={Boolean(errors?.firstName)}
+            helperText={(errors?.firstName)}
+            onChange={handleFirstNameChange}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -129,9 +168,9 @@ export default function CheckoutForm() {
             fullWidth
             autoComplete="family-name"
             variant="outlined"
-            error={Boolean(errors?.text)}
-            helperText={(errors?.text)}
-            onChange={handleTextChange}
+            error={Boolean(errors?.lastName)}
+            helperText={(errors?.lastName)}
+            onChange={handleLastNameChange}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -192,9 +231,9 @@ export default function CheckoutForm() {
             fullWidth
             autoComplete="shipping address-level2"
             variant="outlined"
-            error={Boolean(errors?.text)}
-            helperText={(errors?.text)}
-            onChange={handleTextChange}
+            error={Boolean(errors?.city)}
+            helperText={(errors?.city)}
+            onChange={handleCityChange}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -213,9 +252,9 @@ export default function CheckoutForm() {
             fullWidth
             autoComplete="shipping country"
             variant="outlined"
-            error={Boolean(errors?.text)}
-            helperText={(errors?.text)}
-            onChange={handleTextChange}
+            error={Boolean(errors?.country)}
+            helperText={(errors?.country)}
+            onChange={handleCountryChange}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
