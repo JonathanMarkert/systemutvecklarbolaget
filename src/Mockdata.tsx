@@ -6,7 +6,7 @@ export const products: Product[] = [{
   urlDetails: "https://product-cdn.systembolaget.se/productimages/24410181/24410181_400.png",
   name:'Xmas override',
   brewery: 'NerdBrewing',
-	description: 'Malty, nuanced taste with sweetness, hints of orange chocolate, breadcrumbs, espresso coffee, hazelnuts, vanilla and dark syrup.Malty, nuanced taste with sweetness, hints of orange chocolate, breadcrumbs, espresso coffee, hazelnuts, vanilla and dark syrup.',
+	description: 'Malty, nuanced taste with sweetness, hints of orange chocolate, breadcrumbs, espresso coffee, hazelnuts, vanilla and dark syrup.',
   price: 50,
   amount: 0,
 },{
