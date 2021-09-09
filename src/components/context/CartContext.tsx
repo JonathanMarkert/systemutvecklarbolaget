@@ -1,65 +1,95 @@
 import { FC, createContext, useState } from "react";
-import { Product } from '../../Interfaces/IProduct';
+import { Product } from "../../Interfaces/IProduct";
 
 interface ICartContext {
   cart: Product[];
   handleAddToCart: (beerProduct: Product) => void;
   handleRemoveFromCart: (beerProduct: Product) => void;
-  incrementNumber: (num: number) => void;
-  decrementNumber: (num: number) => void;
+  incrementNumber: (beerProduct: Product) => void;
+  decrementNumber: (beerProduct: Product) => void;
+  totalCartPrice: () => void;
 }
 
 const CartProvider: FC = (props) => {
-    const [cart, setCart] = useState<Product[]>([]);
-    
-    const handleAddToCart = (beerProduct: Product) => {
-        setCart((previousState) => {
-            const isProductInCart = previousState.find(
-                (item) => item.id === beerProduct.id);
+  const [cart, setCart] = useState<Product[]>([]);
 
-                if (isProductInCart) {
-                    return previousState.map((item) =>
-                    item.id === beerProduct.id
-                    ? { ...item, amount: item.amount + 1 }
-                    : item
-                    );
-                }
-                return [...previousState, {...beerProduct, amount: 1}]
-              });
-            };
-            // alternativt i varukorgen foreacha arrayn och ha en ny property som plussar på beroende på hur många id av samma det är.
-        const handleRemoveFromCart = (beerProduct: Product) => {
-            // remove from cart
-           const filteredState = cart.filter(item => item.id !== beerProduct.id);
-           setCart(filteredState);
-          
-        };
-        const incrementNumber = (num: number) => {
-            // alternativt flytta till cart component och ändra inparameter
-            // ta in en product[] och gå igenom.
-            // add number
-        };
-        const decrementNumber = (num: number) => {
-            // subtract number
-        };
-        
-        return (
-          <CartContext.Provider
-            value={{
-              cart: cart,
-              handleAddToCart,
-              handleRemoveFromCart,
-              incrementNumber,
-              decrementNumber,
-            }}
-          >
-            {props.children}
-          </CartContext.Provider>
+  const handleAddToCart = (beerProduct: Product) => {
+    setCart((previousState) => {
+      const isProductInCart = previousState.find(
+        (item) => item.id === beerProduct.id
+      );
 
+      if (isProductInCart) {
+        return previousState.map((item) =>
+          item.id === beerProduct.id
+            ? { ...item, amount: item.amount + 1 }
+            : item
         );
+      }
+      return [...previousState, { ...beerProduct, amount: 1 }];
+    });
+  };
+
+  const handleRemoveFromCart = (beerProduct: Product) => {
+    const filteredState = cart.filter((item) => item.id !== beerProduct.id);
+    setCart(filteredState);
+  };
+  
+  const incrementNumber = (beerProduct: Product) => {
+    setCart((previousState) => {
+      const foundBeer = previousState.find(
+        (item) => item.id === beerProduct.id
+      );
+      if (foundBeer) {
+        return previousState.map((item) =>
+          item.id === beerProduct.id
+            ? { ...item, amount: item.amount + 1 }
+            : item
+        );
+      }
+      return [...previousState, { ...beerProduct }];
+    });
+  };
+
+  const decrementNumber = (beerProduct: Product) => {
+    setCart((previousState) => {
+      const foundBeer = previousState.find(
+        (item) => item.id === beerProduct.id
+      );
+      if (foundBeer) {
+        if(foundBeer.amount < 2) {handleRemoveFromCart(foundBeer)}
+        return previousState.map((item) =>
+          item.id === beerProduct.id
+            ? { ...item, amount: item.amount - 1 }
+            : item
+        );
+      }
+      return [...previousState, { ...beerProduct }];
+    });
+
+  };
+
+  const totalCartPrice = () => {
+    const sum = cart.reduce((sum,beer) => sum + beer.price*beer.amount,0);
+    return sum
+  }
+
+  return (
+    <CartContext.Provider
+      value={{
+        cart: cart,
+        handleAddToCart,
+        handleRemoveFromCart,
+        incrementNumber,
+        decrementNumber,
+        totalCartPrice,
+      }}
+    >
+      {props.children}
+    </CartContext.Provider>
+  );
 };
 export default CartProvider;
-
 
 export const CartContext = createContext<ICartContext>({
   cart: [],
@@ -67,18 +97,6 @@ export const CartContext = createContext<ICartContext>({
   handleRemoveFromCart: () => {},
   incrementNumber: () => {},
   decrementNumber: () => {},
+  totalCartPrice: () => {},
 });
-
-
-// consume:a en context i en component:
-//const {cart, handleAddToCart} = useContext(ProductContext);
-
-// sen använda i t.ex onclick på en button
-// onClick={() => handleAddToCart(product:Product)}
-
-  // till header använd sen funktionen i badge
-  // const getTotalItems = () =>
-  // cart.reduce((total: number, cart) => total + cart.amount, 0);
-
-
 

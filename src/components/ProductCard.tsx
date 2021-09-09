@@ -1,4 +1,5 @@
 import {
+    Box,
     Button,
     Card,
     CardActions,
@@ -63,9 +64,9 @@ const ProductCard: React.FC<Props> = ({ product }) => {   //add clickable image
                     <Typography gutterBottom variant="h5" component="h2" align="center">
                         {product.name}
                     </Typography>
-                    <div>
+                    <Box>
                         {product.description}
-                    </div>
+                    </Box>
                 </CardContent>
                 <CardActions>
                    <Link className={classes.linkStyling} to={`/details/${product.id}`}> 
