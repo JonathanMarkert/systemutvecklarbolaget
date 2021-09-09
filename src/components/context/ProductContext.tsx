@@ -8,9 +8,21 @@ interface IProductContext {
   deleteBeerProduct: (beerProduct: Product) => void;
 }
 
-const ProductProvider: FC = (props) => {
-  const [productsState, setProductsState] = useState<Product[]>(products);
+const preLoadToLocalStorage = () => {
+  const isEmpty = localStorage.length;
+  if (isEmpty === 0) {
+    localStorage.setItem("Products", JSON.stringify(products));
+  }
+  const data = localStorage.getItem("Products");
+  const parsedData:Product[] = JSON.parse(data as string);
+  return parsedData;
+  // kan vi göra den här funktionen snyggare ?
+}
 
+const ProductProvider: FC = (props) => {
+  const [productsState, setProductsState] = useState<Product[]>(preLoadToLocalStorage);
+  
+  
   const addBeerProduct = (beerProduct: Product) => {
     setProductsState((pre) => {
       return [...pre, beerProduct];

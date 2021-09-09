@@ -28,11 +28,10 @@ const CartProvider: FC = (props) => {
               });
             };
             // alternativt i varukorgen foreacha arrayn och ha en ny property som plussar på beroende på hur många id av samma det är.
-            console.log(cart);
         const handleRemoveFromCart = (beerProduct: Product) => {
             // remove from cart
-           const test = cart.filter(item => item.id !== beerProduct.id);
-           setCart(test);
+           const filteredState = cart.filter(item => item.id !== beerProduct.id);
+           setCart(filteredState);
           
         };
         const incrementNumber = (num: number) => {
