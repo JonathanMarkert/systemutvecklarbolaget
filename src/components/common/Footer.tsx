@@ -15,7 +15,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     icon: {
       margin: "0 1rem",
-      fontSize: "2rem"
+      fontSize: "2rem",
+      "&:hover": {
+        color: "white",
+        opacity: 1,
+      },
     }
 }));
 
@@ -29,7 +33,7 @@ export const Footer = () => {
           <TwitterIcon className={classes.icon}/>
       </Typography>
       <Box textAlign="center">
-          Systemutveklar Bolaget 	&copy; {new Date().getFullYear()}
+          Systemutvecklar Bolaget 	&copy; {new Date().getFullYear()}
       </Box>
     </div>
   );
