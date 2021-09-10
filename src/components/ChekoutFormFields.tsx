@@ -31,12 +31,11 @@ export default function CheckoutFormFields({ errors, ...props}: Props) {
   console.log(errors.country);
   console.log(errors.phone);
   console.log(errors.zipcode);
-
+  
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={6}>
         <TextField
-          key={errors.firstName}
           required
           id="firstName"
           name="firstName"
@@ -58,7 +57,6 @@ export default function CheckoutFormFields({ errors, ...props}: Props) {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          key={errors.lastName}
           required
           id="lastName"
           name="lastName"
@@ -80,7 +78,6 @@ export default function CheckoutFormFields({ errors, ...props}: Props) {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          key={errors.address}
           required
           id="address"
           name="address"
@@ -102,7 +99,6 @@ export default function CheckoutFormFields({ errors, ...props}: Props) {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-           key={errors.zipcode}
           required
           id="zip"
           name="zip"
@@ -124,7 +120,6 @@ export default function CheckoutFormFields({ errors, ...props}: Props) {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-           key={errors.city}
           required
           id="city"
           name="city"
@@ -146,7 +141,6 @@ export default function CheckoutFormFields({ errors, ...props}: Props) {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          key={errors.country}
           required
           id="country"
           name="country"
@@ -168,7 +162,6 @@ export default function CheckoutFormFields({ errors, ...props}: Props) {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-           key={errors.phone}
           required
           id="mobileNumber"
           name="mobileNumber"
@@ -190,7 +183,6 @@ export default function CheckoutFormFields({ errors, ...props}: Props) {
       </Grid>
       <Grid item xs={12} sm={6}>
       <TextField
-           key={errors.mail}
           variant="outlined"
           required
           fullWidth

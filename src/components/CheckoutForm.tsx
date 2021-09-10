@@ -249,7 +249,7 @@ export default function CheckoutForm() {
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
-
+  
       <CheckoutFormFields
         errors={errors}
         handleFirstNameChange={handleFirstNameChange}
