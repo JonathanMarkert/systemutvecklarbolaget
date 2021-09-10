@@ -1,7 +1,6 @@
 import { Grid, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
-
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useContext, useState } from "react";
 import CheckoutForm from "../components/CheckoutForm";
@@ -11,9 +10,9 @@ import SlipCard from "../components/SlipCard";
 const useStyles = makeStyles((theme) => ({
   gridContainerStyle: {
     paddingTop: theme.spacing(3),
-    display: "flex",
   },
   topGrid: {
+    paddingTop: theme.spacing(3),
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -30,6 +29,14 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     textAlign: "center",
+  },
+  slipCardContainer: {
+    flexGrow: 1,
+  },
+  papperStyle: {
+    padding: theme.spacing(2),
+    margin: "auto",
+    maxWidth: 500,
   },
 }));
 
@@ -50,11 +57,11 @@ export default function ShoppingCart() {
           <Typography variant="h5">Items in cart: {totalItems}</Typography>
           <Typography variant="h5">Total: {totalCartPrice()}</Typography>
         </Grid>
-      </Grid>
-      <Grid container spacing={2}>
-        {cart.map((product) => (
-          <SlipCard key={product.id} product={product} />
-        ))}
+        <Grid container direction="column">
+          {cart.map((product) => (
+            <SlipCard key={product.id} product={product} />
+          ))}
+        </Grid>
       </Grid>
       <Grid item className={classes.topGrid}>
         <Button
