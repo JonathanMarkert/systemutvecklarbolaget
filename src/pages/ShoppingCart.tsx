@@ -1,7 +1,7 @@
-import { Box, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
+
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useContext, useState } from "react";
 import CheckoutForm from "../components/CheckoutForm";
@@ -9,24 +9,27 @@ import { CartContext } from "../components/context/CartContext";
 import SlipCard from "../components/SlipCard";
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(2),
+  gridContainerStyle: {
+    paddingTop: theme.spacing(3),
+    display: "flex",
   },
-  background: {
-    backgroundColor: "white",
+  topGrid: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  welcomeToShoppingCart: {
-    backgroundColor: theme.palette.secondary.light,
+  bottomGrid: {
+    paddingTop: "1rem",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  formStyle: {
+    display: "flex",
+    flexWrap: "wrap",
     textAlign: "center",
-    color: "white",
-    marginBottom: 0,
-    padding: "0.5rem",
-  },
-  wrapper: {
-    textAlign: "center",
-    color: "white",
-    marginBottom: 0,
-    padding: "0.5rem",
   },
 }));
 
@@ -40,30 +43,31 @@ export default function ShoppingCart() {
   );
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <Box className={classes.background}>
-        <Container className={classes.welcomeToShoppingCart} maxWidth="md">
+    <Container>
+      <Grid container className={classes.gridContainerStyle}>
+        <Grid item xs={12} className={classes.topGrid}>
           <Typography variant="h2">Shopping cart</Typography>
           <Typography variant="h5">Items in cart: {totalItems}</Typography>
           <Typography variant="h5">Total: {totalCartPrice()}</Typography>
-        </Container>
-        <Container className={classes.wrapper} maxWidth="md">
-          <Container maxWidth="md">
-            {cart.map((product) => (
-              <SlipCard key={product.id} product={product} />
-            ))}
-          </Container>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => setShowForm(true)}
-          >
-            CheckOut
-          </Button>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        {cart.map((product) => (
+          <SlipCard key={product.id} product={product} />
+        ))}
+      </Grid>
+      <Grid item className={classes.topGrid}>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => setShowForm(true)}
+        >
+          CheckOut
+        </Button>
+        <Container className={classes.formStyle}>
           {showForm && <CheckoutForm />}
         </Container>
-      </Box>
-    </React.Fragment>
+      </Grid>
+    </Container>
   );
 }
