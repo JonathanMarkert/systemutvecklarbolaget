@@ -15,7 +15,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     icon: {
       margin: "0 1rem",
-      fontSize: "2rem"
+      fontSize: "2rem",
+      "&:hover": {
+        color: "white",
+        opacity: 1,
+      },
     }
 }));
 
