@@ -78,7 +78,6 @@ export default function CheckoutForm() {
     checkFirstNameValidation(value);
   };
   const checkFirstNameValidation = (value: string) => {
-    console.log('FirstNameV');
     setErrors({ ...errors, firstName: '' })
     let firstNameReg = new RegExp(
       /^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/)
@@ -96,7 +95,6 @@ export default function CheckoutForm() {
     checkLastNameValidation(value);  
   };
   const checkLastNameValidation = (value: string) => {
-    console.log('LastNameV');
     setErrors({ ...errors, lastName: '' })
     let lastNameReg = new RegExp(
       /^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/)
@@ -114,7 +112,6 @@ export default function CheckoutForm() {
     checkAdderssValidation(value);
   };
   const checkAdderssValidation = (value:string) => {
-    console.log('AddressV');
     setErrors({ ...errors, address: '' })
     let addressReg = new RegExp(
       /[A-Za-zåäö]+/)
@@ -132,7 +129,6 @@ export default function CheckoutForm() {
     checkZipcodeValidation(value);
   };
   const checkZipcodeValidation = (value:string) => {
-    console.log('ZipcodeV');
     setErrors({ ...errors, zipcode: '' })
     let zipReg = new RegExp(
       /^[+ 0-9]{5}$/)
@@ -150,7 +146,6 @@ export default function CheckoutForm() {
     checkCityValidation(value);
   };
   const checkCityValidation = (value:string) => {
-    console.log('CityV');
     setErrors({ ...errors, city: '' })
     let cityReg = new RegExp(
       /^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/)
@@ -168,7 +163,6 @@ export default function CheckoutForm() {
     checkCountryValidation(value);
   }; 
   const checkCountryValidation = (value:string) => {
-    console.log('CountryV');
     setErrors({ ...errors, country: '' })
     let countryReg = new RegExp(
       /^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/)
@@ -186,7 +180,6 @@ export default function CheckoutForm() {
     checkPhoneValidation(value);   
   };
   const checkPhoneValidation = (value: string) => {
-    console.log('PhoneV');
     setErrors({ ...errors, phone: '' })
     let phoneReg = new RegExp(
       /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm)
@@ -204,7 +197,6 @@ export default function CheckoutForm() {
     checkMailValidation(value);
   };
   const checkMailValidation = (value: string) => {
-    console.log('MailV');
     setErrors({ ...errors, mail: '' })
     let mailReg = new RegExp(
       /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)
