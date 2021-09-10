@@ -7,6 +7,7 @@ import PublicTwoToneIcon from '@material-ui/icons/PublicTwoTone';
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { IFormFieldErrors } from './CheckoutForm';
+import { useEffect, useState } from 'react';
 
 interface Props {
   errors: IFormFieldErrors,
@@ -21,13 +22,21 @@ interface Props {
 };
 
 export default function CheckoutFormFields({ errors, ...props}: Props) {
-  console.log('formfeild');
+  console.log('Loggar alla properties');
+  console.log(errors.mail);
+  console.log(errors.firstName);
+  console.log(errors.lastName);
+  console.log(errors.city);
+  console.log(errors.address);
+  console.log(errors.country);
+  console.log(errors.phone);
+  console.log(errors.zipcode);
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={6}>
         <TextField
-          // key={errors.firstName}
+          key={errors.firstName}
           required
           id="firstName"
           name="firstName"
@@ -35,7 +44,7 @@ export default function CheckoutFormFields({ errors, ...props}: Props) {
           fullWidth
           autoComplete="given-name"
           variant="outlined"
-          error={(Boolean(errors.firstName))}
+          error={Boolean(errors.firstName)}
           helperText={(errors.firstName)}
           onChange={props.handleFirstNameChange}
           InputProps={{
@@ -49,7 +58,7 @@ export default function CheckoutFormFields({ errors, ...props}: Props) {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          // key={errors.lastName}
+          key={errors.lastName}
           required
           id="lastName"
           name="lastName"
@@ -71,7 +80,7 @@ export default function CheckoutFormFields({ errors, ...props}: Props) {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-        //  key={errors.address}
+          key={errors.address}
           required
           id="address"
           name="address"
@@ -93,7 +102,7 @@ export default function CheckoutFormFields({ errors, ...props}: Props) {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          // key={errors.zipcode}
+           key={errors.zipcode}
           required
           id="zip"
           name="zip"
@@ -115,7 +124,7 @@ export default function CheckoutFormFields({ errors, ...props}: Props) {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          // key={errors.city}
+           key={errors.city}
           required
           id="city"
           name="city"
@@ -137,7 +146,7 @@ export default function CheckoutFormFields({ errors, ...props}: Props) {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          // key={errors.country}
+          key={errors.country}
           required
           id="country"
           name="country"
@@ -159,7 +168,7 @@ export default function CheckoutFormFields({ errors, ...props}: Props) {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          // key={errors.phone}
+           key={errors.phone}
           required
           id="mobileNumber"
           name="mobileNumber"
@@ -181,7 +190,7 @@ export default function CheckoutFormFields({ errors, ...props}: Props) {
       </Grid>
       <Grid item xs={12} sm={6}>
       <TextField
-          // key={errors.mail}
+           key={errors.mail}
           variant="outlined"
           required
           fullWidth
