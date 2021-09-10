@@ -93,7 +93,7 @@ const SlipCard: FC<Props> = ({ product }) => {
     <Card className={classes.cartSlipMedia}>
       <Avatar
         variant="rounded"
-        src={product.url}
+        src={product.urlDetails}
         alt={product.name}
         className={classes.thumbNail}
       ></Avatar>
