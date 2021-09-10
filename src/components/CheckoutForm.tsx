@@ -1,9 +1,9 @@
+import Button from '@material-ui/core/Button';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import { useState } from 'react';
-import CheckoutFormFields from './ChekoutFormFields';
 import { useHistory } from 'react-router';
+import CheckoutFormFields from './ChekoutFormFields';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,7 +39,6 @@ export interface IFormFieldErrors {
 }
 
 export default function CheckoutForm() {
-  const [errors, setErrors] = useState<IFormFieldErrors>({});
   const history = useHistory();
   const classes = useStyles();
   const [firstName, setFirstName] = useState<string>('');
@@ -50,6 +49,7 @@ export default function CheckoutForm() {
   const [country, setCountry] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [mail, setMail] = useState<string>('');
+  const [errors, setErrors] = useState<IFormFieldErrors>({});
 
   const isFormValuesEntered = () => {
     return firstName && 
@@ -84,7 +84,6 @@ export default function CheckoutForm() {
       /^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/)
       .test(value);
     if (!firstNameReg) {
-      //setErrors({...errors, firstName: 'Only letters are permitted'})
       let newErrors = errors;
       newErrors.firstName = 'Only letters are permitted'
       setErrors(newErrors)
@@ -103,7 +102,6 @@ export default function CheckoutForm() {
       /^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/)
       .test(value);
     if (!lastNameReg) {
-      // setErrors({ ...errors, lastName: 'Only letters are permitted'})
       let newErrors = errors
       newErrors.lastName = 'Only letters are permitted'
       setErrors(newErrors)
@@ -122,7 +120,6 @@ export default function CheckoutForm() {
       /[A-Za-zåäö]+/)
       .test(value);
     if (!addressReg) {
-      // setErrors({ ...errors, address: 'Only letters and numbers are permitted'})
       let newErrors = errors
       newErrors.address = 'Only letters and numbers are permitted'
       setErrors(newErrors)
@@ -141,7 +138,6 @@ export default function CheckoutForm() {
       /^[+ 0-9]{5}$/)
       .test(value.replace(/\s/g, ""));
     if (!zipReg) {
-      // setErrors({ ...errors, zipcode: 'Has to be 5 numbers'})
       let newErrors = errors
       newErrors.zipcode = 'Has to be 5 numbers'
       setErrors(newErrors)
@@ -160,7 +156,6 @@ export default function CheckoutForm() {
       /^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/)
       .test(value);
     if (!cityReg) {
-      // setErrors({ ...errors, city: 'Only letters are permitted'})
       let newErrors = errors
       newErrors.city = 'Only letters are permitted'
       setErrors(newErrors)
@@ -179,7 +174,6 @@ export default function CheckoutForm() {
       /^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/)
       .test(value);
     if (!countryReg) {
-      // setErrors({ ...errors, country: 'Only letters are permitted'})
       let newErrors = errors
       newErrors.country = 'Only letters are permitted'
       setErrors(newErrors)
@@ -198,7 +192,6 @@ export default function CheckoutForm() {
       /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm)
       .test(value);
     if (!phoneReg) {
-      // setErrors({ ...errors, phone: 'Needs a valid phonenumber'})
       let newErrors = errors
       newErrors.phone = 'Needs a valid phonenumber'
       setErrors(newErrors)
@@ -217,8 +210,6 @@ export default function CheckoutForm() {
       /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)
       .test(value);
     if (!mailReg ) {
-      // setErrors({ ...errors, mail: 'Needs to be an valid email'})
-//TODO ny kod sätter state korekt men triggar inte felmedelandet vid placeorder
       let newErrors = errors;
       newErrors.mail = 'Needs to be an valid email'
       setErrors(newErrors)
@@ -239,8 +230,8 @@ export default function CheckoutForm() {
       checkCountryValidation(country);
       checkPhoneValidation(phone);
       checkMailValidation(mail);
-
-      console.log(errors)
+      const updatedState = { ...errors };
+      setErrors(updatedState);
     }
   };
   
@@ -249,7 +240,6 @@ export default function CheckoutForm() {
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
-  
       <CheckoutFormFields
         errors={errors}
         handleFirstNameChange={handleFirstNameChange}

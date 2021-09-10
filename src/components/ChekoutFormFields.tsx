@@ -1,13 +1,12 @@
-import TextField from '@material-ui/core/TextField';
-import MailTwoToneIcon from '@material-ui/icons/MailTwoTone';
-import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone';
-import CallTwoToneIcon from '@material-ui/icons/CallTwoTone';
-import PersonOutlineTwoToneIcon from '@material-ui/icons/PersonOutlineTwoTone';
-import PublicTwoToneIcon from '@material-ui/icons/PublicTwoTone';
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import TextField from '@material-ui/core/TextField';
+import CallTwoToneIcon from '@material-ui/icons/CallTwoTone';
+import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone';
+import MailTwoToneIcon from '@material-ui/icons/MailTwoTone';
+import PersonOutlineTwoToneIcon from '@material-ui/icons/PersonOutlineTwoTone';
+import PublicTwoToneIcon from '@material-ui/icons/PublicTwoTone';
 import { IFormFieldErrors } from './CheckoutForm';
-import { useEffect, useState } from 'react';
 
 interface Props {
   errors: IFormFieldErrors,
@@ -22,21 +21,10 @@ interface Props {
 };
 
 export default function CheckoutFormFields({ errors, ...props}: Props) {
-  console.log('Loggar alla properties');
-  console.log(errors.mail);
-  console.log(errors.firstName);
-  console.log(errors.lastName);
-  console.log(errors.city);
-  console.log(errors.address);
-  console.log(errors.country);
-  console.log(errors.phone);
-  console.log(errors.zipcode);
-  
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={6}>
         <TextField
-          required
           id="firstName"
           name="firstName"
           label="First name"
