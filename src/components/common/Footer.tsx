@@ -33,7 +33,7 @@ export const Footer = () => {
           <TwitterIcon className={classes.icon}/>
       </Typography>
       <Box textAlign="center">
-          Systemutveklar Bolaget 	&copy; {new Date().getFullYear()}
+          Systemutvecklar Bolaget 	&copy; {new Date().getFullYear()}
       </Box>
     </div>
   );
