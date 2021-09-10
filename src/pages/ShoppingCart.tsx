@@ -1,4 +1,4 @@
-import { Box, Typography } from "@material-ui/core";
+import { Box, Hidden, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -38,11 +38,21 @@ export default function ShoppingCart() {
     (total: number, cart) => total + cart.amount,
     0
   );
+  const [cartIsEmpty, setCartEmpty] = useState(false);
 
   return (
     <React.Fragment>
       <CssBaseline />
       <Box className={classes.background}>
+
+          <Box className={classes.welcomeToShoppingCart} 
+            maxWidth="md"
+            visibility="hidden"
+            >
+            <Typography variant="h2">Shopping cart</Typography>
+            <Typography variant="h5">Your shopping cart is empty</Typography>
+          </Box>
+
         <Container className={classes.welcomeToShoppingCart} maxWidth="md">
           <Typography variant="h2">Shopping cart</Typography>
           <Typography variant="h5">Items in cart: {totalItems}</Typography>
