@@ -1,4 +1,4 @@
-import { IconButton } from "@material-ui/core";
+import { Box, IconButton } from "@material-ui/core";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -14,16 +14,18 @@ import { CartContext } from "./context/CartContext";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing(1),
       flexGrow: 1,
     },
     paper: {
-      padding: theme.spacing(1),
-      maxWidth: 700,
+      maxWidth: 1200,
     },
     image: {
       width: 128,
       height: 128,
+      [theme.breakpoints.down("xs")]: {
+        width: "100%",
+        height: "100%",
+      },
     },
     img: {
       margin: "auto",
@@ -34,11 +36,12 @@ const useStyles = makeStyles((theme: Theme) =>
     deleteIcon: {
       color: "red",
       opacity: "0.5",
-      fontSize: "3rem",
+      fontSize: "2rem",
       "&:hover": {
-        fontSize: "3.5rem",
+        fontSize: "2.5rem",
         color: "red",
         opacity: 1,
+        outline: "none",
       },
     },
     amountButtons: {
@@ -51,11 +54,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-    },
-    end: {
-      display: "flex",
-      justifyContent: "flex-end",
-      alignItems: "flex-end",
     },
   })
 );
@@ -92,27 +90,29 @@ const SlipCard: FC<Props> = ({ product }) => {
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item container alignItems="center" xs={12} md={3}>
-              <AddCircleIcon
-                fontSize="large"
-                onClick={() => incrementNumber(product)}
-                className={classes.amountButtons}
-              />
-              <Typography variant="h6">
-              {product.amount}
+            <Grid item container className={classes.center} xs={12} md={3}>
+              <Box className={classes.center}>
+                <AddCircleIcon
+                  fontSize="large"
+                  onClick={() => incrementNumber(product)}
+                  className={classes.amountButtons}
+                />
+                <Typography variant="h6" style={{ padding: "0.3rem" }}>
+                  {product.amount}
                 </Typography>
-              <RemoveCircleIcon
-                fontSize="large"
-                onClick={() => decrementNumber(product)}
-                className={classes.amountButtons}
-              />
+                <RemoveCircleIcon
+                  fontSize="large"
+                  onClick={() => decrementNumber(product)}
+                  className={classes.amountButtons}
+                />
+              </Box>
             </Grid>
-            <Grid item xs={6} md={3}>
+            <Grid item xs={6} md={3} className={classes.center}>
               <Typography variant="subtitle2">
                 Total: {product.price * product.amount} :-
               </Typography>
             </Grid>
-            <Grid item xs={6} md={3}>
+            <Grid item xs={6} md={3} className={classes.center}>
               <IconButton onClick={() => handleRemoveFromCart(product)}>
                 <DeleteForeverTwoToneIcon className={classes.deleteIcon} />
               </IconButton>
