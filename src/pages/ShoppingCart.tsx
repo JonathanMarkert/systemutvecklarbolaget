@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@material-ui/core";
+import { Box, Grid, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
@@ -6,15 +6,17 @@ import React, { useContext, useState } from "react";
 import CheckoutForm from "../components/CheckoutForm";
 import { CartContext } from "../components/context/CartContext";
 import SlipCard from "../components/SlipCard";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import EuroSymbolOutlinedIcon from "@material-ui/icons/EuroSymbolOutlined";
 
 const useStyles = makeStyles((theme) => ({
   gridContainerStyle: {
-    paddingTop: theme.spacing(3),
+    padding: theme.spacing(3),
   },
-  topGrid: {
-    paddingTop: theme.spacing(3),
+  topGridFlex: {
+    padding: theme.spacing(3),
     display: "flex",
-    flexDirection: "column",
+    //flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -37,10 +39,16 @@ export default function ShoppingCart() {
   return (
     <Container>
       <Grid container className={classes.gridContainerStyle}>
-        <Grid item xs={12} className={classes.topGrid}>
-          <Typography variant="h2">Shopping cart</Typography>
-          <Typography variant="h5">Items in cart: {totalItems}</Typography>
-          <Typography variant="h5">Total: {totalCartPrice()}</Typography>
+        <Grid item xs={12} className={classes.topGridFlex}>
+          <Box className={classes.topGridFlex}>
+            <Typography variant="h5">Shopping</Typography>
+            <ShoppingCartOutlinedIcon />
+            <Typography variant="h5">({totalItems})</Typography>
+          </Box>
+          <Box className={classes.topGridFlex}>
+            <Typography variant="h5">Total: {totalCartPrice()}</Typography>
+            <EuroSymbolOutlinedIcon style={{color:"green"}} />
+          </Box>
         </Grid>
         <Grid container direction="column">
           {cart.map((product) => (
@@ -48,7 +56,7 @@ export default function ShoppingCart() {
           ))}
         </Grid>
       </Grid>
-      <Grid item className={classes.topGrid}>
+      <Grid item className={classes.topGridFlex}>
         <Button
           variant="contained"
           color="secondary"
