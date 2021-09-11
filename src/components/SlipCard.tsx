@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteForeverTwoToneIcon from "@material-ui/icons/DeleteForeverTwoTone";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
+import classNames from "classnames";
 import React, { FC, useContext } from "react";
 import { Product } from "../Interfaces/IProduct";
 import { CartContext } from "./context/CartContext";
@@ -15,11 +16,9 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
-      justifyContent:"center",
-      alignItems:"center",
     },
     paper: {
-      maxWidth: 700,
+      maxWidth: 1200,
     },
     image: {
       width: 128,
@@ -46,10 +45,21 @@ const useStyles = makeStyles((theme: Theme) =>
         outline: "none",
       },
     },
-    amountButtons: {
-      color: theme.palette.secondary.light,
+    incAmountButton: {
+      color: theme.palette.primary.light,
       "&:hover": {
-        color: theme.palette.primary.light,
+        color: theme.palette.secondary.light,
+      },
+    },
+    decAmountButton: {
+      color: theme.palette.primary.light,
+      "&:hover": {
+        color: theme.palette.error.light,
+      },
+    },
+    amountButtonsMobile: {
+      [theme.breakpoints.down("xs")]: {
+        fontSize: 80,
       },
     },
     center: {
@@ -92,35 +102,42 @@ const SlipCard: FC<Props> = ({ product }) => {
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item container className={classes.center} xs={4} sm={3}>
+            <Grid item container className={classes.center} xs={12} sm={3}>
               <Box className={classes.center}>
-                <IconButton style={{background:0}}>
-                <AddCircleIcon
-                  fontSize="large"
-                  onClick={() => incrementNumber(product)}
-                  className={classes.amountButtons}
-                />
+                <IconButton style={{ background: 0 }}>
+                  <AddCircleIcon
+                    fontSize="large"
+                    onClick={() => incrementNumber(product)}
+                    className={classNames(
+                      classes.incAmountButton,
+                      classes.amountButtonsMobile
+                    )}
+                  />
                 </IconButton>
-                <Typography variant="h6">
-                  {product.amount}
-                </Typography>
-                <IconButton style={{background:0}}>
-                <RemoveCircleIcon
-                  fontSize="large"
-                  onClick={() => decrementNumber(product)}
-                  className={classes.amountButtons}
-                />
+                <Typography variant="h6">{product.amount}</Typography>
+                <IconButton style={{ background: 0 }}>
+                  <RemoveCircleIcon
+                    fontSize="large"
+                    onClick={() => decrementNumber(product)}
+                    className={classNames(
+                      classes.decAmountButton,
+                      classes.amountButtonsMobile
+                    )}
+                  />
                 </IconButton>
               </Box>
             </Grid>
-            <Grid item xs={4} sm={3} className={classes.center}>
+            <Grid item xs={12} sm={3} className={classes.center}>
               <Typography variant="subtitle2">
                 Total: {product.price * product.amount} €
               </Typography>
             </Grid>
             <Grid item xs={12} sm={3} className={classes.center}>
-              <IconButton style={{background:0}} onClick={() => handleRemoveFromCart(product)}>
-                <DeleteForeverTwoToneIcon className={classes.deleteIcon}/>
+              <IconButton
+                style={{ background: 0 }}
+                onClick={() => handleRemoveFromCart(product)}
+              >
+                <DeleteForeverTwoToneIcon className={classes.deleteIcon} />
               </IconButton>
             </Grid>
           </Grid>

@@ -16,9 +16,13 @@ const useStyles = makeStyles((theme) => ({
   topGridFlex: {
     padding: theme.spacing(3),
     display: "flex",
-    //flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+  },
+  bottomGridFlex: {
+    display:"flex",
+    flexDirection:"column",
+    alignItems:"center",
   },
   formStyle: {
     display: "flex",
@@ -43,7 +47,7 @@ export default function ShoppingCart() {
           <Box className={classes.topGridFlex}>
             <Typography variant="h5">Shopping</Typography>
             <ShoppingCartOutlinedIcon />
-            <Typography variant="h5">({totalItems})</Typography>
+            <Typography variant="h5" style={{color:"green"}}>({totalItems})</Typography>
           </Box>
           <Box className={classes.topGridFlex}>
             <Typography variant="h5">Total: {totalCartPrice()}</Typography>
@@ -56,7 +60,7 @@ export default function ShoppingCart() {
           ))}
         </Grid>
       </Grid>
-      <Grid item className={classes.topGridFlex}>
+      <Grid item className={classes.bottomGridFlex}>
         <Button
           variant="contained"
           color="secondary"
