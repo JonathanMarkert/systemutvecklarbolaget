@@ -18,25 +18,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
-  bottomGrid: {
-    paddingTop: "1rem",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  },
   formStyle: {
     display: "flex",
     flexWrap: "wrap",
     textAlign: "center",
-  },
-  slipCardContainer: {
-    flexGrow: 1,
-  },
-  papperStyle: {
-    padding: theme.spacing(2),
-    margin: "auto",
-    maxWidth: 500,
   },
 }));
 

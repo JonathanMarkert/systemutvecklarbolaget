@@ -1,24 +1,25 @@
-import React, { FC, useContext } from "react";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { IconButton } from "@material-ui/core";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import ButtonBase from "@material-ui/core/ButtonBase";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import DeleteForeverTwoToneIcon from "@material-ui/icons/DeleteForeverTwoTone";
+import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
+import React, { FC, useContext } from "react";
 import { Product } from "../Interfaces/IProduct";
 import { CartContext } from "./context/CartContext";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
-import DeleteForeverTwoToneIcon from "@material-ui/icons/DeleteForeverTwoTone";
-import { IconButton } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing(2),
+      padding: theme.spacing(1),
       flexGrow: 1,
     },
     paper: {
-      padding: theme.spacing(2),
+      padding: theme.spacing(1),
+      maxWidth: 700,
     },
     image: {
       width: 128,
@@ -39,6 +40,22 @@ const useStyles = makeStyles((theme: Theme) =>
         color: "red",
         opacity: 1,
       },
+    },
+    amountButtons: {
+      color: theme.palette.secondary.light,
+      "&:hover": {
+        color: theme.palette.primary.light,
+      },
+    },
+    center: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    end: {
+      display: "flex",
+      justifyContent: "flex-end",
+      alignItems: "flex-end",
     },
   })
 );
@@ -65,8 +82,8 @@ const SlipCard: FC<Props> = ({ product }) => {
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs>
+            <Grid item xs container direction="column" spacing={1}>
+              <Grid item xs={12} md={3}>
                 <Typography gutterBottom variant="subtitle1">
                   {product.name}
                 </Typography>
@@ -75,22 +92,32 @@ const SlipCard: FC<Props> = ({ product }) => {
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item>
-              <Typography variant="subtitle1">
+            <Grid item container alignItems="center" xs={12} md={3}>
+              <AddCircleIcon
+                fontSize="large"
+                onClick={() => incrementNumber(product)}
+                className={classes.amountButtons}
+              />
+              <Typography variant="h6">
+              {product.amount}
+                </Typography>
+              <RemoveCircleIcon
+                fontSize="large"
+                onClick={() => decrementNumber(product)}
+                className={classes.amountButtons}
+              />
+            </Grid>
+            <Grid item xs={6} md={3}>
+              <Typography variant="subtitle2">
                 Total: {product.price * product.amount} :-
               </Typography>
             </Grid>
-            <Grid item>
+            <Grid item xs={6} md={3}>
               <IconButton onClick={() => handleRemoveFromCart(product)}>
                 <DeleteForeverTwoToneIcon className={classes.deleteIcon} />
               </IconButton>
             </Grid>
           </Grid>
-        </Grid>
-        <Grid item>
-          <AddCircleIcon onClick={() => incrementNumber(product)} />
-          {product.amount}
-          <RemoveCircleIcon onClick={() => decrementNumber(product)} />
         </Grid>
       </Paper>
     </div>
