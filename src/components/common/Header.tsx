@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.primary.main,
     },
     iconButtonStyle: {
-      padding: '0',
+      padding: '0 0.5rem',
     },
     titleStyle: {
       flexGrow: 1,
