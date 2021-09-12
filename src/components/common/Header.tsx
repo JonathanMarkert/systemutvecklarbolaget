@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
       position: "fixed",
       backgroundColor: theme.palette.primary.main,
     },
+    iconButtonStyle: {
+      padding: '0',
+    },
     titleStyle: {
       flexGrow: 1,
       fontFamily: "cursive",
@@ -69,7 +72,7 @@ export default function MenuAppBar() {
       <AppBar className={classes.appBarStyle}>
         <Toolbar>
           <Link to="/">
-            <IconButton>
+            <IconButton className={classes.iconButtonStyle}>
               <img style={{width:"100%"}} src={MainLogo} alt="" />
             </IconButton>
           </Link>
@@ -82,7 +85,7 @@ export default function MenuAppBar() {
           </div>
           <div>
             <Link to="/cart">
-              <IconButton aria-label="cart">
+              <IconButton aria-label="cart" className={classes.iconButtonStyle}>
                 <Badge badgeContent={totalItems} color={"secondary"}>
                   <ShoppingCartOutlinedIcon
                     className={classNames(classes.iconStyle, {
@@ -93,7 +96,7 @@ export default function MenuAppBar() {
               </IconButton>
             </Link>
             <Link to="/admin">
-              <IconButton>
+              <IconButton className={classes.iconButtonStyle}>
                 <AccountCircle className={classes.iconStyle} />
               </IconButton>
             </Link>
