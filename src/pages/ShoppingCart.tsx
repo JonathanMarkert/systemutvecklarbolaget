@@ -8,6 +8,7 @@ import { CartContext } from "../components/context/CartContext";
 import SlipCard from "../components/SlipCard";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import EuroSymbolOutlinedIcon from "@material-ui/icons/EuroSymbolOutlined";
+import classNames from "classnames";
 
 const useStyles = makeStyles((theme) => ({
   gridContainerStyle: {
@@ -20,14 +21,25 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   bottomGridFlex: {
-    display:"flex",
-    flexDirection:"column",
-    alignItems:"center",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   formStyle: {
     display: "flex",
     flexWrap: "wrap",
     textAlign: "center",
+  },
+  stickyContent: {
+    [theme.breakpoints.down("xs")]: {
+      display: "flex",
+      position: "fixed",
+      top: 77,
+      backgroundColor: "#fafafa",
+      height: 10,
+      color: theme.palette.primary.light,
+      zIndex: 9,
+    },
   },
 }));
 
@@ -44,14 +56,18 @@ export default function ShoppingCart() {
     <Container>
       <Grid container className={classes.gridContainerStyle}>
         <Grid item xs={12} className={classes.topGridFlex}>
-          <Box className={classes.topGridFlex}>
-            <Typography variant="h5">Shopping</Typography>
-            <ShoppingCartOutlinedIcon />
-            <Typography variant="h5" style={{color:"green"}}>({totalItems})</Typography>
-          </Box>
-          <Box className={classes.topGridFlex}>
-            <Typography variant="h5">Total: {totalCartPrice()}</Typography>
-            <EuroSymbolOutlinedIcon style={{color:"green"}} />
+          <Box className={classNames(classes.stickyContent,classes.topGridFlex)}>
+            <Box className={classes.topGridFlex}>
+              <Typography variant="h5">Shopping</Typography>
+              <ShoppingCartOutlinedIcon />
+              <Typography variant="h5" style={{ color: "green" }}>
+                ({totalItems})
+              </Typography>
+            </Box>
+            <Box className={classes.topGridFlex}>
+              <Typography variant="h5"> {totalCartPrice()}</Typography>
+              <EuroSymbolOutlinedIcon style={{ color: "green" }} />
+            </Box>
           </Box>
         </Grid>
         <Grid container direction="column">

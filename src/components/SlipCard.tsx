@@ -39,7 +39,6 @@ const useStyles = makeStyles((theme: Theme) =>
       opacity: "0.3",
       fontSize: "2rem",
       "&:hover": {
-        fontSize: "2.5rem",
         color: "red",
         opacity: 1,
         outline: "none",
@@ -59,7 +58,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     amountButtonsMobile: {
       [theme.breakpoints.down("xs")]: {
-        fontSize: 80,
+        fontSize: 70,
       },
     },
     center: {
@@ -105,22 +104,22 @@ const SlipCard: FC<Props> = ({ product }) => {
             <Grid item container className={classes.center} xs={12} sm={3}>
               <Box className={classes.center}>
                 <IconButton style={{ background: 0 }}>
-                  <AddCircleIcon
+                  <RemoveCircleIcon
                     fontSize="large"
-                    onClick={() => incrementNumber(product)}
+                    onClick={() => decrementNumber(product)}
                     className={classNames(
-                      classes.incAmountButton,
+                      classes.decAmountButton,
                       classes.amountButtonsMobile
                     )}
                   />
                 </IconButton>
                 <Typography variant="h6">{product.amount}</Typography>
                 <IconButton style={{ background: 0 }}>
-                  <RemoveCircleIcon
+                  <AddCircleIcon
                     fontSize="large"
-                    onClick={() => decrementNumber(product)}
+                    onClick={() => incrementNumber(product)}
                     className={classNames(
-                      classes.decAmountButton,
+                      classes.incAmountButton,
                       classes.amountButtonsMobile
                     )}
                   />
