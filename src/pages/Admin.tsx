@@ -1,11 +1,10 @@
-import { Avatar, Button, Dialog, DialogContent, DialogContentText, DialogTitle, makeStyles, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, /*TextField, Typography*/ } from "@material-ui/core";
-import Table from "@material-ui/core/Table"
-import { /*Children,*/ useContext, useState } from "react";
-// import { CartContext } from "../components/context/CartContext";
+import { Avatar, Button, Dialog, DialogContent, DialogContentText, DialogTitle, makeStyles, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import Table from "@material-ui/core/Table";
+import React, { useContext, useState } from "react";
+
 import { ProductContext } from "../components/context/ProductContext";
-import { Product } from "../Interfaces/IProduct";
-import React from "react";
 import ProductForm from "../components/ProductForm";
+import { Product } from "../Interfaces/IProduct";
 
 
 const useStyles = makeStyles({
@@ -14,7 +13,6 @@ const useStyles = makeStyles({
   },
   table: {
     maxWidth: '50rem',
-
   },
   deleteButton: {
     color: "red"
@@ -22,18 +20,18 @@ const useStyles = makeStyles({
   editButton: {
     color: "#00C967"
   },
-}
-)
-
-
+  addButton: {
+    margin: "1rem",
+    backgroundColor: "#00C967"
+  },
+})
 
 const Admin = () => {
   const classes = useStyles();
-  const { beerProductArray, /*addBeerProduct,*/ editBeerProduct, deleteBeerProduct } = useContext(ProductContext);
-
-   const [open, setOpen] = React.useState(false);
+  const { beerProductArray, deleteBeerProduct } = useContext(ProductContext);
+  const [open, setOpen] = React.useState(false);
+  const [openAdd, setOpenAdd] = React.useState(false);
   const [product, setProduct] = useState<Product>();
-
 
   function handleClickOpen(event: React.MouseEvent<HTMLButtonElement, MouseEvent>, product: Product) {
     event.persist();
@@ -41,32 +39,22 @@ const Admin = () => {
     setOpen(true);
   };
 
+  function handleAddClickOpen(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    event.persist();
+    setOpenAdd(true);
+  };
+
   function handleClose() {
     setOpen(false);
+    setOpenAdd(false);
   };
-  
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (!product) return;
-    
-  //   const { value, name, type } = event.target;
-  //   const trueValue = type === "number" ? Number(value) : value;
-  //   setProduct({ ...product, [name]: trueValue });
-  // }
 
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   if (!product) return;
-  //   // console.log(newProduct);
-  //   // editBeerProduct(newProduct);
-
-  //   // console.log(value);
-  //   setOpen(false);
-    
-  // }
-
-  return (
+   return (
     <>
       <TableContainer className={classes.tableContainer} component={Paper}>
+        <Button className={classes.addButton} onClick={(event) => handleAddClickOpen(event)}>
+          Add
+        </Button>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -97,7 +85,7 @@ const Admin = () => {
                 <TableCell align="right">
                   <Button className={classes.editButton} onClick={(event) => handleClickOpen(event, product)} > EDIT
                   </Button>
-                 
+
                 </TableCell>
               </TableRow>
             ))}
@@ -105,20 +93,29 @@ const Admin = () => {
         </Table>
       </TableContainer>
       {open && product && (
-        <Dialog open={open}  aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">{product.name}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Edit this beer
-          </DialogContentText>
-         <ProductForm 
-          product={product}
-          // handleSubmit={handleSubmit}
-          handleClose={handleClose}
-        />
-        </DialogContent>
-      </Dialog>  
-      )}      
+        <Dialog open={open} aria-labelledby="form-dialog-title">
+          <DialogTitle id="form-dialog-title">{product.name}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Edit this beer
+            </DialogContentText>
+            <ProductForm
+              product={product}
+              handleClose={handleClose}
+            />
+          </DialogContent>
+        </Dialog>
+      )}
+      {openAdd && (
+        <Dialog open={openAdd} aria-labelledby="form-dialog-title">
+          <DialogTitle id="form-dialog-title">Add Beer</DialogTitle>
+          <DialogContent>
+            <ProductForm
+              handleClose={handleClose}
+            />
+          </DialogContent>
+        </Dialog>
+      )}
     </>
   );
 };
