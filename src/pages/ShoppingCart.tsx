@@ -2,7 +2,7 @@ import { Box, Grid, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CheckoutForm from "../components/CheckoutForm";
 import { CartContext } from "../components/context/CartContext";
 import SlipCard from "../components/SlipCard";

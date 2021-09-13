@@ -1,9 +1,10 @@
 import Button from '@material-ui/core/Button';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import CheckoutFormFields from './ChekoutFormFields';
+import { CartContext } from './context/CartContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,6 +51,7 @@ export default function CheckoutForm() {
   const [phone, setPhone] = useState<string>('');
   const [mail, setMail] = useState<string>('');
   const [errors, setErrors] = useState<IFormFieldErrors>({});
+  const {emptyAllFromCart} = useContext(CartContext)
 
   const isFormValuesEntered = () => {
     return firstName && 
@@ -212,6 +214,7 @@ export default function CheckoutForm() {
     event.preventDefault();
 
     if (isFormValuesEntered() && formHasNoError()) {
+      emptyAllFromCart();
       history.push('/checkout');
     } else {
       checkFirstNameValidation(firstName);
