@@ -1,10 +1,11 @@
-import { Avatar, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, makeStyles, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@material-ui/core";
+import { Avatar, Button, Dialog, DialogContent, DialogContentText, DialogTitle, makeStyles, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, /*TextField, Typography*/ } from "@material-ui/core";
 import Table from "@material-ui/core/Table"
-import { Children, useContext, useState } from "react";
-import { CartContext } from "../components/context/CartContext";
+import { /*Children,*/ useContext, useState } from "react";
+// import { CartContext } from "../components/context/CartContext";
 import { ProductContext } from "../components/context/ProductContext";
 import { Product } from "../Interfaces/IProduct";
 import React from "react";
+import ProductForm from "../components/ProductForm";
 
 
 const useStyles = makeStyles({
@@ -28,14 +29,12 @@ const useStyles = makeStyles({
 
 const Admin = () => {
   const classes = useStyles();
-  const { beerProductArray, addBeerProduct, editBeerProduct, deleteBeerProduct } = useContext(ProductContext);
-  const [open, setOpen] = React.useState(false);
+  const { beerProductArray, /*addBeerProduct,*/ editBeerProduct, deleteBeerProduct } = useContext(ProductContext);
+
+   const [open, setOpen] = React.useState(false);
   const [product, setProduct] = useState<Product>();
 
-  //   const [value, setValue] = React.useState({beerProductArray});
-  //   const handleChange = () => {
-  //     setValue
-  // };
+
   function handleClickOpen(event: React.MouseEvent<HTMLButtonElement, MouseEvent>, product: Product) {
     event.persist();
     setProduct(product);
@@ -45,10 +44,24 @@ const Admin = () => {
   function handleClose() {
     setOpen(false);
   };
+  
+  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (!product) return;
+    
+  //   const { value, name, type } = event.target;
+  //   const trueValue = type === "number" ? Number(value) : value;
+  //   setProduct({ ...product, [name]: trueValue });
+  // }
 
-  // const handleSaveAndClose = () => {
-  //   // editBeerProduct();
+  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   if (!product) return;
+  //   // console.log(newProduct);
+  //   // editBeerProduct(newProduct);
+
+  //   // console.log(value);
   //   setOpen(false);
+    
   // }
 
   return (
@@ -91,94 +104,23 @@ const Admin = () => {
           </TableBody>
         </Table>
       </TableContainer>
-        {open && product && (
-          <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">{product.name}</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Edit this beer
-            </DialogContentText>
-            <form action="">
-
-              <TextField
-                key={product.id}
-                required
-                margin="dense"
-                id={product.id}
-                label="Name"
-                defaultValue={product.name}
-                variant="filled"
-
-                // onChange={handleChange}
-                fullWidth
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="brewery"
-                label="Brewery"
-                // onChange={handleChange}                     
-                fullWidth
-              />
-            </form>
-
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={() => { editBeerProduct(product); handleClose(); }} color="primary">
-              Save
-            </Button>
-          </DialogActions>
-        </Dialog>
-          
-        )}      
+      {open && product && (
+        <Dialog open={open}  aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">{product.name}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Edit this beer
+          </DialogContentText>
+         <ProductForm 
+          product={product}
+          // handleSubmit={handleSubmit}
+          handleClose={handleClose}
+        />
+        </DialogContent>
+      </Dialog>  
+      )}      
     </>
   );
 };
 
 export default Admin;
-
-
-  // const alfons:Product = {
-  //   id:"1000",
-  //   url:"https://i.pinimg.com/736x/26/b2/50/26b250a738ea4abc7a5af4d42ad93af0.jpg",
-  //   urlDetails:"https://i.pinimg.com/736x/26/b2/50/26b250a738ea4abc7a5af4d42ad93af0.jpg",
-  //   name:"o",
-  //   brewery:"m",
-  //   description:"a",
-  //   price:1337,
-  //   amount:0,
-  // }
-
-  // const alfons2: Product = {
-  //   id: "1",
-  //   url: "",
-  //   urlDetails: "",
-  //   name: "Testar om det blev uppdaterat",
-  //   brewery: "",
-  //   description: "",
-  //   price: 666,
-  //   amount: 0,
-  // };
-
-
-
-
-
-  // <TableContainer>
-  //   <h1>ADMIN</h1>
-  //   <p>{beerProductArray.map((item) => item.price)}</p>
-  //   <button onClick={() => addBeerProduct(alfons)}>
-  //     ADD to localStorage
-  //   </button>
-  //   <button onClick={() => editBeerProduct(alfons2)}>
-  //     Edit existing beer
-  //   </button>
-  //   <button onClick={() => deleteBeerProduct(alfons)}>
-  //     Delete existing beer
-  //   </button>
-  //   <h2>CHECK CART ITEMS</h2>
-  //   <p>{cart.map((item) => item.id)}</p>
-  // </TableContainer>

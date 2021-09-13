@@ -26,6 +26,8 @@ const ProductProvider: FC = (props) => {
   
   const addBeerProduct = (beerProduct: Product) => {
     setProductsState((pre) => {
+      // beerProduct.id = String(props.beerProductArray.length + 1);
+      beerProduct.amount = 0;
       return [...pre, beerProduct];
     });
   };
