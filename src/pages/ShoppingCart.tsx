@@ -44,10 +44,10 @@ export default function ShoppingCart() {
       <CssBaseline />
       <Box className={classes.background}>
         {cart.length === 0 ? (
-          <Box className={classes.welcomeToShoppingCart} maxWidth="md">
+          <Container className={classes.welcomeToShoppingCart} maxWidth="md">
             <Typography variant="h2">Shopping cart</Typography>
             <Typography variant="h5">Your shopping cart is empty</Typography>
-          </Box>
+          </Container>
         ) : (
           <div>
             <Container className={classes.welcomeToShoppingCart} maxWidth="md">
