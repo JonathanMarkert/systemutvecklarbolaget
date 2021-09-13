@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
       position: "fixed",
       backgroundColor: theme.palette.primary.main,
     },
+    iconButtonStyle: {
+      padding: '0 0.5rem',
+    },
     titleStyle: {
       flexGrow: 1,
       fontFamily: "cursive",
@@ -40,6 +43,11 @@ const useStyles = makeStyles((theme: Theme) =>
     animateStyle: {
       color: theme.palette.secondary.main,
       fontSize: 50,
+    },
+    removeBgOnHover: {
+      "&:hover": {
+      backgroundColor: "transparent",
+      },
     },
   })
 );
@@ -69,7 +77,7 @@ export default function MenuAppBar() {
       <AppBar className={classes.appBarStyle}>
         <Toolbar>
           <Link to="/">
-            <IconButton>
+            <IconButton className={classNames(classes.iconButtonStyle, classes.removeBgOnHover)}>
               <img style={{width:"100%"}} src={MainLogo} alt="" />
             </IconButton>
           </Link>
@@ -82,7 +90,7 @@ export default function MenuAppBar() {
           </div>
           <div>
             <Link to="/cart">
-              <IconButton aria-label="cart">
+              <IconButton aria-label="cart" className={classNames(classes.iconButtonStyle, classes.removeBgOnHover)}>
                 <Badge badgeContent={totalItems} color={"secondary"}>
                   <ShoppingCartOutlinedIcon
                     className={classNames(classes.iconStyle, {
@@ -93,7 +101,7 @@ export default function MenuAppBar() {
               </IconButton>
             </Link>
             <Link to="/admin">
-              <IconButton>
+              <IconButton className={classNames(classes.iconButtonStyle, classes.removeBgOnHover)}>
                 <AccountCircle className={classes.iconStyle} />
               </IconButton>
             </Link>

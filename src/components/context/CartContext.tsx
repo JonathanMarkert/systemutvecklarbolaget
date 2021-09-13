@@ -8,6 +8,7 @@ interface ICartContext {
   incrementNumber: (beerProduct: Product) => void;
   decrementNumber: (beerProduct: Product) => void;
   totalCartPrice: () => void;
+  emptyAllFromCart: () => void;
 }
 
 const CartProvider: FC = (props) => {
@@ -74,6 +75,13 @@ const CartProvider: FC = (props) => {
     return sum
   }
 
+  const emptyAllFromCart = () => {
+    const emptyArray:Product[] = [];
+    let currentState = [...cart];
+    currentState = emptyArray;
+    setCart(currentState);
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -83,6 +91,7 @@ const CartProvider: FC = (props) => {
         incrementNumber,
         decrementNumber,
         totalCartPrice,
+        emptyAllFromCart,
       }}
     >
       {props.children}
@@ -98,5 +107,6 @@ export const CartContext = createContext<ICartContext>({
   incrementNumber: () => {},
   decrementNumber: () => {},
   totalCartPrice: () => {},
+  emptyAllFromCart: () => {},
 });
 

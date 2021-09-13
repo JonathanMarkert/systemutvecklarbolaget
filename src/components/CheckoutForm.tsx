@@ -1,23 +1,17 @@
-import TextField from '@material-ui/core/TextField';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import MailTwoToneIcon from '@material-ui/icons/MailTwoTone';
-import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone';
-import CallTwoToneIcon from '@material-ui/icons/CallTwoTone';
-import PersonOutlineTwoToneIcon from '@material-ui/icons/PersonOutlineTwoTone';
-import PublicTwoToneIcon from '@material-ui/icons/PublicTwoTone';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import { useContext, useState } from 'react';
+import { useHistory } from 'react-router';
+import CheckoutFormFields from './ChekoutFormFields';
+import { CartContext } from './context/CartContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       '& .MuiTextField-root': {
         margin: theme.spacing(1),
-        width: '18rem',
+        maxWidth: '18rem',
       },
       color: 'black',
       marginTop: '2rem',
@@ -34,290 +28,232 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+export interface IFormFieldErrors {
+  firstName?: string, 
+  lastName?: string, 
+  address?: string, 
+  zipcode?: string, 
+  city?: string,
+  country?: string, 
+  phone?: string, 
+  mail?: string
+}
+
 export default function CheckoutForm() {
+  const history = useHistory();
   const classes = useStyles();
-  const [firstName, setFirstName] = useState<string>();
-  const [lastName, setLastName] = useState<string>();
-  const [city, setCity] = useState<string>();
-  const [country, setCountry] = useState<string>();
-  const [zipcode, setZipcode] = useState<string>();
-  const [address, setAddress] = useState<string>();
-  const [phone, setPhone] = useState<string>();
-  const [mail, setMail] = useState<string>();
-  const [errors, setErrors] = useState<{ 
-    firstName?: string, 
-    lastName?: string, 
-    address?:string, 
-    zipcode?: string, 
-    city?: string,
-    country?: string, 
-    phone?: string, 
-    mail?: string 
-  }
-  >();
-  
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
+  const [zipcode, setZipcode] = useState<string>('');
+  const [city, setCity] = useState<string>('');
+  const [country, setCountry] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
+  const [mail, setMail] = useState<string>('');
+  const [errors, setErrors] = useState<IFormFieldErrors>({});
+  const {emptyAllFromCart} = useContext(CartContext)
+
+  const isFormValuesEntered = () => {
+    return firstName && 
+    lastName && 
+    address &&
+    zipcode &&
+    city &&
+    country &&
+    phone &&
+    mail;
+  };
+  const formHasNoError = () => {
+    return !errors.firstName && 
+    !errors.lastName && 
+    !errors.address &&
+    !errors.zipcode &&
+    !errors.city &&
+    !errors.country &&
+    !errors.phone &&
+    !errors.mail;
+  };
+
   const handleFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target: {value} } = event;
-    setErrors({ ...errors, firstName: '' })
     setFirstName(value);
-    let firstNameReg = new RegExp(/^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/).test(value);
-    if (!firstNameReg) {
-      setErrors({ ...errors, firstName: 'Only letters are permitted'})
-    }    
+    checkFirstNameValidation(value);
   };
+  const checkFirstNameValidation = (value: string) => {
+    setErrors({ ...errors, firstName: '' })
+    let firstNameReg = new RegExp(
+      /^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/)
+      .test(value);
+    if (!firstNameReg) {
+      let newErrors = errors;
+      newErrors.firstName = 'Only letters are permitted'
+      setErrors(newErrors)
+    }  
+  };
+
   const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target: {value} } = event;
-    setErrors({ ...errors, lastName: '' })
     setLastName(value);
-    let lastNameReg = new RegExp(/^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/).test(value);
+    checkLastNameValidation(value);  
+  };
+  const checkLastNameValidation = (value: string) => {
+    setErrors({ ...errors, lastName: '' })
+    let lastNameReg = new RegExp(
+      /^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/)
+      .test(value);
     if (!lastNameReg) {
-      setErrors({ ...errors, lastName: 'Only letters are permitted'})
-    }    
-  };
-  const handleAdderssChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { target: {value} } = event;
-    setErrors({ ...errors, address: '' })
-    setAddress(value);
-    let addressReg = new RegExp(/[A-Za-zåäö]+/).test(value);
-    if (!addressReg) {
-      setErrors({ ...errors, address: 'Only letters and numbers are permitted'})
-    }    
-  };
-  const handleZipcodChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { target: {value} } = event;
-    setErrors({ ...errors, zipcode: '' })
-    setZipcode(value);
-    let zipReg = new RegExp(/^[+ 0-9]{5}$/).test(value.replace(/\s/g, ""));
-    if (!zipReg) {
-      setErrors({ ...errors, zipcode: 'Has to be 5 numbers'})
-    }    
-  };
-  const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { target: {value} } = event;
-    setErrors({ ...errors, city: '' })
-    setCity(value);
-    let cityReg = new RegExp(/^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/).test(value);
-    if (!cityReg) {
-      setErrors({ ...errors, city: 'Only letters are permitted'})
-    }    
-  };
-  const handleCountryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { target: {value} } = event;
-    setErrors({ ...errors, country: '' })
-    setCountry(value);
-    let countryReg = new RegExp(/^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/).test(value);
-    if (!countryReg) {
-      setErrors({ ...errors, country: 'Only letters are permitted'})
-    }    
-  }; 
-  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { target: {value} } = event;
-    setErrors({ ...errors, phone: '' })
-    setPhone(value);
-    let phoneReg = new RegExp(/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm).test(value);
-    if (!phoneReg ) {
-      setErrors({ ...errors, phone: 'Only numbers are permitted'})
-    }    
-  };
-  const handleMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { target: {value} } = event;
-    setErrors({ ...errors, mail: '' })
-    setMail(value);
-    let mailReg = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/).test(value);
-    if (!mailReg ) {
-      setErrors({ ...errors, mail: 'Needs to be an valid email'})
-    }    
+      let newErrors = errors
+      newErrors.lastName = 'Only letters are permitted'
+      setErrors(newErrors)
+    }  
   };
   
-  // Flytta till egen fil ex checkoutFormFields
-  // bara fälten
-  // ta in props och changes
+  const handleAdderssChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: {value} } = event;
+    setAddress(value);
+    checkAdderssValidation(value);
+  };
+  const checkAdderssValidation = (value:string) => {
+    setErrors({ ...errors, address: '' })
+    let addressReg = new RegExp(
+      /[A-Za-zåäö]+/)
+      .test(value);
+    if (!addressReg) {
+      let newErrors = errors
+      newErrors.address = 'Only letters and numbers are permitted'
+      setErrors(newErrors)
+    } 
+  };
+
+  const handleZipcodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: {value} } = event;
+    setZipcode(value);
+    checkZipcodeValidation(value);
+  };
+  const checkZipcodeValidation = (value:string) => {
+    setErrors({ ...errors, zipcode: '' })
+    let zipReg = new RegExp(
+      /^[+ 0-9]{5}$/)
+      .test(value.replace(/\s/g, ""));
+    if (!zipReg) {
+      let newErrors = errors
+      newErrors.zipcode = 'Has to be 5 numbers'
+      setErrors(newErrors)
+    } 
+  }
+
+  const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: {value} } = event;
+    setCity(value);
+    checkCityValidation(value);
+  };
+  const checkCityValidation = (value:string) => {
+    setErrors({ ...errors, city: '' })
+    let cityReg = new RegExp(
+      /^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/)
+      .test(value);
+    if (!cityReg) {
+      let newErrors = errors
+      newErrors.city = 'Only letters are permitted'
+      setErrors(newErrors)
+    }  
+  };
+
+  const handleCountryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: {value} } = event;
+    setCountry(value);
+    checkCountryValidation(value);
+  }; 
+  const checkCountryValidation = (value:string) => {
+    setErrors({ ...errors, country: '' })
+    let countryReg = new RegExp(
+      /^[a-zåäöA-ZÅÄÖ\u00C0-\u00ff\s'-]+$/)
+      .test(value);
+    if (!countryReg) {
+      let newErrors = errors
+      newErrors.country = 'Only letters are permitted'
+      setErrors(newErrors)
+    }    
+  };
+
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: {value} } = event;
+    setPhone(value);
+    checkPhoneValidation(value);   
+  };
+  const checkPhoneValidation = (value: string) => {
+    setErrors({ ...errors, phone: '' })
+    let phoneReg = new RegExp(
+      /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm)
+      .test(value);
+    if (!phoneReg) {
+      let newErrors = errors
+      newErrors.phone = 'Needs a valid phonenumber'
+      setErrors(newErrors)
+    }
+  };
+  
+  const handleMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: {value} } = event;
+    setMail(value);
+    checkMailValidation(value);
+  };
+  const checkMailValidation = (value: string) => {
+    setErrors({ ...errors, mail: '' })
+    let mailReg = new RegExp(
+      /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)
+      .test(value);
+    if (!mailReg ) {
+      let newErrors = errors;
+      newErrors.mail = 'Needs to be an valid email'
+      setErrors(newErrors)
+    }
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (isFormValuesEntered() && formHasNoError()) {
+      emptyAllFromCart();
+      history.push('/checkout');
+    } else {
+      checkFirstNameValidation(firstName);
+      checkLastNameValidation(lastName);
+      checkAdderssValidation(address);
+      checkZipcodeValidation(zipcode);
+      checkCityValidation(city);
+      checkCountryValidation(country);
+      checkPhoneValidation(phone);
+      checkMailValidation(mail);
+      const updatedState = { ...errors };
+      setErrors(updatedState);
+    }
+  };
+  
   return (
-    <form className={classes.root} noValidate autoComplete="on">
+    <form className={classes.root} noValidate autoComplete="on" onSubmit={handleSubmit}>
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="firstName"
-            name="firstName"
-            label="First name"
-            fullWidth
-            autoComplete="given-name"
-            variant="outlined"
-            error={Boolean(errors?.firstName)}
-            helperText={(errors?.firstName)}
-            onChange={handleFirstNameChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <PersonOutlineTwoToneIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="lastName"
-            name="lastName"
-            label="Last name"
-            fullWidth
-            autoComplete="family-name"
-            variant="outlined"
-            error={Boolean(errors?.lastName)}
-            helperText={(errors?.lastName)}
-            onChange={handleLastNameChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <PersonOutlineTwoToneIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="address"
-            name="address"
-            label= "Address"
-            fullWidth
-            autoComplete="shipping address"
-            variant="outlined"
-            error={Boolean(errors?.address)}
-            helperText={(errors?.address)}
-            onChange={handleAdderssChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <HomeTwoToneIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="zip"
-            name="zip"
-            label="Zipcode"
-            fullWidth
-            autoComplete="shipping postal-code"
-            variant="outlined"
-            error={Boolean(errors?.zipcode)}
-            helperText={(errors?.zipcode)}
-            onChange={handleZipcodChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <HomeTwoToneIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="city"
-            name="city"
-            label="City"
-            fullWidth
-            autoComplete="shipping address-level2"
-            variant="outlined"
-            error={Boolean(errors?.city)}
-            helperText={(errors?.city)}
-            onChange={handleCityChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <HomeTwoToneIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="country"
-            name="country"
-            label="Country"
-            fullWidth
-            autoComplete="shipping country"
-            variant="outlined"
-            error={Boolean(errors?.country)}
-            helperText={(errors?.country)}
-            onChange={handleCountryChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <PublicTwoToneIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="mobileNumber"
-            name="mobileNumber"
-            label="Mobile Number"
-            fullWidth
-            autoComplete="tel-national username"
-            variant="outlined"
-            error={Boolean(errors?.phone)}
-            helperText={(errors?.phone)}
-            onChange={handlePhoneChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <CallTwoToneIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-        <TextField
-            variant="outlined"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            error={Boolean(errors?.mail)}
-            helperText={(errors?.mail)}
-            onChange={handleMailChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <MailTwoToneIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-      </Grid>
-      <Link to="/checkout" className={classes.link}>
-        <Button 
-          className={classes.orderButton}
-          variant="contained" 
-          color="secondary" 
-        >
-          Place Order
-        </Button>
-      </Link>
+      <CheckoutFormFields
+        errors={errors}
+        handleFirstNameChange={handleFirstNameChange}
+        handleLastNameChange={handleLastNameChange}
+        handleAdderssChange={handleAdderssChange}
+        handleZipcodChange={handleZipcodeChange}
+        handleCityChange={handleCityChange}
+        handleCountryChange={handleCountryChange}
+        handlePhoneChange={handlePhoneChange}
+        handleMailChange={handleMailChange}
+      />
+      <Button 
+        className={classes.orderButton}
+        variant="contained" 
+        color="secondary"
+        type="submit"
+      >
+        Place Order
+      </Button>
     </form>
   );
-}
-
-
+};

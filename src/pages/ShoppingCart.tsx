@@ -1,34 +1,51 @@
-import { Box, Typography } from "@material-ui/core";
+import { Box, Grid, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CheckoutForm from "../components/CheckoutForm";
 import { CartContext } from "../components/context/CartContext";
 import SlipCard from "../components/SlipCard";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import EuroSymbolOutlinedIcon from "@material-ui/icons/EuroSymbolOutlined";
+import classNames from "classnames";
+import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(2),
+  gridContainerStyle: {
+    padding: theme.spacing(3),
   },
-  background: {
-    backgroundColor: "white",
+  topGridFlex: {
+    padding: theme.spacing(3),
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  welcomeToShoppingCart: {
-    backgroundColor: theme.palette.secondary.light,
+  bottomGridFlex: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  formStyle: {
+    display: "flex",
+    flexWrap: "wrap",
     textAlign: "center",
-    color: "white",
-    marginBottom: 0,
-    padding: "0.5rem",
   },
-  wrapper: {
-    textAlign: "center",
-    color: "white",
-    marginBottom: 0,
-    padding: "0.5rem",
+  stickyContent: {
+    [theme.breakpoints.down("xs")]: {
+      display: "flex",
+      position: "fixed",
+      top: 77,
+      backgroundColor: "#fafafa",
+      height: 10,
+      color: theme.palette.primary.light,
+      borderStyle: "solid",
+      borderRadius: "0.5rem",
+      zIndex: 9,
+    },
   },
 }));
+
 
 export default function ShoppingCart() {
   const { cart, totalCartPrice } = useContext(CartContext);
@@ -40,30 +57,60 @@ export default function ShoppingCart() {
   );
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <Box className={classes.background}>
-        <Container className={classes.welcomeToShoppingCart} maxWidth="md">
-          <Typography variant="h2">Shopping cart</Typography>
-          <Typography variant="h5">Items in cart: {totalItems}</Typography>
-          <Typography variant="h5">Total: {totalCartPrice()}</Typography>
+    <Container>
+      {cart.length === 0 ? (
+        <Box className={classes.topGridFlex}>
+          <Box display="flex" flexDirection="column" alignItems="center">
+            <Typography variant="h4">Cart is empty</Typography>
+            <Box>
+              <SentimentVeryDissatisfiedIcon />
+              <ShoppingCartOutlinedIcon />
+            </Box>
+          </Box>
+        </Box>
+      ) : (
+        <Container>
+          <Grid container className={classes.gridContainerStyle}>
+            <Grid item xs={12} className={classes.topGridFlex}>
+              <Box
+                className={classNames(
+                  classes.stickyContent,
+                  classes.topGridFlex
+                )}
+              >
+                <Box className={classes.topGridFlex}>
+                  <Typography variant="h5">Shopping</Typography>
+                  <ShoppingCartOutlinedIcon />
+                  <Typography variant="h5" style={{ color: "green" }}>
+                    ({totalItems})
+                  </Typography>
+                </Box>
+                <Box className={classes.topGridFlex}>
+                  <Typography variant="h5"> {totalCartPrice()}</Typography>
+                  <EuroSymbolOutlinedIcon style={{ color: "green" }} />
+                </Box>
+              </Box>
+            </Grid>
+            <Grid container direction="column">
+              {cart.map((product) => (
+                <SlipCard key={product.id} product={product} />
+              ))}
+            </Grid>
+          </Grid>
+          <Grid item className={classes.bottomGridFlex}>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => setShowForm(true)}
+            >
+              CheckOut
+            </Button>
+            <Container className={classes.formStyle}>
+              {showForm && <CheckoutForm />}
+            </Container>
+          </Grid>
         </Container>
-        <Container className={classes.wrapper} maxWidth="md">
-          <Container maxWidth="md">
-            {cart.map((product) => (
-              <SlipCard key={product.id} product={product} />
-            ))}
-          </Container>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => setShowForm(true)}
-          >
-            CheckOut
-          </Button>
-          {showForm && <CheckoutForm />}
-        </Container>
-      </Box>
-    </React.Fragment>
+      )}
+    </Container>
   );
 }
