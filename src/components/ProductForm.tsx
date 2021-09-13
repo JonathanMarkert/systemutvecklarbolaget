@@ -28,12 +28,12 @@ export default function ProductForm ({ product, handleClose }: Props) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!product) {
       const { value, name, type } = event.target;
-      const trueValue = type === "number" ? Number(value) : value;
-      setNewProduct({ ...newProduct, [name]: trueValue });
+      const inputValue = type === "number" ? Number(value) : value;
+      setNewProduct({ ...newProduct, [name]: inputValue });
     } else {
       const { value, name, type } = event.target;
-      const trueValue = type === "number" ? Number(value) : value;
-      setNewProduct({ ...product, [name]: trueValue });
+      const inputValue = type === "number" ? Number(value) : value;
+      setNewProduct({ ...product, [name]: inputValue });
     }
   }
 
