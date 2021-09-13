@@ -66,6 +66,14 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center",
       alignItems: "center",
     },
+    textCenterMobile:{
+      [theme.breakpoints.down("xs")]:{
+        display:"flex",
+        flexDirection:"column",
+        justifyContent:"center",
+        alignItems:"center",
+      },
+    },
   })
 );
 
@@ -93,12 +101,14 @@ const SlipCard: FC<Props> = ({ product }) => {
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={1}>
               <Grid item xs={12} sm={3}>
-                <Typography gutterBottom variant="subtitle1">
-                  {product.name}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  Price: {product.price} € /each
-                </Typography>
+                <Box className={classes.textCenterMobile}>
+                  <Typography gutterBottom variant="subtitle1">
+                    {product.name}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    {product.price}€
+                  </Typography>
+                </Box>
               </Grid>
             </Grid>
             <Grid item container className={classes.center} xs={12} sm={3}>
