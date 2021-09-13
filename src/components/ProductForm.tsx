@@ -1,6 +1,6 @@
-import { Button, DialogActions, TextField } from "@material-ui/core";
 import React, { useContext, useState } from "react";
 import { Product } from "../Interfaces/IProduct";
+import { Button, DialogActions, TextField } from "@material-ui/core";
 import { ProductContext } from "./context/ProductContext";
 
 interface Props {
@@ -9,21 +9,34 @@ interface Props {
   handleClose: () => void;
 }
 
+let defaultProduct: Product = {
+  id: '',
+  name:  '',
+  brewery: '',
+  url: '',
+  urlDetails: '',
+  description: '',
+  price: 0,
+  amount: 0,
+} 
+
 
 export default function ProductForm ({ product, handleClose }: Props) {
-  const [newProduct, setNewProduct] = useState<Product>(); 
+  const [newProduct, setNewProduct] = useState<Product>(defaultProduct); 
   const { addBeerProduct, editBeerProduct } = useContext(ProductContext);
-  // if(!product) return;
-    // if (!product) return;
-    console.log(product);
-     
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (!product) return;
-        
-        const { value, name, type } = event.target;
-        const trueValue = type === "number" ? Number(value) : value;
-        setNewProduct({ ...product, [name]: trueValue });
+  
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!product) {
+      const { value, name, type } = event.target;
+      const trueValue = type === "number" ? Number(value) : value;
+      setNewProduct({ ...newProduct, [name]: trueValue });
+    } else {
+      const { value, name, type } = event.target;
+      const trueValue = type === "number" ? Number(value) : value;
+      setNewProduct({ ...product, [name]: trueValue });
     }
+  }
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (!newProduct) return;
