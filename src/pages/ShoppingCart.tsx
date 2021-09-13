@@ -1,9 +1,9 @@
-import { Box, Typography } from "@material-ui/core";
+import { Box, Hidden, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CheckoutForm from "../components/CheckoutForm";
 import { CartContext } from "../components/context/CartContext";
 import SlipCard from "../components/SlipCard";
@@ -43,26 +43,35 @@ export default function ShoppingCart() {
     <React.Fragment>
       <CssBaseline />
       <Box className={classes.background}>
-        <Container className={classes.welcomeToShoppingCart} maxWidth="md">
-          <Typography variant="h2">Shopping cart</Typography>
-          <Typography variant="h5">Items in cart: {totalItems}</Typography>
-          <Typography variant="h5">Total: {totalCartPrice()}</Typography>
-        </Container>
-        <Container className={classes.wrapper} maxWidth="md">
-          <Container maxWidth="md">
-            {cart.map((product) => (
-              <SlipCard key={product.id} product={product} />
-            ))}
+        {cart.length === 0 ? (
+          <Container className={classes.welcomeToShoppingCart} maxWidth="md">
+            <Typography variant="h2">Shopping cart</Typography>
+            <Typography variant="h5">Your shopping cart is empty</Typography>
           </Container>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => setShowForm(true)}
-          >
-            CheckOut
-          </Button>
-          {showForm && <CheckoutForm />}
-        </Container>
+        ) : (
+          <div>
+            <Container className={classes.welcomeToShoppingCart} maxWidth="md">
+              <Typography variant="h2">Shopping cart</Typography>
+              <Typography variant="h5">Items in cart: {totalItems}</Typography>
+              <Typography variant="h5">Total: {totalCartPrice()}</Typography>
+            </Container>
+            <Container className={classes.wrapper} maxWidth="md">
+              <Container maxWidth="md">
+                {cart.map((product) => (
+                  <SlipCard key={product.id} product={product} />
+                ))}
+              </Container>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => setShowForm(true)}
+              >
+                CheckOut
+              </Button>
+              {showForm && <CheckoutForm />}
+            </Container>
+          </div>
+        )}
       </Box>
     </React.Fragment>
   );
