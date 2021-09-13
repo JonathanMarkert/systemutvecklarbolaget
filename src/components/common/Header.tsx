@@ -1,4 +1,4 @@
-import { Badge, Hidden } from "@material-ui/core";
+import { Badge, Hidden, Tooltip } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
@@ -77,9 +77,11 @@ export default function MenuAppBar() {
       <AppBar className={classes.appBarStyle}>
         <Toolbar>
           <Link to="/">
+          <Tooltip title="Home" arrow>
             <IconButton className={classNames(classes.iconButtonStyle, classes.removeBgOnHover)}>
               <img style={{width:"100%"}} src={MainLogo} alt="" />
             </IconButton>
+            </Tooltip>
           </Link>
           <div className={classes.grow}>
             <Hidden only="xs">
@@ -90,6 +92,7 @@ export default function MenuAppBar() {
           </div>
           <div>
             <Link to="/cart">
+              <Tooltip title="Shopping Cart" arrow>
               <IconButton aria-label="cart" className={classNames(classes.iconButtonStyle, classes.removeBgOnHover)}>
                 <Badge badgeContent={totalItems} color={"secondary"}>
                   <ShoppingCartOutlinedIcon
@@ -99,11 +102,14 @@ export default function MenuAppBar() {
                   />
                 </Badge>
               </IconButton>
+              </Tooltip>
             </Link>
             <Link to="/admin">
+            <Tooltip title="Admin" arrow>
               <IconButton className={classNames(classes.iconButtonStyle, classes.removeBgOnHover)}>
                 <AccountCircle className={classes.iconStyle} />
               </IconButton>
+              </Tooltip>
             </Link>
           </div>
         </Toolbar>
