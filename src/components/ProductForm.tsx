@@ -7,7 +7,6 @@ import { useFormik } from "formik";
 
 interface Props {
   product?: Product;
-  // handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   handleClose: () => void;
 }
 
@@ -22,7 +21,7 @@ let defaultProduct: Product = {
   amount: 0,
 };
 
-const validationSchema = yup.object({
+const productFormValidation = yup.object({
   name: yup
     .string()
     .required("Beer must have a name")
@@ -35,7 +34,7 @@ const validationSchema = yup.object({
     .max(10, "Name is to long"),
   url: yup.string().notRequired(),
   urlDetails: yup.string().notRequired(),
-  description: yup.string().notRequired().max(30, "Description is to long"),
+  description: yup.string().notRequired().max(50, "Description is to long"),
   price: yup
     .number()
     .required("Beer aint free!")
@@ -48,42 +47,46 @@ export default function ProductForm({ product, handleClose }: Props) {
 
   const formik = useFormik({
     initialValues: {
-      id: "",
-      name: "",
-      brewery: "",
-      url: "",
-      urlDetails: "",
-      description: "",
-      price: 0,
-      amount: 0,
+      id: product?.id,
+      name: product?.name,
+      brewery: product?.brewery,
+      url: product?.url,
+      urlDetails: product?.urlDetails,
+      description: product?.description,
+      price: product?.price,
+      amount: product?.amount,
     },
-    onSubmit: (values) => {
-      console.log(JSON.stringify(values));
+    onSubmit: (productValues) => {
+      //setNewProduct( {...newProduct,...productValues})
+      handleClose();
     },
+    validateOnChange:true, //osäker om behövs
+    enableReinitialize:true, // viktig
+    validationSchema: productFormValidation,
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!product) {
-      const { value, name, type } = event.target;
-      const inputValue = type === "number" ? Number(value) : value;
-      setNewProduct({ ...newProduct, [name]: inputValue });
-    } else {
-      const { value, name, type } = event.target;
-      const inputValue = type === "number" ? Number(value) : value;
-      setNewProduct({ ...product, [name]: inputValue });
-    }
-  };
+  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (!product) {
+  //     const { value, name, type } = event.target;
+  //     const inputValue = type === "number" ? Number(value) : value;
+  //     setNewProduct({ ...newProduct, [name]: inputValue });
+  //   } else {
+  //     const { value, name, type } = event.target;
+  //     const inputValue = type === "number" ? Number(value) : value;
+  //     setNewProduct({ ...product, [name]: inputValue });
+  //   }
+  // };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!newProduct) return;
-    if (!product) {
-      addBeerProduct(newProduct);
-    } else {
-      editBeerProduct(newProduct);
-    }
-    handleClose();
-  };
+  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   if (!newProduct) return;
+  //   if (!product) {
+  //     addBeerProduct(newProduct);
+  //   } else {
+  //     editBeerProduct(newProduct);
+  //   }
+  //   handleClose();
+  // };
 
   return (
     <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
@@ -91,13 +94,15 @@ export default function ProductForm({ product, handleClose }: Props) {
         name="name"
         type="text"
         onChange={formik.handleChange}
-        // onChange={(e) => setProduct({ ...product, price: Number(e.target.value) })}
         margin="dense"
         label="Name"
         defaultValue={product?.name}
         variant="filled"
         fullWidth
         value={formik.values.name}
+        error={formik.touched.name && Boolean(formik.errors.name)}
+        helperText={formik.touched.name && formik.errors.name}
+        onBlur={formik.handleBlur}
       />
       <TextField
         name="brewery"
@@ -109,6 +114,9 @@ export default function ProductForm({ product, handleClose }: Props) {
         variant="filled"
         fullWidth
         value={formik.values.brewery}
+        error={formik.touched.brewery && Boolean(formik.errors.brewery)}
+        helperText={formik.touched.brewery && formik.errors.brewery}
+        onBlur={formik.handleBlur}
       />
       <TextField
         name="url"
@@ -120,6 +128,9 @@ export default function ProductForm({ product, handleClose }: Props) {
         variant="filled"
         fullWidth
         value={formik.values.url}
+        error={formik.touched.url && Boolean(formik.errors.url)}
+        helperText={formik.touched.url && formik.errors.url}
+        onBlur={formik.handleBlur}
       />
       <TextField
         name="urlDetails"
@@ -131,6 +142,9 @@ export default function ProductForm({ product, handleClose }: Props) {
         variant="filled"
         fullWidth
         value={formik.values.urlDetails}
+        error={formik.touched.urlDetails && Boolean(formik.errors.urlDetails)}
+        helperText={formik.touched.urlDetails && formik.errors.urlDetails}
+        onBlur={formik.handleBlur}
       />
       <TextField
         name="description"
@@ -144,6 +158,9 @@ export default function ProductForm({ product, handleClose }: Props) {
         multiline
         rows={4}
         value={formik.values.description}
+        error={formik.touched.description && Boolean(formik.errors.description)}
+        helperText={formik.touched.description && formik.errors.description}
+        onBlur={formik.handleBlur}
       />
       <TextField
         name="price"
@@ -155,6 +172,9 @@ export default function ProductForm({ product, handleClose }: Props) {
         variant="filled"
         fullWidth
         value={formik.values.price}
+        error={formik.touched.price && Boolean(formik.errors.price)}
+        helperText={formik.touched.price && formik.errors.price}
+        onBlur={formik.handleBlur}
       />
 
       <DialogActions>
