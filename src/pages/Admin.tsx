@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     addButton: {
       margin: "1rem",
-      backgroundColor: "#00C967"
+      backgroundColor: theme.palette.secondary.light,
+      color: '#fff',
     },
     title: {
       padding: '1rem',
