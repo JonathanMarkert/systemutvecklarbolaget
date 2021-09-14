@@ -1,34 +1,33 @@
-import { Avatar, Button, Dialog, DialogContent, DialogContentText, DialogTitle, makeStyles, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
-import Table from "@material-ui/core/Table";
+import { Button, Container, createStyles, Dialog, DialogContent, DialogContentText, DialogTitle, makeStyles, Theme } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import React, { useContext, useState } from "react";
-
+import AdminProductCard from "../components/AdminProductCard";
 import { ProductContext } from "../components/context/ProductContext";
 import ProductForm from "../components/ProductForm";
 import { Product } from "../Interfaces/IProduct";
 
-
-const useStyles = makeStyles({
-  tableContainer: {
-    justifyContent: "center"
-  },
-  table: {
-    maxWidth: '50rem',
-  },
-  deleteButton: {
-    color: "red"
-  },
-  editButton: {
-    color: "#00C967"
-  },
-  addButton: {
-    margin: "1rem",
-    backgroundColor: "#00C967"
-  },
-})
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    addButton: {
+      margin: "1rem",
+      backgroundColor: theme.palette.secondary.light,
+      color: '#fff',
+    },
+    title: {
+      padding: '1rem',
+    },
+    centerMobile:{
+      [theme.breakpoints.down("xs")]:{
+        justifyContent:"center",
+      },
+    },
+  })
+);
 
 const Admin = () => {
   const classes = useStyles();
-  const { beerProductArray, deleteBeerProduct } = useContext(ProductContext);
+  const { beerProductArray} = useContext(ProductContext);
   const [open, setOpen] = React.useState(false);
   const [openAdd, setOpenAdd] = React.useState(false);
   const [product, setProduct] = useState<Product>();
@@ -51,47 +50,25 @@ const Admin = () => {
 
    return (
     <>
-      <TableContainer className={classes.tableContainer} component={Paper}>
-        <Button className={classes.addButton} onClick={(event) => handleAddClickOpen(event)}>
-          Add
-        </Button>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Beer</TableCell>
-              <TableCell align="right">Thumbnail</TableCell>
-              <TableCell align="right">Brewery</TableCell>
-              <TableCell align="right">Price</TableCell>
-              <TableCell align="right">Description</TableCell>
-              <TableCell align="right">Options</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {beerProductArray.map((product) => (
-              <TableRow key={product.id}>
-                <TableCell component="th" scope="row">
-                  {product.name}
-                </TableCell>
-                <TableCell align="right">
-                  <Avatar src={product.url}></Avatar>
-                </TableCell>
-                <TableCell align="right">{product.brewery}</TableCell>
-                <TableCell align="right">{product.price}</TableCell>
-                <TableCell align="right">{product.description}</TableCell>
-                <TableCell align="right">
-                  <Button className={classes.deleteButton} onClick={() => deleteBeerProduct(product)}> DELETE
-                  </Button>
-                </TableCell>
-                <TableCell align="right">
-                  <Button className={classes.editButton} onClick={(event) => handleClickOpen(event, product)} > EDIT
-                  </Button>
-
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Container>
+        <Grid container justifyContent="space-between" alignItems="center" className={classes.centerMobile}>
+          <Typography variant="h3" align="center" className={classes.title}>
+            Admin
+          </Typography>
+          <Button className={classes.addButton} onClick={(event) => handleAddClickOpen(event)}>
+            Add new product
+          </Button>
+        </Grid>
+        <Grid container direction="column">
+          {beerProductArray.map((product) => (
+            <AdminProductCard 
+              key={product.id} 
+              product={product}
+              handleClickOpen={handleClickOpen} />
+          ))}
+        </Grid>
+      </Container>
+    
       {open && product && (
         <Dialog open={open} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">{product.name}</DialogTitle>
