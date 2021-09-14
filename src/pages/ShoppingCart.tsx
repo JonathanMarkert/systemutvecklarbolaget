@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     textAlign: "center",
+    marginBottom: "1rem",
   },
   stickyContent: {
     [theme.breakpoints.down("xs")]: {
@@ -44,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
       zIndex: 9,
     },
   },
+  checkoutButton: {
+    marginBottom: '1rem',
+  }
 }));
 
 
@@ -101,6 +105,7 @@ export default function ShoppingCart() {
             <Button
               variant="contained"
               color="secondary"
+              className={classes.checkoutButton}
               onClick={() => setShowForm(true)}
             >
               CheckOut

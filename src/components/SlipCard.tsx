@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
+      marginBottom: '1.5rem'
     },
     paper: {
       maxWidth: 1200,
@@ -67,11 +68,16 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
     },
     textCenterMobile:{
-      [theme.breakpoints.down("xs")]:{
+      [theme.breakpoints.down("sm")]:{
         display:"flex",
         flexDirection:"column",
         justifyContent:"center",
         alignItems:"center",
+      },
+    },
+    textWrap: {
+      [theme.breakpoints.up("xs")]:{
+        whiteSpace: 'pre-line',
       },
     },
   })
@@ -83,11 +89,11 @@ interface Props {
 
 const SlipCard: FC<Props> = ({ product }) => {
   const classes = useStyles();
-  const { handleRemoveFromCart, decrementNumber, incrementNumber } =
-    useContext(CartContext);
+  const { handleRemoveFromCart, decrementNumber, incrementNumber } = useContext(CartContext);
+  
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>
+      <Paper elevation={5} className={classes.paper}>
         <Grid container spacing={2}>
           <Grid item>
             <ButtonBase className={classes.image}>
@@ -99,19 +105,17 @@ const SlipCard: FC<Props> = ({ product }) => {
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={1}>
-              <Grid item xs={12} sm={3}>
-                <Box className={classes.textCenterMobile}>
-                  <Typography gutterBottom variant="subtitle1">
-                    {product.name}
+            <Grid item md container direction="column" spacing={1} className={classes.textCenterMobile}>
+              <Grid item xs={12}>
+                  <Typography gutterBottom variant="h6" className={classes.textWrap}>
+                    {product.name.length > 16 && product.name.indexOf(' ') <= 0 ? product.name.substring(0,13) + '...' : product.name}
                   </Typography>
-                  <Typography variant="body2" color="textSecondary">
+                  <Typography variant="body2" color="textSecondary" className={classes.textCenterMobile}>
                     {product.price}€
                   </Typography>
-                </Box>
               </Grid>
             </Grid>
-            <Grid item container className={classes.center} xs={12} sm={3}>
+            <Grid item container className={classes.center} xs={12} sm={3} md={3}>
               <Box className={classes.center}>
                 <IconButton style={{ background: 0 }}>
                   <RemoveCircleIcon
@@ -136,12 +140,12 @@ const SlipCard: FC<Props> = ({ product }) => {
                 </IconButton>
               </Box>
             </Grid>
-            <Grid item xs={12} sm={3} className={classes.center}>
+            <Grid item xs={12} sm={4} md={3} className={classes.center}>
               <Typography variant="subtitle2">
-                Total: {product.price * product.amount} €
+                Total: {product.price * product.amount}€
               </Typography>
             </Grid>
-            <Grid item xs={12} sm={3} className={classes.center}>
+            <Grid item xs={12} sm={4} md={3} className={classes.center}>
               <IconButton
                 style={{ background: 0 }}
                 onClick={() => handleRemoveFromCart(product)}
