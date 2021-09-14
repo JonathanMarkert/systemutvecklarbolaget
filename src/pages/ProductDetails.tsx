@@ -33,6 +33,9 @@ createStyles({
     textAlign: "center",
     color: theme.palette.text.secondary,
   },
+  wordWrap: {
+    wordWrap: 'break-word',
+  },
 })
 );
 
@@ -61,9 +64,9 @@ const ProductDetails: FC<DetailsProps> = ({ match}:DetailsProps) => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Paper className={classes.paper}>
-            <Typography variant="h2">{product.name}</Typography>
-            <Typography variant="h5">{product.brewery}</Typography>
-            <Typography style={{wordWrap:"break-word"}} variant="subtitle2">{product?.description}</Typography>
+            <Typography className={classes.wordWrap} variant="h2">{product.name}</Typography>
+            <Typography className={classes.wordWrap} variant="h5">{product.brewery}</Typography>
+            <Typography className={classes.wordWrap} variant="subtitle2">{product?.description}</Typography>
             <Button size="large" color="secondary" onClick={() => handleAddToCart(product)}>
             <AddShoppingCartIcon style={{ fontSize: 50 }} color="secondary"/>
               Buy now
