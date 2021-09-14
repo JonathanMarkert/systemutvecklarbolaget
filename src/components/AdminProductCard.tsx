@@ -88,38 +88,46 @@ const AdminProductCard: FC<Props> = ({ product, handleClickOpen }) => {
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
-              <Grid item xs={12} md={3}>
-                  <Typography variant="h6" align="center">
-                    Name
-                  </Typography>
-                  <Typography gutterBottom variant="subtitle1"  align="center" className={classes.wordWrap}>
-                    {product.name}
-                  </Typography>
-              </Grid>
-              <Grid item xs={12} md={3}>
-                    <Typography variant="h6" align="center">
-                      Price
-                    </Typography>
-                    <Typography gutterBottom variant="subtitle1" align="center">
-                      {product.price}€
-                    </Typography>
-              </Grid>
-              <Grid item xs={12} md={3}>
-                <Typography variant="h6" align="center">
-                  Description
-                </Typography>
-                <Typography gutterBottom variant="body2" align="center" className={classes.wordWrap}>
-                  {product.description}
-                </Typography>
-              </Grid>
-              <Grid item xs={12} md={3} className={classes.center}>
-                <Button className={classes.editButton} onClick={(event) => handleClickOpen(event, product)}> 
-                  EDIT
-                </Button>
-                  <Button className={classes.deleteButton} onClick={() => deleteBeerProduct(product)}> 
-                      DELETE
-                  </Button>
-              </Grid>
+            <Grid item xs={12} md={2}>
+              <Typography variant="h6" align="center">
+                Name
+              </Typography>
+              <Typography gutterBottom variant="subtitle1"  align="center" className={classes.wordWrap}>
+                {product.name}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={2}>
+              <Typography variant="h6" align="center">
+                Brewery
+              </Typography>
+              <Typography gutterBottom variant="subtitle1"  align="center" className={classes.wordWrap}>
+                {product.brewery}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={2}>
+              <Typography variant="h6" align="center">
+                Price
+              </Typography>
+              <Typography gutterBottom variant="subtitle1" align="center">
+                {product.price}€
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <Typography variant="h6" align="center">
+                Description
+              </Typography>
+              <Typography gutterBottom variant="body2" align="center" className={classes.wordWrap}>
+                {product.description}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={3} className={classes.center}>
+              <Button className={classes.editButton} onClick={(event) => handleClickOpen(event, product)}> 
+                EDIT
+              </Button>
+              <Button className={classes.deleteButton} onClick={() => deleteBeerProduct(product)}> 
+                DELETE
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       </Paper>
