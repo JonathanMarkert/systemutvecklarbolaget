@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme: Theme) =>
     editButton: {
       color: theme.palette.secondary.main
     },
+    wordWrap: {
+      wordWrap: 'break-word',
+    }
   })
 );
 
@@ -89,7 +92,7 @@ const AdminProductCard: FC<Props> = ({ product, handleClickOpen }) => {
                   <Typography variant="h6" align="center">
                     Name
                   </Typography>
-                  <Typography gutterBottom variant="subtitle1"  align="center">
+                  <Typography gutterBottom variant="subtitle1"  align="center" className={classes.wordWrap}>
                     {product.name}
                   </Typography>
               </Grid>
@@ -105,7 +108,7 @@ const AdminProductCard: FC<Props> = ({ product, handleClickOpen }) => {
                 <Typography variant="h6" align="center">
                   Description
                 </Typography>
-                <Typography gutterBottom variant="body2" align="center">
+                <Typography gutterBottom variant="body2" align="center" className={classes.wordWrap}>
                   {product.description}
                 </Typography>
               </Grid>
