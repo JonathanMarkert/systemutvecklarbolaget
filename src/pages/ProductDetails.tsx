@@ -26,8 +26,6 @@ createStyles({
     minWidth: 200,
   },
   image: {
-    height: 500,
-    width: 'auto',
     objectFit: 'contain',
   },
   paper: {
@@ -65,7 +63,7 @@ const ProductDetails: FC<DetailsProps> = ({ match}:DetailsProps) => {
           <Paper className={classes.paper}>
             <Typography variant="h2">{product.name}</Typography>
             <Typography variant="h5">{product.brewery}</Typography>
-            <Typography>{product?.description}</Typography>
+            <Typography style={{wordWrap:"break-word"}} variant="subtitle2">{product?.description}</Typography>
             <Button size="large" color="secondary" onClick={() => handleAddToCart(product)}>
             <AddShoppingCartIcon style={{ fontSize: 50 }} color="secondary"/>
               Buy now
