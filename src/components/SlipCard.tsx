@@ -76,9 +76,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     textWrap: {
-      [theme.breakpoints.up("xs")]:{
         whiteSpace: 'pre-line',
-      },
     },
   })
 );
