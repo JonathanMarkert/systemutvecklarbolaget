@@ -3,6 +3,7 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteForeverTwoToneIcon from "@material-ui/icons/DeleteForeverTwoTone";
@@ -76,9 +77,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     textWrap: {
-      [theme.breakpoints.up("xs")]:{
         whiteSpace: 'pre-line',
-      },
     },
   })
 );
@@ -107,9 +106,11 @@ const SlipCard: FC<Props> = ({ product }) => {
           <Grid item xs={12} sm container>
             <Grid item md container direction="column" spacing={1} className={classes.textCenterMobile}>
               <Grid item xs={12}>
+                <Tooltip title={product.name} arrow>
                   <Typography gutterBottom variant="h6" className={classes.textWrap}>
                     {product.name.length > 16 && product.name.indexOf(' ') <= 0 ? product.name.substring(0,13) + '...' : product.name}
                   </Typography>
+                </Tooltip>
                   <Typography variant="body2" color="textSecondary" className={classes.textCenterMobile}>
                     {product.price}€
                   </Typography>

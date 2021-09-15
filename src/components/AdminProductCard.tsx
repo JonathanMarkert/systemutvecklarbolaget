@@ -2,6 +2,7 @@ import Button from "@material-ui/core/Button";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import Tooltip from "@material-ui/core/Tooltip";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React, { FC, useContext } from "react";
@@ -88,38 +89,50 @@ const AdminProductCard: FC<Props> = ({ product, handleClickOpen }) => {
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
-              <Grid item xs={12} md={3}>
-                  <Typography variant="h6" align="center">
-                    Name
-                  </Typography>
-                  <Typography gutterBottom variant="subtitle1"  align="center" className={classes.wordWrap}>
-                    {product.name}
-                  </Typography>
-              </Grid>
-              <Grid item xs={12} md={3}>
-                    <Typography variant="h6" align="center">
-                      Price
-                    </Typography>
-                    <Typography gutterBottom variant="subtitle1" align="center">
-                      {product.price}€
-                    </Typography>
-              </Grid>
-              <Grid item xs={12} md={3}>
-                <Typography variant="h6" align="center">
-                  Description
+            <Grid item xs={12} md={2}>
+              <Typography variant="h6" align="center">
+                Name
+              </Typography>
+              <Tooltip title={product.name} arrow>
+              <Typography gutterBottom variant="subtitle1"  align="center" className={classes.wordWrap}>
+                {product.name.length > 30 && product.name.indexOf(' ') <= 0 ? product.name.substring(0,27) + '...' : product.name}
+              </Typography>
+              </Tooltip>
+            </Grid>
+            <Grid item xs={12} md={2}>
+              <Typography variant="h6" align="center">
+                Brewery
+              </Typography>
+              <Tooltip title={product.brewery} arrow>
+                <Typography gutterBottom variant="subtitle1"  align="center" className={classes.wordWrap}>
+                  {product.brewery.length > 30 && product.brewery.indexOf(' ') <= 0 ? product.brewery.substring(0,27) + '...' : product.brewery}
                 </Typography>
-                <Typography gutterBottom variant="body2" align="center" className={classes.wordWrap}>
-                  {product.description}
-                </Typography>
-              </Grid>
-              <Grid item xs={12} md={3} className={classes.center}>
-                <Button className={classes.editButton} onClick={(event) => handleClickOpen(event, product)}> 
-                  EDIT
-                </Button>
-                  <Button className={classes.deleteButton} onClick={() => deleteBeerProduct(product)}> 
-                      DELETE
-                  </Button>
-              </Grid>
+              </Tooltip>
+            </Grid>
+            <Grid item xs={12} md={2}>
+              <Typography variant="h6" align="center">
+                Price
+              </Typography>
+              <Typography gutterBottom variant="subtitle1" align="center">
+                {product.price}€
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <Typography variant="h6" align="center">
+                Description
+              </Typography>
+              <Typography gutterBottom variant="body2" align="center" className={classes.wordWrap}>
+                {product.description}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={3} className={classes.center}>
+              <Button className={classes.editButton} onClick={(event) => handleClickOpen(event, product)}> 
+                EDIT
+              </Button>
+              <Button className={classes.deleteButton} onClick={() => deleteBeerProduct(product)}> 
+                DELETE
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       </Paper>
