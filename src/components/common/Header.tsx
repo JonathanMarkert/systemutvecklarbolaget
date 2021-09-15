@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.primary.contrastText,
     },
     iconStyle: {
-      fontSize: 40,
+      fontSize: 29,
       color: theme.palette.primary.contrastText,
       "&:hover": {
         color: "#fff",
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     animateStyle: {
       color: theme.palette.secondary.main,
-      fontSize: 50,
+      fontSize: 33,
     },
     removeBgOnHover: {
       "&:hover": {

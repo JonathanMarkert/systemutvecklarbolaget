@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
       maxWidth: 1200,
       padding: '0.5rem',
     },
-    image: {
+    cardMedia: {
       width: 128,
       height: 128,
       objectFit: 'contain',
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     wordWrap: {
       wordWrap: 'break-word',
-    }
+    },
   })
 );
 
@@ -67,12 +67,12 @@ const AdminProductCard: FC<Props> = ({ product, handleClickOpen }) => {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper} elevation={5}>
-        <Grid container spacing={3}>
-          <Grid item>
+        <Grid container spacing={3} >
+          <Grid item  >
             <Typography variant="h6" align="center" >
                 Image
             </Typography>
-            <CardMedia className={classes.image}>
+            <CardMedia className={classes.cardMedia}>
               <img
               className={classes.img}
               alt={product.name}
@@ -80,11 +80,11 @@ const AdminProductCard: FC<Props> = ({ product, handleClickOpen }) => {
             />
             </CardMedia>
           </Grid>
-          <Grid item>
+          <Grid item >
             <Typography variant="h6" align="center">
                 Detail Image 
             </Typography>
-            <CardMedia className={classes.image}>
+            <CardMedia className={classes.cardMedia}>
               <img
               className={classes.img}
               alt={product.name}
@@ -99,7 +99,7 @@ const AdminProductCard: FC<Props> = ({ product, handleClickOpen }) => {
               </Typography>
               <Tooltip title={product.name} arrow>
               <Typography gutterBottom variant="subtitle1"  align="center" className={classes.wordWrap}>
-                {product.name.length > 30 && product.name.indexOf(' ') <= 0 ? product.name.substring(0,27) + '...' : product.name}
+                {product.name.length > 30 && product.name.indexOf(' ') <= 0 ? product.name.substring(0,20) + '...' : product.name}
               </Typography>
               </Tooltip>
             </Grid>
@@ -109,7 +109,7 @@ const AdminProductCard: FC<Props> = ({ product, handleClickOpen }) => {
               </Typography>
               <Tooltip title={product.brewery} arrow>
                 <Typography gutterBottom variant="subtitle1"  align="center" className={classes.wordWrap}>
-                  {product.brewery.length > 30 && product.brewery.indexOf(' ') <= 0 ? product.brewery.substring(0,27) + '...' : product.brewery}
+                  {product.brewery.length > 30 && product.brewery.indexOf(' ') <= 0 ? product.brewery.substring(0,20) + '...' : product.brewery}
                 </Typography>
               </Tooltip>
             </Grid>

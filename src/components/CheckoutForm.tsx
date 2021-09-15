@@ -3,7 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
-import CheckoutFormFields from './ChekoutFormFields';
+import CheckoutFormFields from './CheckoutFormFields';
 import { CartContext } from './context/CartContext';
 
 const useStyles = makeStyles((theme: Theme) =>
