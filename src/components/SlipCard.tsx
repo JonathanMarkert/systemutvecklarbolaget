@@ -47,13 +47,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     incAmountButton: {
       color: theme.palette.primary.light,
-      "&:hover": {
+      "&:active": {
         color: theme.palette.secondary.light,
-      },
+       },
     },
     decAmountButton: {
       color: theme.palette.primary.light,
-      "&:hover": {
+      "&:active": {
         color: theme.palette.error.light,
       },
     },
