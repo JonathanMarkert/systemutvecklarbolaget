@@ -13,11 +13,15 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
-      marginBottom: '0.5rem'
+      marginBottom: '0.5rem',
+      boxSizing: 'content-box',
+      "&::before, ::after": {
+        boxSizing: 'content-box',
+      },
     },
     paper: {
       maxWidth: 1200,
-      padding: '0.5rem'
+      padding: '0.5rem',
     },
     image: {
       width: 128,
@@ -136,7 +140,7 @@ const AdminProductCard: FC<Props> = ({ product, handleClickOpen }) => {
           </Grid>
         </Grid>
       </Paper>
-    </div>
+   </div>
   );
 };
 
