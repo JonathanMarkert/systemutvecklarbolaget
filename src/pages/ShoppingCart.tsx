@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       display: "flex",
       position: "fixed",
-      top: 77,
+      top: 68,
       backgroundColor: "#fafafa",
       height: 10,
       color: theme.palette.primary.light,
