@@ -76,7 +76,7 @@ export const products: Product[] = [{
   id: '044dfd42-5eec-4601-8c90-32c103887ecc',
   url:'https://images.ctfassets.net/ngqihdllh70f/3F136UswljjPoRDYqfABRq/bcd97205c61ebd5e7f37266628b32116/keg.png',
   urlDetails: 'https://glasbanken.se/wp-content/uploads/240518/nerdbrewing_index_out_of_bounds.png',
-  name:'Indexoutofbounds',
+  name:'Index out of bounds',
   brewery: 'NerdBrewing',
 	description: 'Oak aged imperial stout with vanilla and cold brewed vietnamese coffee.',
   price: 5,

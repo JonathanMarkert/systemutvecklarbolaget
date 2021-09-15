@@ -1,4 +1,3 @@
-import React from 'react';
 import { Route, Switch } from 'react-router';
 import Admin from '../../pages/Admin';
 import Checkout from '../../pages/Checkout';

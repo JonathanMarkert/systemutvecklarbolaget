@@ -1,5 +1,4 @@
 import { Box, CardMedia, IconButton } from "@material-ui/core";
-import ButtonBase from "@material-ui/core/ButtonBase";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
@@ -9,7 +8,7 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteForeverTwoToneIcon from "@material-ui/icons/DeleteForeverTwoTone";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 import classNames from "classnames";
-import React, { FC, useContext } from "react";
+import { FC, useContext } from "react";
 import { Product } from "../Interfaces/IProduct";
 import { CartContext } from "./context/CartContext";
 
@@ -99,7 +98,7 @@ const SlipCard: FC<Props> = ({ product }) => {
               <img
                 className={classes.img}
                 alt={product.name}
-                src={product.url}
+                src={product.urlDetails}
               />
             </CardMedia>
           </Grid>

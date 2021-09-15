@@ -1,6 +1,6 @@
 import { Button, DialogActions, TextField } from "@material-ui/core";
 import { useFormik } from "formik";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import * as yup from "yup";
 import { Product } from "../Interfaces/IProduct";
 import { ProductContext } from "./context/ProductContext";
