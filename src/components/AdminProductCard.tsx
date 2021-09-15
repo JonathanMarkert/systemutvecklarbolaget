@@ -2,6 +2,7 @@ import Button from "@material-ui/core/Button";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import Tooltip from "@material-ui/core/Tooltip";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React, { FC, useContext } from "react";
@@ -92,17 +93,21 @@ const AdminProductCard: FC<Props> = ({ product, handleClickOpen }) => {
               <Typography variant="h6" align="center">
                 Name
               </Typography>
+              <Tooltip title={product.name} arrow>
               <Typography gutterBottom variant="subtitle1"  align="center" className={classes.wordWrap}>
-                {product.name}
+                {product.name.length > 30 && product.name.indexOf(' ') <= 0 ? product.name.substring(0,27) + '...' : product.name}
               </Typography>
+              </Tooltip>
             </Grid>
             <Grid item xs={12} md={2}>
               <Typography variant="h6" align="center">
                 Brewery
               </Typography>
-              <Typography gutterBottom variant="subtitle1"  align="center" className={classes.wordWrap}>
-                {product.brewery}
-              </Typography>
+              <Tooltip title={product.brewery} arrow>
+                <Typography gutterBottom variant="subtitle1"  align="center" className={classes.wordWrap}>
+                  {product.brewery.length > 30 && product.brewery.indexOf(' ') <= 0 ? product.brewery.substring(0,27) + '...' : product.brewery}
+                </Typography>
+              </Tooltip>
             </Grid>
             <Grid item xs={12} md={2}>
               <Typography variant="h6" align="center">
