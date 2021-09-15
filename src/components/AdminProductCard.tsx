@@ -1,5 +1,4 @@
 import Button from "@material-ui/core/Button";
-import CardMedia from "@material-ui/core/ButtonBase";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -8,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import React, { FC, useContext } from "react";
 import { ProductContext } from "../components/context/ProductContext";
 import { Product } from "../Interfaces/IProduct";
+import CardMedia from "@material-ui/core/CardMedia";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
