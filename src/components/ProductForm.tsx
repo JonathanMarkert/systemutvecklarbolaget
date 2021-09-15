@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Product } from "../Interfaces/IProduct";
 import { Button, DialogActions, TextField } from "@material-ui/core";
 import { ProductContext } from "./context/ProductContext";
@@ -20,48 +20,48 @@ let defaultProduct: Product = {
   price: 0,
   amount: 0,
 };
+// Pick välja properties
+// Omit välja bort properties
 
-const productFormValidation = yup.object({
+const productFormValidation = yup.object<Record<keyof Omit<Product,"id"|"amount">, yup.AnySchema>>({
   name: yup
     .string()
     .required("Beer must have a name")
     .min(3, "Must be atleast 3 characters long")
-    .max(10, "Name is to long"),
+    .max(30, "Name is to long"),
   brewery: yup
     .string()
     .required("Brewery must have a name")
     .min(3, "Must be atleast 3 characters long")
-    .max(10, "Name is to long"),
-  url: yup.string().notRequired(),
-  urlDetails: yup.string().notRequired(),
+    .max(30, "Name is to long"),
+  url: yup.string().required("Image of beer is required."),
+  //.oneOf(["jpg", "png"]),
+  urlDetails: yup.string().required("Image of beer is required."),
+  //.oneOf(["jpg", "png"]),
   description: yup.string().notRequired().max(50, "Description is to long"),
   price: yup
     .number()
     .required("Beer aint free!")
-    .min(1, "minimum value of one"),
+    .min(1, "minimum value of one")
+    .max(200, "really... more then 200 for a beer ?"),
 });
 
 export default function ProductForm({ product, handleClose }: Props) {
-  const [newProduct, setNewProduct] = useState<Product>(defaultProduct);
+  //const [newProduct, setNewProduct] = useState<Product>(product || defaultProduct);
   const { addBeerProduct, editBeerProduct } = useContext(ProductContext);
 
   const formik = useFormik({
-    initialValues: {
-      id: product?.id,
-      name: product?.name,
-      brewery: product?.brewery,
-      url: product?.url,
-      urlDetails: product?.urlDetails,
-      description: product?.description,
-      price: product?.price,
-      amount: product?.amount,
-    },
-    onSubmit: (productValues) => {
-      //setNewProduct( {...newProduct,...productValues})
+    initialValues: product || defaultProduct,
+    onSubmit: (updatedProduct) => {
+          if (!product) {
+            addBeerProduct(updatedProduct);
+          } else {
+            editBeerProduct(updatedProduct);
+          }
       handleClose();
     },
-    validateOnChange:true, //osäker om behövs
-    enableReinitialize:true, // viktig
+    validateOnChange: true, //osäker om behövs
+    enableReinitialize: true, // viktig
     validationSchema: productFormValidation,
   });
 
@@ -96,7 +96,7 @@ export default function ProductForm({ product, handleClose }: Props) {
         onChange={formik.handleChange}
         margin="dense"
         label="Name"
-        defaultValue={product?.name}
+        //defaultValue={product?.name}
         variant="filled"
         fullWidth
         value={formik.values.name}
@@ -110,7 +110,7 @@ export default function ProductForm({ product, handleClose }: Props) {
         onChange={formik.handleChange}
         margin="dense"
         label="Brewery"
-        defaultValue={product?.brewery}
+        //defaultValue={product?.brewery}
         variant="filled"
         fullWidth
         value={formik.values.brewery}
@@ -124,7 +124,7 @@ export default function ProductForm({ product, handleClose }: Props) {
         onChange={formik.handleChange}
         margin="dense"
         label="Image URL"
-        defaultValue={product?.url}
+        //defaultValue={product?.url}
         variant="filled"
         fullWidth
         value={formik.values.url}
@@ -138,7 +138,7 @@ export default function ProductForm({ product, handleClose }: Props) {
         onChange={formik.handleChange}
         margin="dense"
         label="Alternative image URL"
-        defaultValue={product?.urlDetails}
+        //defaultValue={product?.urlDetails}
         variant="filled"
         fullWidth
         value={formik.values.urlDetails}
@@ -152,7 +152,7 @@ export default function ProductForm({ product, handleClose }: Props) {
         onChange={formik.handleChange}
         margin="dense"
         label="Description"
-        defaultValue={product?.description}
+        //defaultValue={product?.description}
         variant="filled"
         fullWidth
         multiline
@@ -168,7 +168,7 @@ export default function ProductForm({ product, handleClose }: Props) {
         onChange={formik.handleChange}
         margin="dense"
         label="Price"
-        defaultValue={product?.price}
+        //defaultValue={product?.price}
         variant="filled"
         fullWidth
         value={formik.values.price}
