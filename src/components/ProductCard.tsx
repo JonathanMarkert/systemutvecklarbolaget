@@ -32,10 +32,12 @@ const useStyles = makeStyles((theme) => ({
     cardContent: {
         flexGrow: 1,
         height: '10rem',
-        //   marginBottom: '2rem',
         textOverflow: '',
         overflow: 'hidden',
-        textJustify: 'inter-word'
+        textJustify: 'inter-word',
+        "&:hover": {
+            overflow: 'auto',
+        },
     },
     linkStyling: {
         textDecoration: 'none',
@@ -46,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
         "&:hover": {
             color: theme.palette.primary.dark,
         },
+    },
+    wordWrap: {
+        wordWrap: 'break-word',
     },
 }))
 
@@ -61,7 +66,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {   //add clickable image
                     title={product.name}
                 />
                 <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2" align="center">
+                    <Typography gutterBottom variant="h5" component="h2" align="center" className={classes.wordWrap}>
                         {product.name}
                     </Typography>
                     <Box>
