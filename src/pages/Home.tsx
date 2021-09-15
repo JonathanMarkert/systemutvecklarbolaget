@@ -29,9 +29,6 @@ export default function Home() {
   const { beerProductArray } = useContext(ProductContext);
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-
       <main className={classes.background}>
         <HeroSection />
         <Container className={classes.cardGrid} maxWidth="md">
@@ -44,7 +41,6 @@ export default function Home() {
           </Grid>
         </Container>
       </main>
-    </React.Fragment>
   );
 }
 
