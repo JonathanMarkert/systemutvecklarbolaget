@@ -52,6 +52,12 @@ const useStyles = makeStyles((theme: Theme) =>
     wordWrap: {
       wordWrap: 'break-word',
     },
+    gridXs: {
+      [theme.breakpoints.down("xs")]: {
+        minWidth: "100%",
+        minhHeight: "100%",
+      },
+    }
   })
 );
 
@@ -68,7 +74,7 @@ const AdminProductCard: FC<Props> = ({ product, handleClickOpen }) => {
     <div className={classes.root}>
       <Paper className={classes.paper} elevation={5}>
         <Grid container spacing={3} >
-          <Grid item  >
+          <Grid item className={classes.gridXs}>
             <Typography variant="h6" align="center" >
                 Image
             </Typography>
@@ -80,7 +86,7 @@ const AdminProductCard: FC<Props> = ({ product, handleClickOpen }) => {
             />
             </CardMedia>
           </Grid>
-          <Grid item >
+          <Grid item className={classes.gridXs}>
             <Typography variant="h6" align="center">
                 Detail Image 
             </Typography>
