@@ -1,4 +1,4 @@
-import { Box, IconButton } from "@material-ui/core";
+import { Box, CardMedia, IconButton } from "@material-ui/core";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -95,13 +95,13 @@ const SlipCard: FC<Props> = ({ product }) => {
       <Paper elevation={5} className={classes.paper}>
         <Grid container spacing={2}>
           <Grid item>
-            <ButtonBase className={classes.image}>
+            <CardMedia className={classes.image}>
               <img
                 className={classes.img}
                 alt={product.name}
                 src={product.url}
               />
-            </ButtonBase>
+            </CardMedia>
           </Grid>
           <Grid item xs={12} sm container>
             <Grid item md container direction="column" spacing={1} className={classes.textCenterMobile}>

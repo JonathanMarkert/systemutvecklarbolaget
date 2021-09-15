@@ -1,5 +1,5 @@
 import Button from "@material-ui/core/Button";
-import ButtonBase from "@material-ui/core/ButtonBase";
+import CardMedia from "@material-ui/core/ButtonBase";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -68,25 +68,25 @@ const AdminProductCard: FC<Props> = ({ product, handleClickOpen }) => {
             <Typography variant="h6" align="center" >
                 Image
             </Typography>
-            <ButtonBase className={classes.image}>
+            <CardMedia className={classes.image}>
               <img
               className={classes.img}
               alt={product.name}
               src={product.url}
             />
-            </ButtonBase>
+            </CardMedia>
           </Grid>
           <Grid item>
             <Typography variant="h6" align="center">
                 Detail Image 
             </Typography>
-            <ButtonBase className={classes.image}>
+            <CardMedia className={classes.image}>
               <img
               className={classes.img}
               alt={product.name}
               src={product.urlDetails}
             />
-            </ButtonBase>
+            </CardMedia>
           </Grid>
           <Grid item xs={12} sm container>
             <Grid item xs={12} md={2}>
