@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: "1rem",
       backgroundColor: theme.palette.secondary.light,
       color: '#fff',
+      "&:hover": {
+        backgroundColor: theme.palette.secondary.dark,
+        },
     },
     title: {
       padding: '1rem',
