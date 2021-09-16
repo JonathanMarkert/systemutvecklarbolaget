@@ -36,7 +36,7 @@ const productFormValidation = yup.object<
     .max(30, "The brewery name is too long"),
   url: yup.string().required("Image link to a beer logo is required."),
   urlDetails: yup.string().required("Image link to the product is required."),
-  description: yup.string().notRequired().max(120, "Description is too long"),
+  description: yup.string().notRequired().max(200, "Description is too long"),
   price: yup
     .number()
     .required("Beer ain't free!")
