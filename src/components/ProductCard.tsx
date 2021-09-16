@@ -25,10 +25,19 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: 'none'
     },
     cardMedia: {
-        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
         height: 200,
-        paddingTop: '56.25%', // 16:9
+        [theme.breakpoints.down("xs")]: {
+        width: "100%",
+        height: "100%",
+      },
     },
+
+    img: {
+        width:285,
+        objectFit: 'contain',
+      },
     cardContent: {
         flexGrow: 1,
         height: '10rem',
@@ -60,11 +69,13 @@ const ProductCard: React.FC<Props> = ({ product }) => {   //add clickable image
     return (
         <React.Fragment>
             <Card className={classes.card}>
-                <CardMedia
-                    className={classes.cardMedia}
-                    image={product.url}
-                    title={product.name}
-                />
+                <CardMedia className={classes.cardMedia} >
+                    <img
+                        className={classes.img}
+                        alt={product.name}
+                        src={product.url}
+                    />
+                </CardMedia>
                 <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2" align="center" className={classes.wordWrap}>
                         {product.name}
