@@ -105,7 +105,7 @@ const AdminProductCard: FC<Props> = ({ product, handleClickOpen }) => {
               </Typography>
               <Tooltip title={product.name} arrow>
               <Typography gutterBottom variant="subtitle1"  align="center" className={classes.wordWrap}>
-                {product.name.length > 30 && product.name.indexOf(' ') <= 0 ? product.name.substring(0,20) + '...' : product.name}
+                {product.name.length > 23 && product.name.indexOf(' ') <= 0 ? product.name.substring(0,20) + '...' : product.name}
               </Typography>
               </Tooltip>
             </Grid>
