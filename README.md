@@ -58,3 +58,6 @@ By teachers standars and speccs.
 2. &#9745; Admin page where you can edit, add & remove products
 3. &#9745; Every product is stored in localstorage (if localstorage is empty when page 
 is loaded, all products need to be pre-saved there
+
+___
+https://github.com/JonathanMarkert/systemutvecklarbolaget
