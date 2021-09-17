@@ -1,46 +1,63 @@
-# Getting Started with Create React App
+<p align="center">
+  <img src="https://cdn.discordapp.com/attachments/797112544682573886/887682768371339274/SkrikPanik1.png" />
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Installation
+- Run `npm install` in terminal to get node_modules and package.json.
+- Run `npm start` in terminal to launch the app that will open on localhost port 3000.
 
-In the project directory, you can run:
+### Dependencies:
+- [React](https://facebook.github.io/create-react-app/docs/getting-started)
+- [Material-Ui](https://material-ui.com/getting-started/installation/)
+- [Material-Ui-Icons](https://material-ui.com/components/material-icons/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Yup](https://www.npmjs.com/package/yup)
+- [Formik](https://formik.org/docs/overview)
+- [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+- [Uuid](https://www.npmjs.com/package/uuid)
+### About the project:
+___
+We made a storepage for selling nerdbrew beer for programmers (and for others with good taste).
+The name of the page and logo is based of a Swedish alcohol distributer, SystemBolaget, but the design and layout is our own.
 
-### `npm start`
+For this project we have used `Material UI`,`React` and `Typescript` to deliver an application with shopping cart
+features. The cart consists of various components which includes Product items to add to a cart, checkout forms with validations, and an admin-mode page to alter and add products which then is stored in `localstorage`.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The page is fully responsive, meaning that we have considered any device, such as tablets, smartphones and widescreen monitors. We used `React Router` to navigate between the different pages.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+All product data is firstly mocked through a `Typescript Interface`. Afterwards the data is handled through `localstorage`.
 
-### `npm test`
+For styling the page and it's layout we used `Material UI` components and `Css`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Restrains:
+___
+We have taken no mearsuments for payment options, calculation on taxes or delivery fees.
+No shipping functionallity, no login system or saving of customer details for order notification.
+Also no value excange depending on where you live. 
 
-### `npm run build`
+Everything is in Euro and the only calculation functionallity used is to calculate amount and cost for price per unit.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Required speccs for the project:
+___
+By teachers standars and speccs.
+#### Pass
+1. &#9745; Git & Github has been used
+2. &#9745; Your project map has a README.md file
+3. &#9745; Assignment is handed in on time
+4. &#9745; Typescript & Material-UI has been used
+5. &#9745; React Router has been used for navigation
+6. &#9745; Checkout form can be autofilled
+7. &#9745; Every field in checkout form has validation
+8. &#9745; Homepage is fully responsive
+9. &#9745; Mocked products has its own file and should be implemented with TS interface
+10. &#9745; Prodject is up on Netlify or other service
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Extra credit
+1. &#9745; All tasks for a passable grade have been met
+2. &#9745; Admin page where you can edit, add & remove products
+3. &#9745; Every product is stored in localstorage (if localstorage is empty when page 
+is loaded, all products need to be pre-saved there
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+___
+https://github.com/JonathanMarkert/systemutvecklarbolaget
