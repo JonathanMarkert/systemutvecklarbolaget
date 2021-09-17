@@ -2,14 +2,14 @@ import { Box, Grid, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
+import EuroSymbolOutlinedIcon from "@material-ui/icons/EuroSymbolOutlined";
+import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import classNames from "classnames";
 import { useContext, useState } from "react";
 import CheckoutForm from "../components/CheckoutForm";
 import { CartContext } from "../components/context/CartContext";
 import SlipCard from "../components/SlipCard";
-import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-import EuroSymbolOutlinedIcon from "@material-ui/icons/EuroSymbolOutlined";
-import classNames from "classnames";
-import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 
 const useStyles = makeStyles((theme) => ({
   gridContainerStyle: {
@@ -46,10 +46,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   checkoutButton: {
-    marginBottom: '1rem',
-  }
+    marginBottom: "1rem",
+  },
 }));
-
 
 export default function ShoppingCart() {
   const { cart, totalCartPrice } = useContext(CartContext);

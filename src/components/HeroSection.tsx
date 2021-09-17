@@ -1,7 +1,7 @@
 import { Box, Hidden, Theme, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import KeyboardArrowDownOutlinedIcon from "@material-ui/icons/KeyboardArrowDownOutlined";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import KeyboardArrowDownOutlinedIcon from "@material-ui/icons/KeyboardArrowDownOutlined";
+import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
   heroBackground: {
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: "auto",
   },
   breadText: {
-    paddingTop:"3rem",
+    paddingTop: "3rem",
     textAlign: "center",
     maxWidth: "600px",
     letterSpacing: "2px",
@@ -94,11 +94,11 @@ const HeroSection = () => {
             Beer <FavoriteIcon style={{ fontSize: 40 }} />{" "}
           </Hidden>
           <Hidden only="xs">
-            <Typography className={classes.breadText} variant="h5">
-              What is cooler than coding-themed beer? Null,
-              I say! We have already messed with your meddlesome government so
-              you don't have to worry about taxes or such. Just treat this site
-              as middleware and import the whole module!
+            <Typography className={classes.breadText} variant="body2">
+              What is cooler than coding-themed beer? Null, I say! We have
+              already messed with your meddlesome government so you don't have
+              to worry about taxes or such. Just treat this site as middleware
+              and import the whole module!
             </Typography>
           </Hidden>
         </Typography>

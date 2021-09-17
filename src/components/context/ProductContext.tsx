@@ -1,7 +1,7 @@
 import { createContext, FC, useEffect, useState } from "react";
-import { products } from "../../Mockdata";
+import { v1 as uuidv1 } from "uuid";
 import { Product } from "../../Interfaces/IProduct";
-import { v1 as uuidv1 } from 'uuid';
+import { products } from "../../Mockdata";
 
 interface IProductContext {
   beerProductArray: Product[];
@@ -20,9 +20,10 @@ const preLoadToLocalStorage = (): Product[] => {
   return JSON.parse(data as string) || products;
 };
 
-
 const ProductProvider: FC = (props) => {
-  const [productsState, setProductsState] = useState<Product[]>(preLoadToLocalStorage);
+  const [productsState, setProductsState] = useState<Product[]>(
+    preLoadToLocalStorage
+  );
 
   const addBeerProduct = (beerProduct: Product) => {
     setProductsState((pre) => {
@@ -34,14 +35,16 @@ const ProductProvider: FC = (props) => {
 
   const editBeerProduct = (beerProduct: Product) => {
     const index = productsState.findIndex((item) => item.id === beerProduct.id);
-    if (index === -1) return
+    if (index === -1) return;
     const newBeerProducts = [...productsState];
     newBeerProducts[index] = beerProduct;
     setProductsState(newBeerProducts);
   };
 
   const deleteBeerProduct = (beerProduct: Product) => {
-    const filteredState = productsState.filter((item) => item.id !== beerProduct.id);
+    const filteredState = productsState.filter(
+      (item) => item.id !== beerProduct.id
+    );
     setProductsState(filteredState);
   };
 
@@ -74,7 +77,7 @@ export default ProductProvider;
 
 export const ProductContext = createContext<IProductContext>({
   beerProductArray: [],
-  addBeerProduct: () => { },
-  editBeerProduct: () => { },
-  deleteBeerProduct: () => { },
+  addBeerProduct: () => {},
+  editBeerProduct: () => {},
+  deleteBeerProduct: () => {},
 });
