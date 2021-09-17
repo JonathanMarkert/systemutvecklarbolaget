@@ -17,7 +17,7 @@ const preLoadToLocalStorage = (): Product[] => {
     localStorage.setItem("Products", JSON.stringify(products));
   }
 
-  return JSON.parse(data as string);
+  return JSON.parse(data as string) || products;
 };
 
 
