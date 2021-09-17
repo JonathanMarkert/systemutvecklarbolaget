@@ -1,4 +1,4 @@
-import { FC, createContext, useState } from "react";
+import { createContext, FC, useState } from "react";
 import { Product } from "../../Interfaces/IProduct";
 
 interface ICartContext {
@@ -35,7 +35,7 @@ const CartProvider: FC = (props) => {
     const filteredState = cart.filter((item) => item.id !== beerProduct.id);
     setCart(filteredState);
   };
-  
+
   const incrementNumber = (beerProduct: Product) => {
     setCart((previousState) => {
       const foundBeer = previousState.find(
@@ -58,7 +58,9 @@ const CartProvider: FC = (props) => {
         (item) => item.id === beerProduct.id
       );
       if (foundBeer) {
-        if(foundBeer.amount < 2) {handleRemoveFromCart(foundBeer)}
+        if (foundBeer.amount < 2) {
+          handleRemoveFromCart(foundBeer);
+        }
         return previousState.map((item) =>
           item.id === beerProduct.id
             ? { ...item, amount: item.amount - 1 }
@@ -67,20 +69,19 @@ const CartProvider: FC = (props) => {
       }
       return [...previousState, { ...beerProduct }];
     });
-
   };
 
   const totalCartPrice = () => {
-    const sum = cart.reduce((sum,beer) => sum + beer.price*beer.amount,0);
-    return sum
-  }
+    const sum = cart.reduce((sum, beer) => sum + beer.price * beer.amount, 0);
+    return sum;
+  };
 
   const emptyAllFromCart = () => {
-    const emptyArray:Product[] = [];
+    const emptyArray: Product[] = [];
     let currentState = [...cart];
     currentState = emptyArray;
     setCart(currentState);
-  }
+  };
 
   return (
     <CartContext.Provider
@@ -98,6 +99,7 @@ const CartProvider: FC = (props) => {
     </CartContext.Provider>
   );
 };
+
 export default CartProvider;
 
 export const CartContext = createContext<ICartContext>({
@@ -109,4 +111,3 @@ export const CartContext = createContext<ICartContext>({
   totalCartPrice: () => {},
   emptyAllFromCart: () => {},
 });
-

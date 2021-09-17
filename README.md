@@ -15,6 +15,7 @@
 - [Yup](https://www.npmjs.com/package/yup)
 - [Formik](https://formik.org/docs/overview)
 - [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+- [Uuid](https://www.npmjs.com/package/uuid)
 ### About the project:
 ___
 We made a storepage for selling nerdbrew beer for programmers (and for others with good taste).

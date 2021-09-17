@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.primary.main,
     },
     iconButtonStyle: {
-      padding: '0 0.5rem',
+      padding: "0 0.5rem",
     },
     titleStyle: {
       flexGrow: 1,
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     removeBgOnHover: {
       "&:hover": {
-      backgroundColor: "transparent",
+        backgroundColor: "transparent",
       },
     },
   })
@@ -77,10 +77,15 @@ export default function MenuAppBar() {
       <AppBar className={classes.appBarStyle}>
         <Toolbar>
           <Link to="/">
-          <Tooltip title="Home" arrow>
-            <IconButton className={classNames(classes.iconButtonStyle, classes.removeBgOnHover)}>
-              <img style={{width:"100%"}} src={MainLogo} alt="" />
-            </IconButton>
+            <Tooltip title="Home" arrow>
+              <IconButton
+                className={classNames(
+                  classes.iconButtonStyle,
+                  classes.removeBgOnHover
+                )}
+              >
+                <img style={{ width: "100%" }} src={MainLogo} alt="" />
+              </IconButton>
             </Tooltip>
           </Link>
           <div className={classes.grow}>
@@ -93,22 +98,33 @@ export default function MenuAppBar() {
           <div>
             <Link to="/cart">
               <Tooltip title="Shopping Cart" arrow>
-              <IconButton aria-label="cart" className={classNames(classes.iconButtonStyle, classes.removeBgOnHover)}>
-                <Badge badgeContent={totalItems} color={"secondary"}>
-                  <ShoppingCartOutlinedIcon
-                    className={classNames(classes.iconStyle, {
-                      [classes.animateStyle]: animate,
-                    })}
-                  />
-                </Badge>
-              </IconButton>
+                <IconButton
+                  aria-label="cart"
+                  className={classNames(
+                    classes.iconButtonStyle,
+                    classes.removeBgOnHover
+                  )}
+                >
+                  <Badge badgeContent={totalItems} color={"secondary"}>
+                    <ShoppingCartOutlinedIcon
+                      className={classNames(classes.iconStyle, {
+                        [classes.animateStyle]: animate,
+                      })}
+                    />
+                  </Badge>
+                </IconButton>
               </Tooltip>
             </Link>
             <Link to="/admin">
-            <Tooltip title="Admin" arrow>
-              <IconButton className={classNames(classes.iconButtonStyle, classes.removeBgOnHover)}>
-                <AccountCircle className={classes.iconStyle} />
-              </IconButton>
+              <Tooltip title="Admin" arrow>
+                <IconButton
+                  className={classNames(
+                    classes.iconButtonStyle,
+                    classes.removeBgOnHover
+                  )}
+                >
+                  <AccountCircle className={classes.iconStyle} />
+                </IconButton>
               </Tooltip>
             </Link>
           </div>
