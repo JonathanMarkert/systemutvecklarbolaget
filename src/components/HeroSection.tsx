@@ -27,10 +27,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     minWidth: "100%",
-    opacity: 1, // testa utan filmen
   },
   heroVideo: {
-    objectFit: "contain",
+    objectFit: "cover",
   },
   iconStyle: {
     fontSize: 100,
