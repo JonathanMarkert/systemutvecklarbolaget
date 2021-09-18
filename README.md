@@ -16,6 +16,11 @@
 - [Formik](https://formik.org/docs/overview)
 - [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 - [Uuid](https://www.npmjs.com/package/uuid)
+___
+### Netlify
+Page is hosted on netlifly, visit the link below to check it out!
+- [Netlify](skrikochpanik.netlify.app)
+
 ### About the project:
 ___
 We made a storepage for selling nerdbrew beer for programmers (and for others with good taste).
